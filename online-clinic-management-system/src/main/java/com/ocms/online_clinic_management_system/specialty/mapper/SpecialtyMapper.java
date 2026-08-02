@@ -1,6 +1,8 @@
 package com.ocms.online_clinic_management_system.specialty.mapper;
 
 import com.ocms.online_clinic_management_system.specialty.dto.request.CreateSpecialtyRequest;
+import com.ocms.online_clinic_management_system.specialty.dto.request.UpdateSpecialtyRequest;
+import com.ocms.online_clinic_management_system.specialty.dto.response.SpecialtyDetailResponse;
 import com.ocms.online_clinic_management_system.specialty.dto.response.SpecialtyResponse;
 import com.ocms.online_clinic_management_system.specialty.entity.Specialty;
 import org.mapstruct.BeanMapping;
@@ -13,6 +15,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface SpecialtyMapper {
 
     SpecialtyResponse toSpecialtyResponse(Specialty specialty);
+    SpecialtyDetailResponse toSpecialtyDetailResponse(Specialty specialty);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "doctors", ignore = true)
@@ -23,6 +26,6 @@ public interface SpecialtyMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "doctors", ignore = true)
     @Mapping(target = "medicalServices", ignore = true)
-    void updateFromRequest(CreateSpecialtyRequest request,@MappingTarget Specialty specialty);
+    void updateFromRequest(UpdateSpecialtyRequest request, @MappingTarget Specialty specialty);
 
 }
