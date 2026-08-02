@@ -34,6 +34,11 @@ public enum ErrorCode {
 
     PATIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "PATIENT_001", "Patient not found"),
 
+    INVALID_CITIZEN_ID(HttpStatus.BAD_REQUEST, "PATIENT_002", "Citizen ID is invalid"),
+    INVALID_EMERGENCY_CONTACT(HttpStatus.BAD_REQUEST, "PATIENT_003", "Emergency contact is invalid"),
+    INVALID_MEDICAL_HISTORY(HttpStatus.BAD_REQUEST, "PATIENT_004", "Medical history is invalid"),
+    INVALID_ALLERGY_INFO(HttpStatus.BAD_REQUEST, "PATIENT_005", "Allergy information is invalid"),
+    PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "PATIENT_006", "Password confirmation does not match"),
 
     SPECIALTY_NOT_FOUND(HttpStatus.NOT_FOUND, "SPECIALTY_001", "Specialty not found");
 
