@@ -40,8 +40,11 @@ public enum ErrorCode {
     INVALID_ALLERGY_INFO(HttpStatus.BAD_REQUEST, "PATIENT_005", "Allergy information is invalid"),
     PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "PATIENT_006", "Password confirmation does not match"),
 
-    SPECIALTY_NOT_FOUND(HttpStatus.NOT_FOUND, "SPECIALTY_001", "Specialty not found");
+    SPECIALTY_NOT_FOUND(HttpStatus.NOT_FOUND, "SPECIALTY_001", "Specialty not found"),
+    SPECIALTY_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SPECIALTY_002", "Specialty already exists"),
 
+    MEDICAL_SERVICE_NOT_FOUND(HttpStatus.NOT_FOUND, "SERVICE_001", "Medical service not found"),
+    MEDICAL_SERVICE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SERVICE_002", "Medical service already exists");
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;

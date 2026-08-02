@@ -1,16 +1,16 @@
 package com.ocms.online_clinic_management_system.specialty.dto.response;
 
-import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
+import lombok.Setter;
 
 @Getter
-@SuperBuilder
-public class SpecialtyResponse {
+@Setter
+
+public class SpecialtyDetailResponse {
 
     private Long id;
 
     private String name;
 
-
+    private String description;
 }

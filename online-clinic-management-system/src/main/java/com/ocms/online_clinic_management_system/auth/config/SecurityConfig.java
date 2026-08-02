@@ -7,6 +7,7 @@ import com.ocms.online_clinic_management_system.auth.oauth2.CustomOidcUserServic
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -47,9 +48,14 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/error",  "/oauth2/**", "/login/oauth2/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/medical-services/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/specialties/all").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/medical-services/specialty/**").authenticated()
+                        .requestMatchers("/api/specialties/**").hasRole("ADMIN")
+                        .requestMatchers("/api/medical-services/**").hasRole("ADMIN")
                         .requestMatchers("/api/patient/**").hasRole("PATIENT")
                         .requestMatchers("/api/staff/patients/**").hasRole("STAFF")
+
                         .anyRequest()
                         .authenticated())
 
