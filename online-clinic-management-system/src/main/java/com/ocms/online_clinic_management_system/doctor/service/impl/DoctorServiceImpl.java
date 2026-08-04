@@ -1,8 +1,10 @@
 package com.ocms.online_clinic_management_system.doctor.service.impl;
 
+import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.doctor.dto.request.UpdateDoctorRequest;
 import com.ocms.online_clinic_management_system.doctor.dto.response.DoctorResponse;
 
+import com.ocms.online_clinic_management_system.doctor.dto.response.DoctorSummaryResponse;
 import com.ocms.online_clinic_management_system.doctor.entity.Doctor;
 
 import com.ocms.online_clinic_management_system.doctor.exception.DoctorNotFoundException;
@@ -21,9 +23,12 @@ import com.ocms.online_clinic_management_system.user.entity.User;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
 
 @Service
@@ -52,6 +57,15 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public PageResponse<DoctorSummaryResponse> getAllDoctors(Pageable pageable) {
+
+        Page<Doctor> page = doctorRepository.findAll(pageable);
+
+        return PageResponse.of(page.map(doctorMapper::toSummaryResponse));
+    }
+
+    @Override
     public DoctorResponse update(Long doctorId, UpdateDoctorRequest request){
         Doctor doctor = findEntity(doctorId);
 
@@ -63,17 +77,16 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional(readOnly = true)
     public DoctorResponse findById(Long doctorId){
+
         return doctorMapper.toDoctorResponse(findEntity(doctorId));
     }
 
 
     public Doctor findEntity(Long id){
-        return doctorRepository.findById(id)
-                .orElseThrow(
-                        DoctorNotFoundException::new
-                );
-
+        return doctorRepository.findById(id).orElseThrow(DoctorNotFoundException::new);
     }
+
+
 
 
 }

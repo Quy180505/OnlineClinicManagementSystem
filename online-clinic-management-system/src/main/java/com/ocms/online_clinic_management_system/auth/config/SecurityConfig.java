@@ -51,11 +51,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/medical-services/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/specialties/all").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/medical-services/specialty/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/doctors").authenticated()
                         .requestMatchers("/api/specialties/**").hasRole("ADMIN")
                         .requestMatchers("/api/medical-services/**").hasRole("ADMIN")
                         .requestMatchers("/api/patient/**").hasRole("PATIENT")
                         .requestMatchers("/api/staff/patients/**").hasRole("STAFF")
-
+                        .requestMatchers("/api/doctor-schedules/**").hasRole("STAFF")
                         .anyRequest()
                         .authenticated())
 

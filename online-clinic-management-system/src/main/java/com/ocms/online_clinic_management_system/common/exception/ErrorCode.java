@@ -44,7 +44,12 @@ public enum ErrorCode {
     SPECIALTY_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SPECIALTY_002", "Specialty already exists"),
 
     MEDICAL_SERVICE_NOT_FOUND(HttpStatus.NOT_FOUND, "SERVICE_001", "Medical service not found"),
-    MEDICAL_SERVICE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SERVICE_002", "Medical service already exists");
+    MEDICAL_SERVICE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SERVICE_002", "Medical service already exists"),
+
+    DOCTOR_SCHEDULE_NOT_FOUND(HttpStatus.NOT_FOUND, "SCHEDULE_001", "Doctor schedule not found"),
+    DOCTOR_SCHEDULE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SCHEDULE_002", "Doctor schedule already exists"),
+    INVALID_SCHEDULE_TIME(HttpStatus.BAD_REQUEST, "SCHEDULE_003", "Invalid schedule time");
+
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;
