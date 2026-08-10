@@ -4,6 +4,7 @@ import com.ocms.online_clinic_management_system.patient.dto.request.UpdateAccoun
 import com.ocms.online_clinic_management_system.patient.dto.request.UpdatePatientRequest;
 import com.ocms.online_clinic_management_system.patient.dto.response.PatientDetailResponse;
 import com.ocms.online_clinic_management_system.patient.dto.response.PatientResponse;
+import com.ocms.online_clinic_management_system.patient.entity.Patient;
 import com.ocms.online_clinic_management_system.user.entity.User;
 
 public interface PatientService {
@@ -13,5 +14,5 @@ public interface PatientService {
     PatientDetailResponse getMyProfile();
     PatientDetailResponse updateProfile(UpdatePatientRequest request);
     void updateAccount(UpdateAccountRequest request);
-
+    Patient getCurrentPatient();
 }
