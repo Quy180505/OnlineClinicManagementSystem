@@ -88,7 +88,9 @@ public class PatientServiceImpl implements PatientService {
     }
 
 
-    private Patient getCurrentPatient() {
+    @Override
+    @Transactional(readOnly = true)
+    public Patient getCurrentPatient() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -96,5 +98,4 @@ public class PatientServiceImpl implements PatientService {
 
         return patientRepository.findByUserId(principal.getId()).orElseThrow(PatientNotFoundException::new);
     }
-
 }
