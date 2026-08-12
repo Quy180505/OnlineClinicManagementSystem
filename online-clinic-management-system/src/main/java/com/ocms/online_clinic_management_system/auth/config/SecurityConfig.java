@@ -67,6 +67,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/medical-examinations/today").hasRole("DOCTOR")
                         .requestMatchers(HttpMethod.GET, "/api/medical-examinations/*/treatment-history").hasRole("DOCTOR")
                         .requestMatchers(HttpMethod.PATCH, "/api/medical-examinations/*/start").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/medical-records/appointment/*").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/medical-records/appointment/*").hasRole("DOCTOR")
                         .anyRequest().authenticated())
 
                 .oauth2Login(oauth -> oauth
