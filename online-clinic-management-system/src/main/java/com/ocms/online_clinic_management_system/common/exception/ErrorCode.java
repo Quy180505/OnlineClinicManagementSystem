@@ -18,9 +18,9 @@ public enum ErrorCode {
     ACCESS_DENIED(HttpStatus.FORBIDDEN, "AUTH_004", "Access denied"),
 
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_001", "User not found"),
-    USERNAME_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "USER_002", "Username already exists"),
-    EMAIL_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "USER_003", "Email already exists"),
-    PHONE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "USER_004", "Phone already exists"),
+    USERNAME_ALREADY_EXISTS(HttpStatus.CONFLICT, "USER_002", "Username already exists"),
+    EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT, "USER_003", "Email already exists"),
+    PHONE_ALREADY_EXISTS(HttpStatus.CONFLICT, "USER_004", "Phone already exists"),
     INVALID_ROLE(HttpStatus.BAD_REQUEST, "USER_005", "Invalid role"),
 
 
@@ -36,28 +36,33 @@ public enum ErrorCode {
     PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "PATIENT_006", "Password confirmation does not match"),
 
     SPECIALTY_NOT_FOUND(HttpStatus.NOT_FOUND, "SPECIALTY_001", "Specialty not found"),
-    SPECIALTY_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SPECIALTY_002", "Specialty already exists"),
+    SPECIALTY_ALREADY_EXISTS(HttpStatus.CONFLICT, "SPECIALTY_002", "Specialty already exists"),
 
     MEDICAL_SERVICE_NOT_FOUND(HttpStatus.NOT_FOUND, "SERVICE_001", "Medical service not found"),
-    MEDICAL_SERVICE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SERVICE_002", "Medical service already exists"),
+    MEDICAL_SERVICE_ALREADY_EXISTS(HttpStatus.CONFLICT, "SERVICE_002", "Medical service already exists"),
 
     DOCTOR_SCHEDULE_NOT_FOUND(HttpStatus.NOT_FOUND, "SCHEDULE_001", "Doctor schedule not found"),
-    DOCTOR_SCHEDULE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "SCHEDULE_002", "Doctor schedule already exists"),
+    DOCTOR_SCHEDULE_ALREADY_EXISTS(HttpStatus.CONFLICT, "SCHEDULE_002", "Doctor schedule already exists"),
     INVALID_SCHEDULE_TIME(HttpStatus.BAD_REQUEST, "SCHEDULE_003", "Invalid schedule time"),
 
 
     APPOINTMENT_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "APPOINTMENT_001", "Appointment status not found"),
     APPOINTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "APPOINTMENT_002", "Appointment not found"),
-    APPOINTMENT_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "APPOINTMENT_003", "Appointment already exists"),
+    APPOINTMENT_ALREADY_EXISTS(HttpStatus.CONFLICT, "APPOINTMENT_003", "Appointment already exists"),
     INVALID_APPOINTMENT_STATUS(HttpStatus.BAD_REQUEST, "APPOINTMENT_004", "Invalid appointment status"),
-    APPOINTMENT_CANCELLATION_NOT_ALLOWED(HttpStatus.BAD_REQUEST, "APPOINTMENT_005", "Appointment cancellation is not allowed"),
+    APPOINTMENT_CANCELLATION_NOT_ALLOWED(HttpStatus.CONFLICT, "APPOINTMENT_005", "Appointment cancellation is not allowed"),
     SCHEDULE_UNAVAILABLE(HttpStatus.BAD_REQUEST, "APPOINTMENT_006", "Doctor schedule is unavailable"),
     INVALID_APPOINTMENT_SERVICE(HttpStatus.BAD_REQUEST, "APPOINTMENT_007", "Medical service does not belong to doctor's specialty"),
     APPOINTMENT_SCHEDULE_FULL(HttpStatus.BAD_REQUEST,"APPOINTMENT_008","Doctor schedule is full"),
     APPOINTMENT_ACCESS_DENIED(HttpStatus.FORBIDDEN, "APPOINTMENT_009", "You do not have permission to access this appointment"),
+    APPOINTMENT_NOT_CONFIRMED(HttpStatus.BAD_REQUEST, "APPOINTMENT_010", "Appointment is not confirmed"),
+
+    MEDICAL_EXAMINATION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "MEDICAL_RECORD_001", "You do not have permission to perform this medical examination"),
+    MEDICAL_RECORD_ALREADY_EXISTS(HttpStatus.CONFLICT, "MEDICAL_RECORD_002", "Medical record already exists for this appointment"),
+    MEDICAL_RECORD_NOT_FOUND(HttpStatus.NOT_FOUND, "MEDICAL_RECORD_003", "Medical record not found"),
 
     INVOICE_NOT_FOUND(HttpStatus.NOT_FOUND,"INVOICE_001", "Invoice not found"),
-    INVOICE_ALREADY_EXISTS(HttpStatus.BAD_REQUEST,"INVOICE_002", "Invoice already exists");
+    INVOICE_ALREADY_EXISTS(HttpStatus.CONFLICT,"INVOICE_002", "Invoice already exists");
 
 
 

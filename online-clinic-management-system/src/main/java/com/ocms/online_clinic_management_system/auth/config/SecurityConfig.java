@@ -64,6 +64,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/appointments").hasRole("STAFF")
                         .requestMatchers(HttpMethod.PATCH, "/api/appointments/*/confirm").hasRole("STAFF")
                         .requestMatchers(HttpMethod.PATCH, "/api/appointments/*/reject").hasRole("STAFF")
+                        .requestMatchers(HttpMethod.GET, "/api/medical-examinations/today").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/medical-examinations/*/treatment-history").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/medical-examinations/*/start").hasRole("DOCTOR")
                         .anyRequest().authenticated())
 
                 .oauth2Login(oauth -> oauth

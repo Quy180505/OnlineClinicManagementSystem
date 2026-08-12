@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class MedicalRecord extends BaseEntity {
     @Lob
     @Column(name = "examination_result")
     private String examinationResult;
+
+    @Column(name = "examination_date")
+    private LocalDateTime examinationDate;
 
     @Lob
     private String diagnosis;
