@@ -13,4 +13,5 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Lo
     Optional<MedicalRecord> findByAppointmentId(Long appointmentId);
 
     List<MedicalRecord> findByPatientIdOrderByExaminationDateDesc(Long patientId);
+    boolean existsByAppointmentId(Long appointmentId);
 }
