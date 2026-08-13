@@ -24,6 +24,10 @@ public class MedicalServiceController {
 
     private final MedicalServiceService medicalServiceService;
 
+    @GetMapping("/specialty/{specialtyId}/examination")
+    public ApiResponse<List<MedicalServiceResponse>> getExaminationServicesBySpecialty(@PathVariable Long specialtyId) {
+        return ApiResponse.success(medicalServiceService.getExaminationServicesBySpecialty(specialtyId));
+    }
 
     @GetMapping("/specialty/{specialtyId}")
     public ApiResponse<List<MedicalServiceResponse>> getBySpecialty(@PathVariable Long specialtyId) {

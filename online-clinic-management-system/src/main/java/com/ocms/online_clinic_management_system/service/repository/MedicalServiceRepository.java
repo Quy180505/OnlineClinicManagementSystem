@@ -1,6 +1,7 @@
 package com.ocms.online_clinic_management_system.service.repository;
 
 
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.service.entity.MedicalService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -17,4 +18,5 @@ public interface MedicalServiceRepository extends JpaRepository<MedicalService, 
 
     boolean existsByServiceNameAndSpecialty_Id(String serviceName, Long specialtyId);
     List<MedicalService> findAllBySpecialty_IdOrderByServiceName(Long specialtyId);
+    List<MedicalService> findAllBySpecialty_IdAndServiceTypeOrderByServiceName(Long specialtyId, MedicalServiceType serviceType);
 }
