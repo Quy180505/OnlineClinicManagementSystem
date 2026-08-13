@@ -3,6 +3,7 @@ package com.ocms.online_clinic_management_system.appointment.validator;
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.appointment.exception.*;
 import com.ocms.online_clinic_management_system.appointment.repository.AppointmentRepository;
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.common.constant.enums.ScheduleStatus;
 import com.ocms.online_clinic_management_system.schedule.entity.DoctorSchedule;
 import com.ocms.online_clinic_management_system.service.entity.MedicalService;
@@ -36,6 +37,12 @@ public class AppointmentValidator {
         }
     }
 
+    public void validateServiceIsExam(MedicalService medicalService) {
+        if (medicalService.getServiceType() != MedicalServiceType.EXAM) {
+            throw new AppointmentExamServiceRequiredException();
+        }
+    }
+
     public void validateServiceBelongsToDoctor(MedicalService medicalService, DoctorSchedule schedule) {
         Long serviceSpecialtyId = medicalService.getSpecialty().getId();
         Long doctorSpecialtyId = schedule.getDoctor().getSpecialty().getId();
@@ -45,7 +52,10 @@ public class AppointmentValidator {
     }
 
     public void validateScheduleCapacity(DoctorSchedule schedule) {
-        if (schedule.getAppointments().size() >= schedule.getMaxPatients()) {
+
+        long currentAppointments = appointmentRepository.countValidAppointmentsByScheduleId(schedule.getId());
+
+        if (currentAppointments >= schedule.getMaxPatients()) {
             throw new ScheduleFullException();
         }
     }

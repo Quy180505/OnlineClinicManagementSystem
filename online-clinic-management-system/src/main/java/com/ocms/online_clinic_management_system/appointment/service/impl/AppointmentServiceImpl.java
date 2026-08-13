@@ -60,6 +60,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         MedicalService medicalService = medicalServiceValidator.validateMedicalServiceExists(request.getServiceId());
         DoctorSchedule schedule = doctorScheduleValidator.validateScheduleExists(request.getScheduleId());
 
+        appointmentValidator.validateServiceIsExam(medicalService);
         appointmentValidator.validateScheduleAvailable(schedule);
         appointmentValidator.validateScheduleCapacity(schedule);
         appointmentValidator.validateServiceBelongsToDoctor(medicalService, schedule);
