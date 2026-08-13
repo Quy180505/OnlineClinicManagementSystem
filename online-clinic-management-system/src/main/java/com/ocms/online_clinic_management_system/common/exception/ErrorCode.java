@@ -56,17 +56,22 @@ public enum ErrorCode {
     APPOINTMENT_SCHEDULE_FULL(HttpStatus.BAD_REQUEST,"APPOINTMENT_008","Doctor schedule is full"),
     APPOINTMENT_ACCESS_DENIED(HttpStatus.FORBIDDEN, "APPOINTMENT_009", "You do not have permission to access this appointment"),
     APPOINTMENT_NOT_CONFIRMED(HttpStatus.BAD_REQUEST, "APPOINTMENT_010", "Appointment is not confirmed"),
-
+    APPOINTMENT_EXAM_SERVICE_REQUIRED(HttpStatus.BAD_REQUEST, "APPOINTMENT_011", "Only examination services can be booked"),
     MEDICAL_EXAMINATION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "MEDICAL_RECORD_001", "You do not have permission to perform this medical examination"),
     MEDICAL_RECORD_ALREADY_EXISTS(HttpStatus.CONFLICT, "MEDICAL_RECORD_002", "Medical record already exists for this appointment"),
     MEDICAL_RECORD_NOT_FOUND(HttpStatus.NOT_FOUND, "MEDICAL_RECORD_003", "Medical record not found"),
 
     INVOICE_NOT_FOUND(HttpStatus.NOT_FOUND,"INVOICE_001", "Invoice not found"),
-    INVOICE_ALREADY_EXISTS(HttpStatus.CONFLICT,"INVOICE_002", "Invoice already exists");
+    INVOICE_ALREADY_EXISTS(HttpStatus.CONFLICT,"INVOICE_002", "Invoice already exists"),
 
-
-
-
+    TEST_ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "LAB_001", "Test order not found"),
+    TEST_ORDER_DETAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "LAB_003", "Test order detail not found"),
+    LAB_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND, "LAB_004", "Lab result not found"),
+    LAB_RESULT_ALREADY_EXISTS(HttpStatus.CONFLICT, "LAB_005", "Lab result already exists"),
+    LABORATORY_ACCESS_DENIED(HttpStatus.FORBIDDEN, "LAB_006", "You do not have permission to access laboratory data"),
+    INVALID_TEST_ORDER_STATUS(HttpStatus.BAD_REQUEST, "LAB_007", "Test order status is invalid"),
+    INVALID_LAB_SERVICE(HttpStatus.BAD_REQUEST, "LAB_008", "Medical service is not valid for this doctor"),
+    INVALID_LAB_SERVICE_TYPE(HttpStatus.BAD_REQUEST,"LAB_009","Only test services can be ordered");
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;

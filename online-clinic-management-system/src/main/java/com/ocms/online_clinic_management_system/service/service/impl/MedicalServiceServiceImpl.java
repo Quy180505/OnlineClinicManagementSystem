@@ -1,5 +1,6 @@
 package com.ocms.online_clinic_management_system.service.service.impl;
 
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.service.dto.request.CreateMedicalServiceRequest;
 import com.ocms.online_clinic_management_system.service.dto.request.PatchMedicalServiceRequest;
@@ -32,6 +33,19 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     private final MedicalServiceValidator medicalServiceValidator;
     private final SpecialtyValidator specialtyValidator;
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MedicalServiceResponse> getExaminationServicesBySpecialty(Long specialtyId) {
+
+        specialtyValidator.validateSpecialtyExists(specialtyId);
+
+        return medicalServiceRepository
+                .findAllBySpecialty_IdAndServiceTypeOrderByServiceName(specialtyId, MedicalServiceType.EXAM)
+                .stream()
+                .map(medicalServiceMapper::toResponse)
+                .toList();
+    }
 
     @Override
     @Transactional(readOnly = true)

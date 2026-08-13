@@ -24,4 +24,6 @@ public interface MedicalServiceService {
     List<MedicalServiceResponse> getBySpecialty(Long specialtyId);
 
     MedicalServiceResponse partialUpdate(Long medicalServiceId, PatchMedicalServiceRequest request);
+
+    List<MedicalServiceResponse> getExaminationServicesBySpecialty(Long specialtyId);
 }

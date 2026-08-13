@@ -7,6 +7,11 @@ import com.ocms.online_clinic_management_system.invoice.exception.InvoiceNotFoun
 import com.ocms.online_clinic_management_system.invoice.repository.InvoiceRepository;
 import com.ocms.online_clinic_management_system.invoice.service.InvoiceService;
 import com.ocms.online_clinic_management_system.common.constant.enums.InvoiceItemType;
+import com.ocms.online_clinic_management_system.laboratory.entity.TestOrder;
+import com.ocms.online_clinic_management_system.laboratory.entity.TestOrderDetail;
+import com.ocms.online_clinic_management_system.laboratory.event.TestOrderCreatedEvent;
+import com.ocms.online_clinic_management_system.laboratory.exception.TestOrderNotFoundException;
+import com.ocms.online_clinic_management_system.laboratory.repository.TestOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +24,7 @@ import java.math.BigDecimal;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
-
+    private final TestOrderRepository testOrderRepository;
     @Override
     public Invoice createInitialInvoice(Appointment appointment) {
 
@@ -49,11 +54,38 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         return invoiceRepository.save(invoice);
     }
+    @Override
+    public void addTestOrderToInvoice(TestOrderCreatedEvent event) {
+
+        TestOrder testOrder = testOrderRepository.findById(event.getTestOrderId()).orElseThrow(TestOrderNotFoundException::new);
+        Invoice invoice = invoiceRepository.findByAppointment_Id(testOrder.getMedicalRecord().getAppointment().getId()).orElseThrow(InvoiceNotFoundException::new);
+        BigDecimal additionalAmount = BigDecimal.ZERO;
+
+        for (TestOrderDetail detail : testOrder.getDetails()) {
+            BigDecimal unitPrice = detail.getService().getPrice();
+            InvoiceDetail invoiceDetail = InvoiceDetail.builder()
+                    .invoice(invoice)
+                    .itemType(InvoiceItemType.TEST)
+                    .testOrderDetail(detail)
+                    .description(detail.getService().getServiceName())
+                    .quantity(1)
+                    .unitPrice(unitPrice)
+                    .amount(unitPrice)
+                    .build();
+
+            invoice.getInvoiceDetails().add(invoiceDetail);
+            additionalAmount = additionalAmount.add(unitPrice);
+        }
+
+        invoice.setTotalAmount(invoice.getTotalAmount().add(additionalAmount));
+
+        invoiceRepository.save(invoice);
+    }
+
 
     @Override
     @Transactional(readOnly = true)
     public Invoice getByAppointmentId(Long appointmentId) {
-
         return invoiceRepository.findByAppointment_Id(appointmentId).orElseThrow(InvoiceNotFoundException::new);
     }
 }

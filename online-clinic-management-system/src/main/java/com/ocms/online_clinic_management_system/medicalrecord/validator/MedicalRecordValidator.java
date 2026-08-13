@@ -38,4 +38,8 @@ public class MedicalRecordValidator {
             throw new InvalidAppointmentStatusException();
         }
     }
+
+    public MedicalRecord validateMedicalRecordById(Long medicalRecordId) {
+        return medicalRecordRepository.findById(medicalRecordId).orElseThrow(MedicalRecordNotFoundException::new);
+    }
 }
