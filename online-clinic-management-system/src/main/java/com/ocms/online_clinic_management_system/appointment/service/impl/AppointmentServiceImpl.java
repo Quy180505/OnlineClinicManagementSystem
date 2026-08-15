@@ -2,6 +2,7 @@ package com.ocms.online_clinic_management_system.appointment.service.impl;
 
 import com.ocms.online_clinic_management_system.appointment.dto.request.AppointmentSearchRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.request.CreateAppointmentRequest;
+import com.ocms.online_clinic_management_system.appointment.dto.request.RejectAppointmentRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.response.AppointmentDetailResponse;
 import com.ocms.online_clinic_management_system.appointment.dto.response.AppointmentResponse;
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
@@ -134,7 +135,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentResponse reject(Long appointmentId) {
+    public AppointmentResponse reject(Long appointmentId, RejectAppointmentRequest request) {
 
         Appointment appointment = appointmentValidator.validateAppointmentExists(appointmentId);
         appointmentValidator.validateStatusTransition(appointment, "REJECTED");
@@ -142,7 +143,8 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setAppointmentStatus(rejectedStatus);
 
         eventPublisher.publish(new AppointmentRejectedEvent(appointment.getId(), appointment.getPatient().getId(),
-                                                            appointment.getDoctor().getId(),appointment.getPatient().getUser().getId()
+                                                            appointment.getDoctor().getId(),
+                                                            appointment.getPatient().getUser().getId(), request.getReason()
                 ));
         return appointmentMapper.toResponse(appointment);
     }

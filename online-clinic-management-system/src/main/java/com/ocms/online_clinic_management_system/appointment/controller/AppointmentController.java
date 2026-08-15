@@ -2,6 +2,7 @@ package com.ocms.online_clinic_management_system.appointment.controller;
 
 import com.ocms.online_clinic_management_system.appointment.dto.request.AppointmentSearchRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.request.CreateAppointmentRequest;
+import com.ocms.online_clinic_management_system.appointment.dto.request.RejectAppointmentRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.response.AppointmentDetailResponse;
 import com.ocms.online_clinic_management_system.appointment.dto.response.AppointmentResponse;
 import com.ocms.online_clinic_management_system.appointment.service.AppointmentService;
@@ -50,8 +51,8 @@ public class AppointmentController {
 
 
     @PatchMapping("/{id}/reject")
-    public ResponseEntity<ApiResponse<AppointmentResponse>> reject(@PathVariable Long id) {
-        return ResponseEntity.ok(ApiResponse.success(appointmentService.reject(id)));
+    public ResponseEntity<ApiResponse<AppointmentResponse>> reject(@PathVariable Long id ,@Valid @RequestBody RejectAppointmentRequest request) {
+        return ResponseEntity.ok(ApiResponse.success(appointmentService.reject(id,request)));
     }
 
     @PatchMapping("/{id}/cancel")

@@ -11,11 +11,13 @@ public class AppointmentRejectedEvent extends BaseEvent implements DomainEvent {
     private final Long patientId;
     private final Long doctorId;
     private final Long patientUserId;
+    private final String reason;
 
-    public AppointmentRejectedEvent(Long appointmentId, Long patientId, Long doctorId,  Long patientUserId) {
+    public AppointmentRejectedEvent(Long appointmentId, Long patientId, Long doctorId,  Long patientUserId,String reason) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.patientUserId = patientUserId;
+        this.reason=reason;
     }
 }
