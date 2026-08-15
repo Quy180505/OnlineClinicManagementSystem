@@ -62,7 +62,7 @@ public class AppointmentEventListener {
         Notification notification = Notification.builder()
                 .user(user)
                 .title("Lịch khám bị từ chối")
-                .content("Lịch khám của bạn đã bị từ chối.")
+                .content("Lịch khám của bạn đã bị từ chối. Lý do:" + event.getReason())
                 .notificationType("APPOINTMENT_REJECTED")
                 .build();
 
