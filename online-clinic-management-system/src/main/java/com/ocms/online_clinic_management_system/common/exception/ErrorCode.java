@@ -71,7 +71,20 @@ public enum ErrorCode {
     LABORATORY_ACCESS_DENIED(HttpStatus.FORBIDDEN, "LAB_006", "You do not have permission to access laboratory data"),
     INVALID_TEST_ORDER_STATUS(HttpStatus.BAD_REQUEST, "LAB_007", "Test order status is invalid"),
     INVALID_LAB_SERVICE(HttpStatus.BAD_REQUEST, "LAB_008", "Medical service is not valid for this doctor"),
-    INVALID_LAB_SERVICE_TYPE(HttpStatus.BAD_REQUEST,"LAB_009","Only test services can be ordered");
+    INVALID_LAB_SERVICE_TYPE(HttpStatus.BAD_REQUEST,"LAB_009","Only test services can be ordered"),
+
+    MEDICINE_NOT_FOUND(HttpStatus.NOT_FOUND, "INVENTORY_001", "Medicine not found"),
+    MEDICINE_ALREADY_EXISTS(HttpStatus.CONFLICT, "INVENTORY_002", "Medicine already exists"),
+    MEDICINE_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "INVENTORY_003", "Medicine category not found"),
+    MEDICINE_CATEGORY_ALREADY_EXISTS(HttpStatus.CONFLICT, "INVENTORY_004", "Medicine category already exists"),
+    MEDICINE_INVENTORY_NOT_FOUND(HttpStatus.NOT_FOUND, "INVENTORY_005", "Medicine inventory not found"),
+    INVENTORY_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "INVENTORY_006", "Inventory status not found"),
+    INSUFFICIENT_STOCK(HttpStatus.BAD_REQUEST, "INVENTORY_007", "Insufficient medicine stock"),
+    EXPIRED_MEDICINE(HttpStatus.BAD_REQUEST, "INVENTORY_008", "Medicine has expired"),
+    INVALID_INVENTORY_TRANSACTION(HttpStatus.BAD_REQUEST, "INVENTORY_009", "Invalid inventory transaction");
+
+
+
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;

@@ -75,6 +75,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/laboratory/test-orders/*/start").hasRole("STAFF")
                         .requestMatchers(HttpMethod.PATCH, "/api/laboratory/test-order-details/*/result").hasRole("STAFF")
                         .requestMatchers(HttpMethod.GET, "/api/laboratory/test-order-details/*/result").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/medicines/**").hasAnyRole("PATIENT", "DOCTOR", "STAFF", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/medicines").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/medicines/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/medicines/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/medicines/*/restore").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/medicine-categories/**").hasAnyRole("PATIENT", "DOCTOR", "STAFF", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/medicine-categories").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/medicine-categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/medicine-categories/**").hasRole("ADMIN")
+                        .requestMatchers("/api/inventory/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
 
                 .oauth2Login(oauth -> oauth
