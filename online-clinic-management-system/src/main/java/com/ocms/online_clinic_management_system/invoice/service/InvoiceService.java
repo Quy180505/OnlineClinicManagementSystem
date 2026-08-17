@@ -6,7 +6,7 @@ import com.ocms.online_clinic_management_system.prescription.entity.Prescription
 
 public interface InvoiceService {
 
-    Invoice createInitialInvoice(Appointment appointment);
+    void createInitialInvoice(Appointment appointment);
     Invoice getByAppointmentId(Long appointmentId);
     void addTestOrderToInvoice(TestOrderCreatedEvent event);
     void addPrescriptionToInvoice(Prescription prescription);

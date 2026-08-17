@@ -61,7 +61,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
     @Override
-    public Invoice createInitialInvoice(Appointment appointment) {
+    public void createInitialInvoice(Appointment appointment) {
 
         if (invoiceRepository.existsByAppointment_Id(appointment.getId())) {
             throw new InvoiceAlreadyExistsException();
@@ -87,7 +87,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         detail.setInvoice(invoice);
         invoice.getInvoiceDetails().add(detail);
 
-        return invoiceRepository.save(invoice);
+        invoiceRepository.save(invoice);
     }
     @Override
     public void addTestOrderToInvoice(TestOrderCreatedEvent event) {
