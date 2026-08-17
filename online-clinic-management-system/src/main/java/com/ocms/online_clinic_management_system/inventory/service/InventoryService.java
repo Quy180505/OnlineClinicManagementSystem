@@ -1,6 +1,7 @@
 package com.ocms.online_clinic_management_system.inventory.service;
 
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
+import com.ocms.online_clinic_management_system.inventory.dto.request.ExportMedicineRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.ImportMedicineRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.InventorySearchRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.response.InventoryTransactionResponse;
@@ -19,4 +20,5 @@ public interface InventoryService {
 
     PageResponse<InventoryTransactionResponse> getTransactions(Long medicineInventoryId, Pageable pageable);
 
+    void exportMedicine(ExportMedicineRequest request);
 }
