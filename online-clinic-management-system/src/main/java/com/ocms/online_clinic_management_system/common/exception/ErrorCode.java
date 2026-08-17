@@ -81,7 +81,12 @@ public enum ErrorCode {
     INVENTORY_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "INVENTORY_006", "Inventory status not found"),
     INSUFFICIENT_STOCK(HttpStatus.BAD_REQUEST, "INVENTORY_007", "Insufficient medicine stock"),
     EXPIRED_MEDICINE(HttpStatus.BAD_REQUEST, "INVENTORY_008", "Medicine has expired"),
-    INVALID_INVENTORY_TRANSACTION(HttpStatus.BAD_REQUEST, "INVENTORY_009", "Invalid inventory transaction");
+    INVALID_INVENTORY_TRANSACTION(HttpStatus.BAD_REQUEST, "INVENTORY_009", "Invalid inventory transaction"),
+
+    PRESCRIPTION_NOT_FOUND(HttpStatus.NOT_FOUND, "PRESCRIPTION_001", "Prescription not found"),
+    PRESCRIPTION_DETAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "PRESCRIPTION_002", "Prescription detail not found"),
+    PRESCRIPTION_ALREADY_EXISTS(HttpStatus.CONFLICT, "PRESCRIPTION_003", "Prescription already exists for this medical record"),
+    PRESCRIPTION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "PRESCRIPTION_004", "You do not have permission to access this prescription");
 
 
 

@@ -3,6 +3,8 @@ package com.ocms.online_clinic_management_system.inventory.service.impl;
 import com.ocms.online_clinic_management_system.common.constant.enums.InventoryTransactionType;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.inventory.config.InventoryProperties;
+import com.ocms.online_clinic_management_system.inventory.dto.request.ExportMedicineDetailRequest;
+import com.ocms.online_clinic_management_system.inventory.dto.request.ExportMedicineRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.ImportMedicineRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.InventorySearchRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.response.InventoryTransactionResponse;
@@ -11,6 +13,8 @@ import com.ocms.online_clinic_management_system.inventory.entity.InventoryStatus
 import com.ocms.online_clinic_management_system.inventory.entity.InventoryTransaction;
 import com.ocms.online_clinic_management_system.inventory.entity.Medicine;
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineInventory;
+import com.ocms.online_clinic_management_system.inventory.exception.InsufficientStockException;
+import com.ocms.online_clinic_management_system.inventory.exception.InvalidInventoryTransactionException;
 import com.ocms.online_clinic_management_system.inventory.mapper.InventoryMapper;
 import com.ocms.online_clinic_management_system.inventory.repository.InventoryTransactionRepository;
 import com.ocms.online_clinic_management_system.inventory.repository.MedicineInventoryRepository;
@@ -19,6 +23,8 @@ import com.ocms.online_clinic_management_system.inventory.specification.Medicine
 import com.ocms.online_clinic_management_system.inventory.validator.InventoryStatusValidator;
 import com.ocms.online_clinic_management_system.inventory.validator.InventoryValidator;
 import com.ocms.online_clinic_management_system.inventory.validator.MedicineValidator;
+import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
+import com.ocms.online_clinic_management_system.prescription.repository.PrescriptionDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +49,74 @@ public class InventoryServiceImpl implements InventoryService {
     private final InventoryValidator inventoryValidator;
     private final InventoryStatusValidator inventoryStatusValidator;
     private final InventoryProperties inventoryProperties;
+    private final PrescriptionDetailRepository prescriptionDetailRepository;
+
+    @Override
+    public void exportMedicine(ExportMedicineRequest request) {
+
+        for (ExportMedicineDetailRequest detail : request.getDetails()) {
+
+
+            medicineValidator.validateMedicineExists(detail.getMedicineId());
+
+
+            PrescriptionDetail prescriptionDetail =
+                    inventoryValidator.validatePrescriptionDetailExists(detail.getPrescriptionDetailId(), request.getPrescriptionId());
+
+            if (!prescriptionDetail.getMedicine().getId().equals(detail.getMedicineId())) {
+                throw new InvalidInventoryTransactionException();
+            }
+
+            if (detail.getQuantity() > prescriptionDetail.getQuantity()) {
+                throw new InsufficientStockException();
+            }
+
+            List<MedicineInventory> inventories = medicineInventoryRepository
+                            .findAvailableInventoriesForUpdate(detail.getMedicineId(), LocalDate.now());
+
+            int totalAvailable = inventories.stream().mapToInt(MedicineInventory::getQuantityInStock).sum();
+
+            if (totalAvailable < detail.getQuantity()) {
+                throw new InsufficientStockException();
+            }
+
+            int remainingQuantity = detail.getQuantity();
+
+            for (MedicineInventory inventory : inventories) {
+
+                if (remainingQuantity <= 0) {
+                    break;
+                }
+
+                int quantityBefore = inventory.getQuantityInStock();
+                int exportQuantity = Math.min(quantityBefore, remainingQuantity);
+                int quantityAfter = quantityBefore - exportQuantity;
+                inventory.setQuantityInStock(quantityAfter);
+
+                inventory.setInventoryStatus(determineInventoryStatus(quantityAfter, inventory.getExpireDate()));
+
+                InventoryTransaction transaction = InventoryTransaction.builder()
+                        .medicineInventory(inventory)
+                        .prescriptionDetail(prescriptionDetail)
+                        .transactionType(InventoryTransactionType.EXPORT)
+                        .quantity(exportQuantity)
+                        .quantityBefore(quantityBefore)
+                        .quantityAfter(quantityAfter)
+                        .note("Xuất thuốc theo đơn thuốc")
+                        .build();
+
+                inventoryTransactionRepository.save(transaction);
+
+                remainingQuantity -= exportQuantity;
+            }
+
+            if (remainingQuantity > 0) {
+                throw new InsufficientStockException();
+            }
+        }
+    }
+
+
     @Override
     public MedicineInventoryResponse importMedicine(ImportMedicineRequest request) {
 

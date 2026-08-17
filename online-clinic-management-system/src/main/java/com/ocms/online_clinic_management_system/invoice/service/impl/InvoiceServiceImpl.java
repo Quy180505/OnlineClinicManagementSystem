@@ -12,6 +12,8 @@ import com.ocms.online_clinic_management_system.laboratory.entity.TestOrderDetai
 import com.ocms.online_clinic_management_system.laboratory.event.TestOrderCreatedEvent;
 import com.ocms.online_clinic_management_system.laboratory.exception.TestOrderNotFoundException;
 import com.ocms.online_clinic_management_system.laboratory.repository.TestOrderRepository;
+import com.ocms.online_clinic_management_system.prescription.entity.Prescription;
+import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,39 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
     private final TestOrderRepository testOrderRepository;
+
+    @Override
+    public void addPrescriptionToInvoice(Prescription prescription) {
+
+        Long appointmentId = prescription.getMedicalRecord().getAppointment().getId();
+        Invoice invoice = invoiceRepository.findByAppointment_Id(appointmentId).orElseThrow(InvoiceNotFoundException::new);
+        BigDecimal additionalAmount = BigDecimal.ZERO;
+
+        for (PrescriptionDetail detail : prescription.getDetails()) {
+
+            BigDecimal unitPrice = detail.getUnitPrice();
+
+            BigDecimal amount = unitPrice.multiply(BigDecimal.valueOf(detail.getQuantity()));
+
+            InvoiceDetail invoiceDetail = InvoiceDetail.builder()
+                    .invoice(invoice)
+                    .itemType(InvoiceItemType.MEDICINE)
+                    .prescriptionDetail(detail)
+                    .description(detail.getMedicine().getMedicineName())
+                    .quantity(detail.getQuantity())
+                    .unitPrice(unitPrice)
+                    .amount(amount)
+                    .build();
+
+            invoice.getInvoiceDetails().add(invoiceDetail);
+
+            additionalAmount = additionalAmount.add(amount);
+        }
+        invoice.setTotalAmount(invoice.getTotalAmount().add(additionalAmount));
+        invoiceRepository.save(invoice);
+    }
+
+
     @Override
     public Invoice createInitialInvoice(Appointment appointment) {
 

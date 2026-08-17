@@ -8,9 +8,11 @@ import com.ocms.online_clinic_management_system.user.entity.User;
 import com.ocms.online_clinic_management_system.user.exception.UserNotFoundException;
 import com.ocms.online_clinic_management_system.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
 @RequiredArgsConstructor
@@ -19,8 +21,8 @@ public class LaboratoryEventListener {
     private final NotificationRepository notificationRepository;
     private final UserRepository userRepository;
 
-    @EventListener
-    @Transactional
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleTestOrderCreated(TestOrderCreatedEvent event) {
 
         User user = getUser(event.getPatientId());
@@ -35,8 +37,8 @@ public class LaboratoryEventListener {
         notificationRepository.save(notification);
     }
 
-    @EventListener
-    @Transactional
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleLabResultUpdated(LabResultUpdatedEvent event) {
 
         User user = getUser(event.getPatientId());

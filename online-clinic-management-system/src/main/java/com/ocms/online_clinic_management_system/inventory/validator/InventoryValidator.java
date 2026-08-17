@@ -8,6 +8,9 @@ import com.ocms.online_clinic_management_system.inventory.exception.InvalidInven
 import com.ocms.online_clinic_management_system.inventory.exception.MedicineInventoryNotFoundException;
 import com.ocms.online_clinic_management_system.inventory.repository.MedicineInventoryRepository;
 import com.ocms.online_clinic_management_system.inventory.repository.InventoryTransactionRepository;
+import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
+import com.ocms.online_clinic_management_system.prescription.exception.PrescriptionDetailNotFoundException;
+import com.ocms.online_clinic_management_system.prescription.repository.PrescriptionDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +21,7 @@ import java.time.LocalDate;
 public class InventoryValidator {
 
     private final MedicineInventoryRepository medicineInventoryRepository;
-
+    private final PrescriptionDetailRepository prescriptionDetailRepository;
 
     public MedicineInventory validateMedicineInventoryExists(Long medicineInventoryId) {
         return medicineInventoryRepository.findById(medicineInventoryId).orElseThrow(MedicineInventoryNotFoundException::new);
@@ -53,5 +56,10 @@ public class InventoryValidator {
         {
             throw new ExpiredMedicineException();
         }
+    }
+
+    public PrescriptionDetail validatePrescriptionDetailExists(Long prescriptionDetailId, Long prescriptionId) {
+        return prescriptionDetailRepository.findByIdAndPrescriptionId(prescriptionDetailId, prescriptionId)
+                .orElseThrow(PrescriptionDetailNotFoundException::new);
     }
 }
