@@ -70,9 +70,22 @@ public class LaboratoryValidator {
         }
     }
 
+    public void validateTestOrderCompleted(LabResult labResult) {
+        if (labResult.getTestOrderDetail().getTestOrder().getStatus() != TestOrderStatus.COMPLETED) {
+            throw new InvalidTestOrderStatusException();
+        }
+    }
+
     public void validateServiceBelongsToDoctorSpecialty(MedicalService medicalService, Doctor doctor) {
         if (!medicalService.getSpecialty().getId().equals(doctor.getSpecialty().getId())) {
             throw new InvalidLabServiceException();
+        }
+    }
+
+    public void validateLabResultPatientOwnership(LabResult labResult, Long patientId) {
+        Long resultPatientId = labResult.getTestOrderDetail().getTestOrder().getMedicalRecord().getPatient().getId();
+        if (!resultPatientId.equals(patientId)) {
+            throw new LaboratoryAccessDeniedException();
         }
     }
 }
