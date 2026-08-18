@@ -86,8 +86,12 @@ public enum ErrorCode {
     PRESCRIPTION_NOT_FOUND(HttpStatus.NOT_FOUND, "PRESCRIPTION_001", "Prescription not found"),
     PRESCRIPTION_DETAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "PRESCRIPTION_002", "Prescription detail not found"),
     PRESCRIPTION_ALREADY_EXISTS(HttpStatus.CONFLICT, "PRESCRIPTION_003", "Prescription already exists for this medical record"),
-    PRESCRIPTION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "PRESCRIPTION_004", "You do not have permission to access this prescription");
+    PRESCRIPTION_ACCESS_DENIED(HttpStatus.FORBIDDEN, "PRESCRIPTION_004", "You do not have permission to access this prescription"),
 
+    PAYMENT_NOT_FOUND(HttpStatus.NOT_FOUND,"PAYMENT_001","Payment not found"),
+    PAYMENT_ALREADY_PAID(HttpStatus.CONFLICT,"PAYMENT_002","Payment has already been paid"),
+    INVALID_PAYMENT(HttpStatus.BAD_REQUEST,"PAYMENT_003","Invalid payment"),
+    PAYMENT_TRANSACTION_NOT_FOUND(HttpStatus.NOT_FOUND,"PAYMENT_004","Payment transaction not found");
 
 
     private final HttpStatus httpStatus;
