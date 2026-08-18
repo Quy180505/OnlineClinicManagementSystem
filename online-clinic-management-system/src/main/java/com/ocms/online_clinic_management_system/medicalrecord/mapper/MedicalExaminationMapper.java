@@ -1,9 +1,7 @@
 package com.ocms.online_clinic_management_system.medicalrecord.mapper;
 
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
-import com.ocms.online_clinic_management_system.medicalrecord.dto.response.MedicalExaminationResponse;
-import com.ocms.online_clinic_management_system.medicalrecord.dto.response.TodayAppointmentResponse;
-import com.ocms.online_clinic_management_system.medicalrecord.dto.response.TreatmentHistoryResponse;
+import com.ocms.online_clinic_management_system.medicalrecord.dto.response.*;
 import com.ocms.online_clinic_management_system.medicalrecord.entity.Disease;
 import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalRecord;
 import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalRecordDisease;
@@ -29,8 +27,6 @@ public interface MedicalExaminationMapper {
 
     List<TodayAppointmentResponse> toTodayAppointmentResponseList(List<Appointment> appointments);
 
-
-
     @Mapping(target = "appointmentId", source = "id")
     @Mapping(target = "patientId", source = "patient.id")
     @Mapping(target = "patientName", source = "patient.user.fullName")
@@ -53,7 +49,6 @@ public interface MedicalExaminationMapper {
     TreatmentHistoryResponse toTreatmentHistoryResponse(MedicalRecord medicalRecord);
 
     List<TreatmentHistoryResponse> toTreatmentHistoryResponseList(List<MedicalRecord> medicalRecords);
-
 
     default List<String> mapDiseases(List<MedicalRecordDisease> diseases) {
         if (diseases == null) {
