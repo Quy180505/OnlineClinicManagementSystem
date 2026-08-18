@@ -29,6 +29,12 @@ public class MedicalRecordValidator {
         }
     }
 
+    public void validatePatientOwnership(MedicalRecord medicalRecord, Long currentUserId) {
+        if (!medicalRecord.getPatient().getUser().getId().equals(currentUserId)) {
+            throw new MedicalExaminationAccessDeniedException();
+        }
+    }
+
     public void validateAppointmentInProgress(MedicalRecord medicalRecord) {
         Appointment appointment = medicalRecord.getAppointment();
 
