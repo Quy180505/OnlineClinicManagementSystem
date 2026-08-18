@@ -9,12 +9,15 @@ import com.ocms.online_clinic_management_system.doctor.repository.DoctorReposito
 import com.ocms.online_clinic_management_system.laboratory.dto.request.CreateTestOrderRequest;
 import com.ocms.online_clinic_management_system.laboratory.dto.request.UpdateLabResultRequest;
 import com.ocms.online_clinic_management_system.laboratory.dto.response.LabResultResponse;
+import com.ocms.online_clinic_management_system.laboratory.dto.response.PatientLabResultDetailResponse;
+import com.ocms.online_clinic_management_system.laboratory.dto.response.PatientLabResultResponse;
 import com.ocms.online_clinic_management_system.laboratory.dto.response.TestOrderResponse;
 import com.ocms.online_clinic_management_system.laboratory.entity.LabResult;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrder;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrderDetail;
 import com.ocms.online_clinic_management_system.laboratory.event.LabResultUpdatedEvent;
 import com.ocms.online_clinic_management_system.laboratory.event.TestOrderCreatedEvent;
+import com.ocms.online_clinic_management_system.laboratory.exception.LabResultNotFoundException;
 import com.ocms.online_clinic_management_system.laboratory.mapper.LabResultMapper;
 import com.ocms.online_clinic_management_system.laboratory.mapper.TestOrderMapper;
 import com.ocms.online_clinic_management_system.laboratory.repository.LabResultRepository;
@@ -24,6 +27,9 @@ import com.ocms.online_clinic_management_system.laboratory.service.LaboratorySer
 import com.ocms.online_clinic_management_system.laboratory.validator.LaboratoryValidator;
 import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalRecord;
 import com.ocms.online_clinic_management_system.medicalrecord.validator.MedicalRecordValidator;
+import com.ocms.online_clinic_management_system.patient.entity.Patient;
+import com.ocms.online_clinic_management_system.patient.exception.PatientNotFoundException;
+import com.ocms.online_clinic_management_system.patient.repository.PatientRepository;
 import com.ocms.online_clinic_management_system.service.entity.MedicalService;
 import com.ocms.online_clinic_management_system.service.exception.MedicalServiceNotFoundException;
 import com.ocms.online_clinic_management_system.service.repository.MedicalServiceRepository;
@@ -43,6 +49,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     private final TestOrderDetailRepository testOrderDetailRepository;
     private final LabResultRepository labResultRepository;
     private final MedicalServiceRepository medicalServiceRepository;
+    private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
 
     private final LaboratoryValidator laboratoryValidator;
@@ -54,6 +61,26 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     private final SecurityHelper securityHelper;
     private final DomainEventPublisher domainEventPublisher;
 
+
+    @Override
+    public List<PatientLabResultResponse> getMyLabResults() {
+
+        Long currentUserId = securityHelper.getCurrentUserId();
+        Patient patient = patientRepository.findByUserId(currentUserId).orElseThrow(PatientNotFoundException::new);
+        List<LabResult> labResults = labResultRepository.findByTestOrderDetail_TestOrder_MedicalRecord_Patient_IdAndTestOrderDetail_TestOrder_StatusOrderByResultDateDesc(patient.getId(),TestOrderStatus.COMPLETED);
+        return labResultMapper.toPatientLabResultResponseList(labResults);
+    }
+
+    @Override
+    public PatientLabResultDetailResponse getMyLabResult(Long labResultId) {
+
+        Long currentUserId = securityHelper.getCurrentUserId();
+        Patient patient = patientRepository.findByUserId(currentUserId).orElseThrow(PatientNotFoundException::new);
+        LabResult labResult = labResultRepository.findById(labResultId).orElseThrow(LabResultNotFoundException::new);
+        laboratoryValidator.validateLabResultPatientOwnership(labResult, patient.getId());
+        laboratoryValidator.validateTestOrderCompleted(labResult);
+        return labResultMapper.toPatientLabResultDetailResponse(labResult);
+    }
 
     @Override
     @Transactional
