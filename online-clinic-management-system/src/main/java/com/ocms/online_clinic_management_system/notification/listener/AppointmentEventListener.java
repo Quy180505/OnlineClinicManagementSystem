@@ -39,6 +39,7 @@ public class AppointmentEventListener {
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleAppointmentConfirmed(AppointmentConfirmedEvent event) {
 
         User user = getUser(event.getPatientUserId());
@@ -54,6 +55,7 @@ public class AppointmentEventListener {
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleAppointmentRejected(AppointmentRejectedEvent event) {
 
         User user = getUser(event.getPatientUserId());
@@ -69,6 +71,7 @@ public class AppointmentEventListener {
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleAppointmentCancelled(AppointmentCancelledEvent event) {
 
         User user = getUser(event.getPatientUserId());
