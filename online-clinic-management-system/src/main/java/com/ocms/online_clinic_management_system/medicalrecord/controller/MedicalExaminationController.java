@@ -20,8 +20,8 @@ public class MedicalExaminationController {
     private final MedicalExaminationService medicalExaminationService;
 
     @GetMapping("/today")
-    public ResponseEntity<ApiResponse<List<TodayAppointmentResponse>>> getTodayAppointments(@RequestParam LocalDate workDate) {
-        return ResponseEntity.ok(ApiResponse.success(medicalExaminationService.getTodayAppointments(workDate)));
+    public ResponseEntity<ApiResponse<List<TodayAppointmentResponse>>> getTodayAppointments() {
+        return ResponseEntity.ok(ApiResponse.success(medicalExaminationService.getTodayAppointments()));
     }
 
     @PatchMapping("/{appointmentId}/start")

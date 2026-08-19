@@ -37,20 +37,16 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     private final SecurityHelper securityHelper;
 
     @Override
-    public List<TodayAppointmentResponse> getTodayAppointments(LocalDate workDate) {
+    public List<TodayAppointmentResponse> getTodayAppointments() {
+        LocalDate workDate = LocalDate.now();
+
         Long currentUserId = securityHelper.getCurrentUserId();
 
         medicalExaminationValidator.validateDoctorAuthenticated(currentUserId);
 
         Long doctorId = medicalExaminationValidator.validateAndGetDoctorId(currentUserId);
 
-        List<Appointment> appointments =
-                appointmentRepository.findByDoctorAndWorkDateAndStatuses(doctorId, workDate,
-                        List.of(
-                                STATUS_CONFIRMED,
-                                STATUS_IN_PROGRESS
-                        )
-                );
+        List<Appointment> appointments = appointmentRepository.findByDoctorAndWorkDateAndStatuses(doctorId, workDate, List.of(STATUS_CONFIRMED, STATUS_IN_PROGRESS));
 
         return medicalExaminationMapper.toTodayAppointmentResponseList(appointments);
     }
@@ -66,13 +62,11 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
         medicalExaminationValidator.validateAppointmentConfirmed(appointment);
         medicalExaminationValidator.validateMedicalRecordNotExists(appointmentId);
 
-        AppointmentStatus inProgressStatus = appointmentStatusRepository.findByName(STATUS_IN_PROGRESS)
-                .orElseThrow(AppointmentNotFoundException::new);
+        AppointmentStatus inProgressStatus = appointmentStatusRepository.findByName(STATUS_IN_PROGRESS).orElseThrow(AppointmentNotFoundException::new);
 
         appointment.setAppointmentStatus(inProgressStatus);
 
-        MedicalRecord medicalRecord =
-                MedicalRecord.builder()
+        MedicalRecord medicalRecord = MedicalRecord.builder()
                         .appointment(appointment)
                         .patient(appointment.getPatient())
                         .doctor(appointment.getDoctor())
