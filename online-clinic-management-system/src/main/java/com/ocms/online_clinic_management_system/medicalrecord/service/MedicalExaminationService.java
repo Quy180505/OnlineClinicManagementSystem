@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface MedicalExaminationService {
 
-    List<TodayAppointmentResponse> getTodayAppointments(LocalDate workDate);
+    List<TodayAppointmentResponse> getTodayAppointments();
     MedicalExaminationResponse startMedicalExamination(Long appointmentId);
     List<TreatmentHistoryResponse> getTreatmentHistory(Long appointmentId);
 }
