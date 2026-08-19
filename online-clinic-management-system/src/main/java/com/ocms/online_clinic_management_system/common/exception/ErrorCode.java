@@ -91,7 +91,8 @@ public enum ErrorCode {
     PAYMENT_NOT_FOUND(HttpStatus.NOT_FOUND,"PAYMENT_001","Payment not found"),
     PAYMENT_ALREADY_PAID(HttpStatus.CONFLICT,"PAYMENT_002","Payment has already been paid"),
     INVALID_PAYMENT(HttpStatus.BAD_REQUEST,"PAYMENT_003","Invalid payment"),
-    PAYMENT_TRANSACTION_NOT_FOUND(HttpStatus.NOT_FOUND,"PAYMENT_004","Payment transaction not found");
+    PAYMENT_TRANSACTION_NOT_FOUND(HttpStatus.NOT_FOUND,"PAYMENT_004","Payment transaction not found"),
+    PAYMENT_ACCESS_DENIED(HttpStatus.FORBIDDEN,"PAYMENT_005","You do not have permission to access this payment");
 
 
     private final HttpStatus httpStatus;

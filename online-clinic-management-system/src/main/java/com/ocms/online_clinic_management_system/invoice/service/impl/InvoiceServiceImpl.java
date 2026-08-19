@@ -1,5 +1,6 @@
 package com.ocms.online_clinic_management_system.invoice.service.impl;
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
+import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
 import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import com.ocms.online_clinic_management_system.invoice.entity.InvoiceDetail;
 import com.ocms.online_clinic_management_system.invoice.exception.InvoiceAlreadyExistsException;
@@ -18,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
-
+import com.ocms.online_clinic_management_system.invoice.event.InvoiceCreatedEvent;
+import com.ocms.online_clinic_management_system.invoice.event.InvoiceUpdatedEvent;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
     private final TestOrderRepository testOrderRepository;
-
+    private final DomainEventPublisher eventPublisher;
     @Override
     public void addPrescriptionToInvoice(Prescription prescription) {
 
@@ -57,6 +59,8 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         invoice.setTotalAmount(invoice.getTotalAmount().add(additionalAmount));
         invoiceRepository.save(invoice);
+        eventPublisher.publish(new InvoiceUpdatedEvent(invoice.getId(),  invoice.getPatient().getId(),
+                invoice.getAppointment().getId(),invoice.getTotalAmount()));
     }
 
 
@@ -88,6 +92,8 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoice.getInvoiceDetails().add(detail);
 
         invoiceRepository.save(invoice);
+        eventPublisher.publish(new InvoiceCreatedEvent(invoice.getId(),  invoice.getPatient().getId(),
+                invoice.getAppointment().getId(),invoice.getTotalAmount()));
     }
     @Override
     public void addTestOrderToInvoice(TestOrderCreatedEvent event) {
@@ -115,6 +121,8 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoice.setTotalAmount(invoice.getTotalAmount().add(additionalAmount));
 
         invoiceRepository.save(invoice);
+        eventPublisher.publish(new InvoiceUpdatedEvent(invoice.getId(),  invoice.getPatient().getId(),
+                invoice.getAppointment().getId(),invoice.getTotalAmount()));
     }
 
 
