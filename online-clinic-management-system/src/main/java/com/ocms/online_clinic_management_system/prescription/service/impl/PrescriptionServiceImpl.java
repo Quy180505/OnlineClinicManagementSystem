@@ -84,7 +84,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public PrescriptionResponse create(Long medicalRecordId, CreatePrescriptionRequest request) {
 
-        MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordExists(medicalRecordId);
+        MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordById(medicalRecordId);
         Long currentUserId = securityHelper.getCurrentUserId();
 
         medicalRecordValidator.validateDoctorOwnership(medicalRecord, currentUserId);
