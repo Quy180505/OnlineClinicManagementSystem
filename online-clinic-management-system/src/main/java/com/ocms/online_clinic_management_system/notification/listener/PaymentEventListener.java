@@ -9,12 +9,34 @@ import com.ocms.online_clinic_management_system.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
 public class PaymentEventListener {
 
+    private final NotificationRepository notificationRepository;
+    private final UserRepository userRepository;
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void handlePaymentCompleted(PaymentCompletedEvent event) {
+
+        User user = getUser(event.getPatientUserId());
+
+        Notification notification = Notification.builder()
+                .user(user)
+                .title("Thanh toán thành công")
+                .content("Hóa đơn đã được thanh toán thành công.")
+                .notificationType("PAYMENT_COMPLETED")
+                .build();
+
+        notificationRepository.save(notification);
+    }
+
+    private User getUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+    }
 }
