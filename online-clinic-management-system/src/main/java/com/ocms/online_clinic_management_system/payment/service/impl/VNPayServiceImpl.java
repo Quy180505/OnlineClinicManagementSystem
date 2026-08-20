@@ -4,6 +4,7 @@ import com.ocms.online_clinic_management_system.payment.entity.Payment;
 import com.ocms.online_clinic_management_system.payment.entity.PaymentTransaction;
 import com.ocms.online_clinic_management_system.payment.entity.TransactionStatus;
 import com.ocms.online_clinic_management_system.payment.event.PaymentCompletedEvent;
+import com.ocms.online_clinic_management_system.payment.event.PaymentFailedEvent;
 import com.ocms.online_clinic_management_system.payment.gateway.config.VNPayProperties;
 import com.ocms.online_clinic_management_system.payment.repository.PaymentRepository;
 import com.ocms.online_clinic_management_system.payment.repository.PaymentTransactionRepository;
@@ -13,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.math.BigDecimal;
@@ -28,12 +28,9 @@ import java.util.TreeMap;
 public class VNPayServiceImpl implements VNPayService {
 
     private final VNPayProperties vnpayProperties;
-
     private final PaymentRepository paymentRepository;
     private final PaymentTransactionRepository paymentTransactionRepository;
-
     private final PaymentValidator paymentValidator;
-
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
@@ -126,7 +123,7 @@ public class VNPayServiceImpl implements VNPayService {
         transaction.setTransactionStatus(failedStatus);
 
         paymentTransactionRepository.save(transaction);
-
+        publishPaymentFailedEvent(payment, transaction);
         response.put("RspCode", "00");
         response.put("Message", "Confirm Success");
 
@@ -247,5 +244,22 @@ public class VNPayServiceImpl implements VNPayService {
                         transaction.getPaymentMethod().getName(),
                         transaction.getTransactionCode(),
                         transaction.getAmount()));
+    }
+
+
+    private void publishPaymentFailedEvent(Payment payment, PaymentTransaction transaction) {
+        var invoice = payment.getInvoice();
+
+        eventPublisher.publishEvent(new PaymentFailedEvent(
+                        payment.getId(),
+                        invoice.getId(),
+                        invoice.getPatient().getId(),
+                        invoice.getPatient().getUser().getId(),
+                        transaction.getId(),
+                        transaction.getPaymentMethod().getName(),
+                        transaction.getTransactionCode(),
+                        transaction.getAmount()
+                )
+        );
     }
 }
