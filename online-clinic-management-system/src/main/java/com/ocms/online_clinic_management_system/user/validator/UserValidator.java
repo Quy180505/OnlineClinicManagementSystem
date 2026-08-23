@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.validator;
-
 import com.ocms.online_clinic_management_system.common.exception.ErrorCode;
 import com.ocms.online_clinic_management_system.user.dto.request.CreateDoctorRequest;
 import com.ocms.online_clinic_management_system.user.dto.request.CreateStaffRequest;
@@ -21,7 +20,6 @@ public class UserValidator {
         validateUsername(request.getUsername());
         validateEmail(request.getEmail());
         validatePhone(request.getPhone());
-
     }
 
     public void validateCreateStaff(CreateStaffRequest request) {

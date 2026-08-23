@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +21,7 @@ public class LabResult extends BaseEntity {
     private TestOrderDetail testOrderDetail;
 
     @Lob
-    @Column(name = "result_content", nullable = false)
+    @Column(name = "result_content",columnDefinition = "TEXT", nullable = false)
     private String resultContent;
 
     @Column(name = "result_date", nullable = false)

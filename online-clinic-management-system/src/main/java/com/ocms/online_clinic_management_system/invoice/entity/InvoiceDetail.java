@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.invoice.entity;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.InvoiceItemType;
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrderDetail;
@@ -8,7 +7,6 @@ import com.ocms.online_clinic_management_system.service.entity.MedicalService;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.math.BigDecimal;
 
 @Entity

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.service.impl;
-
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
 import com.ocms.online_clinic_management_system.common.util.PasswordUtil;
 import com.ocms.online_clinic_management_system.doctor.service.DoctorService;
@@ -22,7 +21,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -36,8 +34,6 @@ public class UserServiceImpl implements UserService {
     private final StaffService staffService;
     private final DomainEventPublisher eventPublisher;
     private final PasswordUtil passwordUtil;
-
-
 
     @Override
     public UserResponse createDoctor(CreateDoctorRequest request) {
@@ -56,17 +52,10 @@ public class UserServiceImpl implements UserService {
                 .build();
         User savedUser = userRepository.save(user);
         doctorService.createDoctor(savedUser, request.getSpecialtyId(), request.getDegree(),request.getExperienceYears());
-        eventPublisher.publish(new UserCreatedEvent(
-                        savedUser.getId(),
-                        savedUser.getUsername(),
-                        role.getRoleName()
-                )
-        );
+        eventPublisher.publish(new UserCreatedEvent(savedUser.getId(), savedUser.getUsername(), role.getRoleName()));
 
         return userMapper.toUserResponse(savedUser);
     }
-
-
 
     @Override
     public UserResponse createStaff(CreateStaffRequest request) {
@@ -75,7 +64,6 @@ public class UserServiceImpl implements UserService {
         Role role = roleRepository.findByRoleName("ROLE_STAFF").orElseThrow();
 
         User user = User.builder()
-
                 .username(request.getUsername())
                 .password(passwordUtil.encode(request.getPassword()))
                 .fullName(request.getFullName())
@@ -88,12 +76,7 @@ public class UserServiceImpl implements UserService {
 
         User savedUser = userRepository.save(user);
         staffService.createStaff(savedUser, request.getPosition());
-        eventPublisher.publish(new UserCreatedEvent(
-                        savedUser.getId(),
-                        savedUser.getUsername(),
-                        role.getRoleName()
-                )
-        );
+        eventPublisher.publish(new UserCreatedEvent(savedUser.getId(), savedUser.getUsername(), role.getRoleName()));
 
         return userMapper.toUserResponse(savedUser);
     }
@@ -108,18 +91,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailResponse updateRole(Long userId, UpdateUserRoleRequest request){
-        User user=findEntity(userId);
 
+        User user=findEntity(userId);
         String oldRole = user.getRole().getRoleName();
 
         Role newRole = roleRepository.findByRoleName(request.getRoleName()).orElseThrow();
         user.setRole(newRole);
-        eventPublisher.publish(new UserRoleChangedEvent(
-                        userId,
-                        oldRole,
-                        newRole.getRoleName()
-                )
-        );
+        eventPublisher.publish(new UserRoleChangedEvent(userId, oldRole, newRole.getRoleName()));
 
         return userMapper.toUserDetailResponse(user);
     }
@@ -155,8 +133,6 @@ public class UserServiceImpl implements UserService {
                 UserSpecification.role(request.getRoleName()),
                 UserSpecification.status(request.getStatus())
         );
-
-
 
         Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
 

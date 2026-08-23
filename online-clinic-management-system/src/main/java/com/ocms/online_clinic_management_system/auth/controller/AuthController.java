@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.controller;
-
 import com.ocms.online_clinic_management_system.auth.dto.request.LoginRequest;
 import com.ocms.online_clinic_management_system.auth.dto.request.RegisterRequest;
 import com.ocms.online_clinic_management_system.auth.dto.response.LoginResponse;
@@ -25,14 +24,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<LoginResponse>> register(@Valid @RequestBody RegisterRequest request) {
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(
-                        ApiResponse.<LoginResponse>builder()
-                                .success(true)
-                                .message("Register successfully.")
-                                .data(authService.register(request))
-                                .build()
-                );
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.<LoginResponse>builder().success(true).message("Register successfully.").data(authService.register(request)).build());
     }
+
+
 }

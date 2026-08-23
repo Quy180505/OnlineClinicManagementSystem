@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.prescription.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.inventory.entity.Medicine;
 import jakarta.persistence.*;
@@ -7,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.math.BigDecimal;
 
 @Entity

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.specification;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.UserStatus;
 import com.ocms.online_clinic_management_system.user.entity.User;
 import org.springframework.data.jpa.domain.Specification;

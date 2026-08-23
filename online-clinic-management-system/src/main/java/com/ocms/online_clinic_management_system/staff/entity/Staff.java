@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.user.entity.User;
 import jakarta.persistence.*;

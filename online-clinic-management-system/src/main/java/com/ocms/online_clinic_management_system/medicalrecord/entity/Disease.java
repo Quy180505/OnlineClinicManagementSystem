@@ -1,14 +1,10 @@
 package com.ocms.online_clinic_management_system.medicalrecord.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 @Getter
 @Setter
