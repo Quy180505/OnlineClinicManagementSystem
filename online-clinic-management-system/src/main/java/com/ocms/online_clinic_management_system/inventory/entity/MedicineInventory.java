@@ -1,10 +1,8 @@
 package com.ocms.online_clinic_management_system.inventory.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,12 +37,7 @@ public class MedicineInventory extends BaseEntity {
     @Column(name = "last_updated", insertable = false, updatable = false)
     private LocalDateTime lastUpdated;
 
-    @OneToMany(mappedBy = "medicineInventory",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
+    @OneToMany(mappedBy = "medicineInventory", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Builder.Default
     private List<InventoryTransaction> inventoryTransactions = new ArrayList<>();
 }

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
 

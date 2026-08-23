@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.patient.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.common.constant.enums.BloodType;
 import com.ocms.online_clinic_management_system.user.entity.User;
@@ -12,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

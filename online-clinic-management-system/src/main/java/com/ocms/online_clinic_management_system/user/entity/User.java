@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.entity;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.AuthProvider;
 import com.ocms.online_clinic_management_system.common.constant.enums.Gender;
 import com.ocms.online_clinic_management_system.common.constant.enums.UserStatus;
@@ -19,7 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDate;
 
 @Entity
@@ -67,7 +65,7 @@ public class User extends BaseEntity {
     @Builder.Default
     private UserStatus status = UserStatus.ACTIVE;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
