@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.prescription.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.prescription.dto.request.CreatePrescriptionRequest;
@@ -12,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/api/prescriptions")

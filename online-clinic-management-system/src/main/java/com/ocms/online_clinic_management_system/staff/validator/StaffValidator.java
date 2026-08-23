@@ -1,6 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.validator;
-
-import com.ocms.online_clinic_management_system.common.exception.ErrorCode;
 import com.ocms.online_clinic_management_system.patient.exception.InvalidCitizenIdException;
 import com.ocms.online_clinic_management_system.staff.dto.request.UpdatePatientInformationRequest;
 import com.ocms.online_clinic_management_system.patient.exception.InvalidEmergencyContactException;

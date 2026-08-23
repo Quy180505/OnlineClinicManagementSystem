@@ -1,8 +1,6 @@
 package com.ocms.online_clinic_management_system.prescription.specification;
-
 import com.ocms.online_clinic_management_system.prescription.entity.Prescription;
 import org.springframework.data.jpa.domain.Specification;
-
 import java.time.LocalDate;
 
 public final class PrescriptionSpecification {

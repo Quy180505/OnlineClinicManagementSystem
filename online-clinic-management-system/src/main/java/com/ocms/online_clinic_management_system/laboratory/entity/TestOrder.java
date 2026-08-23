@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,8 +35,6 @@ public class TestOrder extends BaseEntity {
     @Column(nullable = false)
     private TestOrderStatus status;
 
-    @OneToMany(mappedBy = "testOrder",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "testOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TestOrderDetail> details;
 }

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.dto.request;
-
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;

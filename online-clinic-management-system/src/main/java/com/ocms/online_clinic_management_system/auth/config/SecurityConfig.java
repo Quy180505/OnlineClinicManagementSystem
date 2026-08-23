@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.config;
-
 import com.ocms.online_clinic_management_system.auth.jwt.JwtAccessDeniedHandler;
 import com.ocms.online_clinic_management_system.auth.jwt.JwtAuthenticationEntryPoint;
 import com.ocms.online_clinic_management_system.auth.jwt.JwtAuthenticationFilter;
@@ -18,33 +17,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.ocms.online_clinic_management_system.auth.oauth2.CustomOAuth2UserService;
 import com.ocms.online_clinic_management_system.auth.oauth2.OAuth2AuthenticationFailureHandler;
 import com.ocms.online_clinic_management_system.auth.oauth2.OAuth2AuthenticationSuccessHandler;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
     private final JwtAuthenticationEntryPoint authenticationEntryPoint;
-
     private final JwtAccessDeniedHandler accessDeniedHandler;
-
     private final CustomOAuth2UserService customOAuth2UserService;
-
     private final OAuth2AuthenticationSuccessHandler successHandler;
-
     private final OAuth2AuthenticationFailureHandler failureHandler;
-
     private final CustomOidcUserService customOidcUserService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
-
-        http
+                 http
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
 
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/error",  "/oauth2/**", "/login/oauth2/**","/api/payments/vnpay/**").permitAll()
@@ -96,28 +89,17 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
 
                 .oauth2Login(oauth -> oauth
-                        .userInfoEndpoint(user -> user
-                                .oidcUserService(customOidcUserService))
+                        .userInfoEndpoint(user -> user.oidcUserService(customOidcUserService))
                         .successHandler(successHandler)
                         .failureHandler(failureHandler))
-                .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(authenticationEntryPoint)
-                        .accessDeniedHandler(accessDeniedHandler))
-
-                .addFilterBefore(
-                        jwtAuthenticationFilter,
-                        UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-
-
     @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration)
-            throws Exception {
-
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 }

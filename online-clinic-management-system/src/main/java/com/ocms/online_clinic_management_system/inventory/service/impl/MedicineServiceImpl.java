@@ -1,8 +1,6 @@
 package com.ocms.online_clinic_management_system.inventory.service.impl;
-
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.inventory.dto.request.CreateMedicineRequest;
-import com.ocms.online_clinic_management_system.inventory.dto.request.InventorySearchRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.MedicineSearchRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.UpdateMedicineRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.response.MedicineDetailResponse;
@@ -34,22 +32,17 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public void restore(Long medicineId) {
-
         Medicine medicine = medicineValidator.validateInactiveMedicineExists(medicineId);
-
         medicine.setIsActive(true);
     }
     @Override
     public MedicineResponse create(CreateMedicineRequest request) {
 
         medicineValidator.validateMedicineNameNotExists(request.getMedicineName());
-
         MedicineCategory category = medicineCategoryValidator.validateMedicineCategoryExists(request.getMedicineCategoryId());
-
         Medicine medicine = medicineMapper.toEntity(request);
         medicine.setIsActive(true);
         medicine.setMedicineCategory(category);
-
         medicine = medicineRepository.save(medicine);
 
         return medicineMapper.toResponse(medicine);

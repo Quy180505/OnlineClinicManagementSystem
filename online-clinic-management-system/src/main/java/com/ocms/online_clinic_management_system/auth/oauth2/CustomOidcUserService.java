@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.oauth2;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
@@ -12,8 +11,7 @@ import org.springframework.stereotype.Service;
 public class CustomOidcUserService extends OidcUserService {
 
     @Override
-    public OidcUser loadUser(OidcUserRequest userRequest)
-            throws OAuth2AuthenticationException {
+    public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
 
         OidcUser oidcUser = super.loadUser(userRequest);
 

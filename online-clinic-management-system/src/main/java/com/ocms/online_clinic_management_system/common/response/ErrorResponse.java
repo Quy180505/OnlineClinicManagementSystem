@@ -1,8 +1,6 @@
 package com.ocms.online_clinic_management_system.common.response;
-
 import lombok.Builder;
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -10,12 +8,8 @@ import java.time.LocalDateTime;
 public class ErrorResponse {
 
     private LocalDateTime timestamp;
-
     private int status;
-
     private String code;
-
     private String message;
-
     private String path;
 }

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.appointment.service.impl;
-
 import com.ocms.online_clinic_management_system.appointment.dto.request.AppointmentSearchRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.request.CreateAppointmentRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.request.RejectAppointmentRequest;
@@ -23,7 +22,6 @@ import com.ocms.online_clinic_management_system.common.event.DomainEventPublishe
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.invoice.service.InvoiceService;
 import com.ocms.online_clinic_management_system.patient.entity.Patient;
-import com.ocms.online_clinic_management_system.patient.exception.PatientNotFoundException;
 import com.ocms.online_clinic_management_system.patient.repository.PatientRepository;
 import com.ocms.online_clinic_management_system.patient.service.PatientService;
 import com.ocms.online_clinic_management_system.schedule.entity.DoctorSchedule;

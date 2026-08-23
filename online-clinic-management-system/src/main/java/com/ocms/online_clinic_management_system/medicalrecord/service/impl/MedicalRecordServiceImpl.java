@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.medicalrecord.service.impl;
-
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.request.UpdateMedicalRecordRequest;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.response.MedicalRecordResponse;
@@ -16,7 +15,6 @@ import com.ocms.online_clinic_management_system.patient.repository.PatientReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service

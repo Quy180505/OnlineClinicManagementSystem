@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.medicalrecord.service.impl;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.appointment.entity.AppointmentStatus;
 import com.ocms.online_clinic_management_system.appointment.exception.AppointmentNotFoundException;
@@ -17,7 +16,6 @@ import com.ocms.online_clinic_management_system.medicalrecord.validator.MedicalE
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,14 +36,12 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     @Override
     public List<TodayAppointmentResponse> getTodayAppointments() {
-        LocalDate workDate = LocalDate.now();
 
+        LocalDate workDate = LocalDate.now();
         Long currentUserId = securityHelper.getCurrentUserId();
 
         medicalExaminationValidator.validateDoctorAuthenticated(currentUserId);
-
         Long doctorId = medicalExaminationValidator.validateAndGetDoctorId(currentUserId);
-
         List<Appointment> appointments = appointmentRepository.findByDoctorAndWorkDateAndStatuses(doctorId, workDate, List.of(STATUS_CONFIRMED, STATUS_IN_PROGRESS));
 
         return medicalExaminationMapper.toTodayAppointmentResponseList(appointments);

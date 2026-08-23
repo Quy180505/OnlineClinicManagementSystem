@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.notification.listener;
-
 import com.ocms.online_clinic_management_system.notification.entity.Notification;
 import com.ocms.online_clinic_management_system.notification.repository.NotificationRepository;
 import com.ocms.online_clinic_management_system.prescription.event.PrescriptionCreatedEvent;
@@ -12,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.transaction.annotation.Transactional;
+
 @Component
 @RequiredArgsConstructor
 public class PrescriptionEventListener {

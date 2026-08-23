@@ -1,12 +1,10 @@
 package com.ocms.online_clinic_management_system.auth.security;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.UserStatus;
 import com.ocms.online_clinic_management_system.user.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 

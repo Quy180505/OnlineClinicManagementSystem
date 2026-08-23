@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.prescription.event;
-
 import com.ocms.online_clinic_management_system.common.event.BaseEvent;
 import com.ocms.online_clinic_management_system.common.event.DomainEvent;
 import lombok.Getter;

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.service.impl;
-
 import com.ocms.online_clinic_management_system.staff.dto.request.UpdateStaffRequest;
 import com.ocms.online_clinic_management_system.staff.dto.response.StaffResponse;
 import com.ocms.online_clinic_management_system.staff.entity.Staff;
@@ -19,6 +18,7 @@ public class StaffServiceImpl implements StaffService {
 
     private final StaffRepository staffRepository;
     private final StaffMapper staffMapper;
+
     @Override
     public void createStaff(User user, String position){
         Staff staff = Staff.builder().user(user).position(position).build();
@@ -35,9 +35,9 @@ public class StaffServiceImpl implements StaffService {
     @Override
     @Transactional(readOnly = true)
     public StaffResponse findById(Long staffId){
-
         return staffMapper.toStaffResponse(findEntity(staffId));
     }
+
     private Staff findEntity(Long id){
         return staffRepository.findById(id).orElseThrow(StaffNotFoundException::new);
     }

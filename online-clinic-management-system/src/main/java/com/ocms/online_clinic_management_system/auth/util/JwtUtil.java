@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.util;
-
 import com.ocms.online_clinic_management_system.auth.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

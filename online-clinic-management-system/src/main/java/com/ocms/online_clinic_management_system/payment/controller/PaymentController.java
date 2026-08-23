@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.payment.dto.request.CreatePaymentRequest;
 import com.ocms.online_clinic_management_system.payment.dto.response.CreatePaymentResponse;

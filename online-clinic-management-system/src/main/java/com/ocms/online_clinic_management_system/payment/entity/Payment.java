@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import jakarta.persistence.*;
@@ -7,7 +6,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,12 +39,7 @@ public class Payment extends BaseEntity {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "payment",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
+    @OneToMany(mappedBy = "payment", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Builder.Default
     private List<PaymentTransaction> transactions = new ArrayList<>();
 }

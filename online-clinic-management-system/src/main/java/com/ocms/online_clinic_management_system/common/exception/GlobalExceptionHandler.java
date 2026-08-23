@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.common.exception;
-
 import com.ocms.online_clinic_management_system.common.response.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
@@ -8,7 +7,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
@@ -16,15 +14,11 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> handleBusinessException(
-            BusinessException ex,
-            HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException ex, HttpServletRequest request) {
 
         ErrorCode errorCode = ex.getErrorCode();
 
-        return ResponseEntity
-                .status(errorCode.getHttpStatus())
-                .body(
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(
                         ErrorResponse.builder()
                                 .timestamp(LocalDateTime.now())
                                 .status(errorCode.getHttpStatus().value())
@@ -36,9 +30,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(
-            MethodArgumentNotValidException ex,
-            HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex, HttpServletRequest request) {
 
         String message = ex.getBindingResult()
                 .getFieldErrors()
@@ -58,9 +50,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResponse> handleConstraintViolation(
-            ConstraintViolationException ex,
-            HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleConstraintViolation(ConstraintViolationException ex, HttpServletRequest request) {
 
         return ResponseEntity.badRequest().body(
                 ErrorResponse.builder()
@@ -74,9 +64,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(
-            Exception ex,
-            HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleException(Exception ex, HttpServletRequest request) {
 
         return ResponseEntity.internalServerError().body(
                 ErrorResponse.builder()

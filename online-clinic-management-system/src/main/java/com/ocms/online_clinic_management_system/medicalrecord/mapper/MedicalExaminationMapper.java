@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.medicalrecord.mapper;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.response.*;
 import com.ocms.online_clinic_management_system.medicalrecord.entity.Disease;
@@ -7,7 +6,6 @@ import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalReco
 import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalRecordDisease;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -55,9 +53,6 @@ public interface MedicalExaminationMapper {
             return List.of();
         }
 
-        return diseases.stream()
-                .map(MedicalRecordDisease::getDisease)
-                .map(Disease::getDiseaseName)
-                .toList();
+        return diseases.stream().map(MedicalRecordDisease::getDisease).map(Disease::getDiseaseName).toList();
     }
 }

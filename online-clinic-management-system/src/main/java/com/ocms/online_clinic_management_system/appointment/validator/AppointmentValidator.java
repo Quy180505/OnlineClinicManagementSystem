@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.appointment.validator;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.appointment.exception.*;
 import com.ocms.online_clinic_management_system.appointment.repository.AppointmentRepository;
@@ -71,7 +70,6 @@ public class AppointmentValidator {
         String currentStatus = appointment.getAppointmentStatus().getName();
 
         boolean valid = switch (currentStatus) {
-
             case "PENDING" -> "CONFIRMED".equals(targetStatus) || "REJECTED".equals(targetStatus) || "CANCELLED".equals(targetStatus);
             case "CONFIRMED" -> "IN_PROGRESS".equals(targetStatus) || "CANCELLED".equals(targetStatus);
             case "IN_PROGRESS" -> "COMPLETED".equals(targetStatus);

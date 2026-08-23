@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.laboratory.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.laboratory.dto.request.CreateTestOrderRequest;
 import com.ocms.online_clinic_management_system.laboratory.dto.request.UpdateLabResultRequest;

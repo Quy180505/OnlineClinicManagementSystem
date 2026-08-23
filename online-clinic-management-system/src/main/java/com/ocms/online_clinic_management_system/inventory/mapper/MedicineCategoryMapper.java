@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.mapper;
-
 import com.ocms.online_clinic_management_system.inventory.dto.request.CreateMedicineCategoryRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.UpdateMedicineCategoryRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.response.MedicineCategoryResponse;

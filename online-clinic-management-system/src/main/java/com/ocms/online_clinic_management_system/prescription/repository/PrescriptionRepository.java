@@ -1,10 +1,7 @@
 package com.ocms.online_clinic_management_system.prescription.repository;
-
 import com.ocms.online_clinic_management_system.prescription.entity.Prescription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long>, JpaSpecificationExecutor<Prescription> {

@@ -1,8 +1,6 @@
 package com.ocms.online_clinic_management_system.auth.oauth2;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocms.online_clinic_management_system.common.response.ErrorResponse;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +19,9 @@ public class OAuth2AuthenticationFailureHandler implements AuthenticationFailure
     private final ObjectMapper objectMapper;
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
-            throws IOException{
-
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException{
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-
         response.setContentType("application/json");
 
         ErrorResponse error = ErrorResponse.builder()

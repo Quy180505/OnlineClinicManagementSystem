@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.appointment.service;
-
 import com.ocms.online_clinic_management_system.appointment.dto.request.AppointmentSearchRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.request.CreateAppointmentRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.request.RejectAppointmentRequest;

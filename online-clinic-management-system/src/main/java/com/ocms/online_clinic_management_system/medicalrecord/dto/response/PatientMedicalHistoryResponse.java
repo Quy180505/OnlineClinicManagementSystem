@@ -1,7 +1,5 @@
 package com.ocms.online_clinic_management_system.medicalrecord.dto.response;
-
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Getter

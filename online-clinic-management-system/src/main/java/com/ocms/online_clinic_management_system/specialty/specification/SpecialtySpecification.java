@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.specialty.specification;
-
 import com.ocms.online_clinic_management_system.specialty.entity.Specialty;
 import org.springframework.data.jpa.domain.Specification;
 

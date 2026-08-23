@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

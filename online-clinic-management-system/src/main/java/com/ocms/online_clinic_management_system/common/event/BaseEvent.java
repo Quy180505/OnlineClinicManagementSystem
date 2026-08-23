@@ -1,7 +1,5 @@
 package com.ocms.online_clinic_management_system.common.event;
-
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter

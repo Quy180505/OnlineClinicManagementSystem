@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.validator;
-
 import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import com.ocms.online_clinic_management_system.payment.entity.Payment;
 import com.ocms.online_clinic_management_system.payment.entity.PaymentMethod;

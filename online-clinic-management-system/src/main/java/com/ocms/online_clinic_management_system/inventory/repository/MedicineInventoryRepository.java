@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.repository;
-
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineInventory;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.time.LocalDate;
 import java.util.List;
 

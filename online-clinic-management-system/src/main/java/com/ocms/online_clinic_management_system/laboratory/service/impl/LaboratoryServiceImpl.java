@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.laboratory.service.impl;
-
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.common.constant.enums.TestOrderStatus;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
@@ -36,7 +35,6 @@ import com.ocms.online_clinic_management_system.service.repository.MedicalServic
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -51,13 +49,10 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     private final MedicalServiceRepository medicalServiceRepository;
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
-
     private final LaboratoryValidator laboratoryValidator;
     private final MedicalRecordValidator medicalRecordValidator;
-
     private final TestOrderMapper testOrderMapper;
     private final LabResultMapper labResultMapper;
-
     private final SecurityHelper securityHelper;
     private final DomainEventPublisher domainEventPublisher;
 
@@ -87,11 +82,8 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public TestOrderResponse startTestOrder(Long testOrderId) {
 
         TestOrder testOrder = laboratoryValidator.validateTestOrderExists(testOrderId);
-
         laboratoryValidator.validateTestOrderCanStart(testOrder);
-
         testOrder.setStatus(TestOrderStatus.IN_PROGRESS);
-
         TestOrder savedTestOrder = testOrderRepository.save(testOrder);
 
         return testOrderMapper.toResponse(savedTestOrder);
@@ -103,9 +95,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public TestOrderResponse createTestOrder(Long medicalRecordId, CreateTestOrderRequest request) {
 
         Long currentUserId = securityHelper.getCurrentUserId();
-
         Doctor doctor = doctorRepository.findByUserId(currentUserId).orElseThrow(DoctorNotFoundException::new);
-
         MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordById(medicalRecordId);
 
         medicalRecordValidator.validateDoctorOwnership(medicalRecord, currentUserId);
@@ -127,8 +117,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
         TestOrder savedTestOrder = testOrderRepository.save(testOrder);
 
-        domainEventPublisher.publish(
-                new TestOrderCreatedEvent(
+        domainEventPublisher.publish(new TestOrderCreatedEvent(
                         savedTestOrder.getId(),
                         medicalRecord.getId(),
                         medicalRecord.getPatient().getId(),
@@ -165,9 +154,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public LabResultResponse updateLabResult(Long testOrderDetailId, UpdateLabResultRequest request) {
 
         TestOrderDetail testOrderDetail = laboratoryValidator.validateTestOrderDetailExists(testOrderDetailId);
-
         TestOrder testOrder = testOrderDetail.getTestOrder();
-
 
         laboratoryValidator.validateTestOrderCanReceiveResult(testOrder);
         laboratoryValidator.validateLabResultNotExists(testOrderDetailId);
@@ -182,8 +169,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
         updateTestOrderStatusAfterResult(testOrder);
 
-        domainEventPublisher.publish(
-                new LabResultUpdatedEvent(
+        domainEventPublisher.publish(new LabResultUpdatedEvent(
                         savedLabResult.getId(),
                         testOrderDetail.getId(),
                         testOrder.getId(),
@@ -209,7 +195,6 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     public LabResultResponse getLabResult(Long testOrderDetailId) {
 
         laboratoryValidator.validateTestOrderDetailExists(testOrderDetailId);
-
         LabResult labResult = laboratoryValidator.validateLabResultExists(testOrderDetailId);
 
         return labResultMapper.toResponse(labResult);

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.notification.listener;
-
 import com.ocms.online_clinic_management_system.notification.entity.Notification;
 import com.ocms.online_clinic_management_system.notification.repository.NotificationRepository;
 import com.ocms.online_clinic_management_system.payment.event.PaymentCompletedEvent;

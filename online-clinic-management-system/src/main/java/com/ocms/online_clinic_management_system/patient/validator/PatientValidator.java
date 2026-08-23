@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.patient.validator;
-
 import com.ocms.online_clinic_management_system.patient.dto.request.UpdateAccountRequest;
 import com.ocms.online_clinic_management_system.patient.dto.request.UpdatePatientRequest;
 import com.ocms.online_clinic_management_system.patient.exception.InvalidAllergyInfoException;
@@ -14,7 +13,6 @@ import org.springframework.util.StringUtils;
 public class PatientValidator {
 
     public void validateUpdate(UpdatePatientRequest request) {
-
         validateCitizenId(request.getCitizenId());
         validateEmergencyContact(request.getEmergencyContact());
         validateMedicalHistory(request.getMedicalHistory());
@@ -23,19 +21,14 @@ public class PatientValidator {
 
     public void validateAccount(UpdateAccountRequest request) {
 
-
         String newPassword = request.getNewPassword();
         String confirmPassword = request.getConfirmPassword();
 
-        if (!StringUtils.hasText(newPassword)
-                && !StringUtils.hasText(confirmPassword)) {
+        if (!StringUtils.hasText(newPassword) && !StringUtils.hasText(confirmPassword)) {
             return;
         }
 
-
-        if (!StringUtils.hasText(newPassword)
-                || !StringUtils.hasText(confirmPassword)) {
-
+        if (!StringUtils.hasText(newPassword) || !StringUtils.hasText(confirmPassword)) {
             throw new PasswordNotMatchException();
         }
 

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.config;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 public class JwtConfig {
 
     private String secret;
-
     private long expiration;
 
     public String getSecret() {

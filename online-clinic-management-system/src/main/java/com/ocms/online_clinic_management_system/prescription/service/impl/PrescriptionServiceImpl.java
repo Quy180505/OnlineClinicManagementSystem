@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.prescription.service.impl;
-
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.doctor.entity.Doctor;
@@ -48,7 +47,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final MedicalRecordValidator medicalRecordValidator;
     private final InventoryService inventoryService;
     private final InvoiceService invoiceService;
-
     private final SecurityHelper securityHelper;
     private final ApplicationEventPublisher eventPublisher;
 
@@ -113,13 +111,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         }
 
         prescription.setDetails(details);
-
         prescription = prescriptionRepository.save(prescription);
 
         ExportMedicineRequest exportRequest = buildExportMedicineRequest(prescription);
 
         inventoryService.exportMedicine(exportRequest);
-
         invoiceService.addPrescriptionToInvoice(prescription);
 
         publishPrescriptionCreatedEvent(prescription, medicalRecord);
@@ -138,10 +134,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private ExportMedicineRequest buildExportMedicineRequest(Prescription prescription) {
 
         List<ExportMedicineDetailRequest> details =
-                prescription.getDetails()
-                        .stream()
-                        .map(detail -> {
-
+                prescription.getDetails().stream().map(detail -> {
                             ExportMedicineDetailRequest request = new ExportMedicineDetailRequest();
 
                             request.setMedicineId(detail.getMedicine().getId());

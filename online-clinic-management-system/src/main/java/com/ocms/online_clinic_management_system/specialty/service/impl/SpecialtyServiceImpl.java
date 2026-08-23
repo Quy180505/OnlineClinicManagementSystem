@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.specialty.service.impl;
-
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.specialty.dto.request.CreateSpecialtyRequest;
 import com.ocms.online_clinic_management_system.specialty.dto.request.UpdateSpecialtyRequest;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -31,18 +29,13 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     @Override
     @Transactional(readOnly = true)
     public List<SpecialtyResponse> getAll() {
-        return specialtyRepository.findAll(Sort.by("name"))
-                .stream()
-                .map(specialtyMapper::toSpecialtyResponse)
-                .toList();
+        return specialtyRepository.findAll(Sort.by("name")).stream().map(specialtyMapper::toSpecialtyResponse).toList();
     }
     @Override
     public SpecialtyResponse create(CreateSpecialtyRequest request) {
 
         specialtyValidator.validateSpecialtyNameNotExists(request.getName());
-
         Specialty specialty = specialtyMapper.toEntity(request);
-
         specialty = specialtyRepository.save(specialty);
 
         return specialtyMapper.toSpecialtyResponse(specialty);
@@ -51,15 +44,13 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     @Override
     public SpecialtyResponse update(Long specialtyId, UpdateSpecialtyRequest request) {
 
-        Specialty specialty =
-                specialtyValidator.validateSpecialtyExists(specialtyId);
+        Specialty specialty = specialtyValidator.validateSpecialtyExists(specialtyId);
 
         if (!specialty.getName().equalsIgnoreCase(request.getName())) {
             specialtyValidator.validateSpecialtyNameNotExists(request.getName());
         }
 
         specialtyMapper.updateFromRequest(request, specialty);
-
         specialty = specialtyRepository.save(specialty);
 
         return specialtyMapper.toSpecialtyResponse(specialty);
@@ -67,32 +58,31 @@ public class SpecialtyServiceImpl implements SpecialtyService {
 
     @Override
     public void delete(Long specialtyId) {
-
         Specialty specialty = specialtyValidator.validateSpecialtyExists(specialtyId);
-
         specialtyRepository.delete(specialty);
     }
-
 
     @Override
     @Transactional
     public SpecialtyResponse partialUpdate(Long specialtyId, UpdateSpecialtyRequest request) {
 
         Specialty specialty = specialtyValidator.validateSpecialtyExists(specialtyId);
-        if (request.getName() != null && !request.getName().equalsIgnoreCase(specialty.getName())) {
+
+        if (request.getName() != null && !request.getName().equalsIgnoreCase(specialty.getName()))
+        {
             specialtyValidator.validateSpecialtyNameNotExists(request.getName());
         }
+
         specialtyMapper.updateFromRequest(request, specialty);
         specialtyRepository.save(specialty);
+
         return specialtyMapper.toSpecialtyResponse(specialty);
     }
 
     @Override
     @Transactional(readOnly = true)
     public SpecialtyDetailResponse getById(Long specialtyId) {
-
         Specialty specialty = specialtyValidator.validateSpecialtyExists(specialtyId);
-
         return specialtyMapper.toSpecialtyDetailResponse(specialty);
     }
 

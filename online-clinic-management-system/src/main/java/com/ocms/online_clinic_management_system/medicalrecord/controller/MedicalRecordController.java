@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.medicalrecord.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.request.UpdateMedicalRecordRequest;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.response.MedicalRecordResponse;
@@ -10,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

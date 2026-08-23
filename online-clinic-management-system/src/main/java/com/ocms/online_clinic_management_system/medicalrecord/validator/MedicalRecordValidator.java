@@ -1,9 +1,6 @@
 package com.ocms.online_clinic_management_system.medicalrecord.validator;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.appointment.exception.InvalidAppointmentStatusException;
-import com.ocms.online_clinic_management_system.doctor.entity.Doctor;
-import com.ocms.online_clinic_management_system.doctor.repository.DoctorRepository;
 import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalRecord;
 import com.ocms.online_clinic_management_system.medicalrecord.exception.MedicalExaminationAccessDeniedException;
 import com.ocms.online_clinic_management_system.medicalrecord.exception.MedicalRecordNotFoundException;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class MedicalRecordValidator {
 
     private static final String STATUS_IN_PROGRESS = "IN_PROGRESS";
-
     private final MedicalRecordRepository medicalRecordRepository;
 
     public MedicalRecord validateMedicalRecordExists(Long appointmentId) {

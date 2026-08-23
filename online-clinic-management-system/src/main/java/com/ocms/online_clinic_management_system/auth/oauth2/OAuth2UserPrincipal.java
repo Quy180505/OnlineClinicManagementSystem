@@ -1,9 +1,7 @@
 package com.ocms.online_clinic_management_system.auth.oauth2;
-
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-
 import java.util.Collection;
 import java.util.Map;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;

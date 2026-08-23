@@ -25,8 +25,6 @@ public class TestOrderDetail extends BaseEntity {
     @JoinColumn(name = "service_id", nullable = false)
     private MedicalService service;
 
-    @OneToOne(mappedBy = "testOrderDetail",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToOne(mappedBy = "testOrderDetail", cascade = CascadeType.ALL, orphanRemoval = true)
     private LabResult labResult;
 }

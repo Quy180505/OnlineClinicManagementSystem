@@ -8,7 +8,6 @@ import com.ocms.online_clinic_management_system.auth.security.UserPrincipal;
 import com.ocms.online_clinic_management_system.auth.service.AuthService;
 import com.ocms.online_clinic_management_system.common.constant.enums.AuthProvider;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
-import com.ocms.online_clinic_management_system.common.exception.ErrorCode;
 import com.ocms.online_clinic_management_system.common.util.PasswordUtil;
 import com.ocms.online_clinic_management_system.patient.service.PatientService;
 import com.ocms.online_clinic_management_system.user.entity.Role;
@@ -31,19 +30,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;
-
     private final JwtProvider jwtProvider;
-
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final PatientService patientService;
-
     private final DomainEventPublisher eventPublisher;
-
     private final RegisterValidator registerValidator;
-
     private final PasswordUtil passwordUtil;
 
 
@@ -51,13 +43,11 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse register(RegisterRequest request) {
 
         registerValidator.validate(request);
-
         Role patientRole = roleRepository.findByRoleName("ROLE_PATIENT").orElseThrow(InvalidRoleException::new);
 
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordUtil.encode(request.getPassword()))
-
                 .fullName(request.getFullName())
                 .email(request.getEmail())
                 .phone(request.getPhone())
@@ -69,12 +59,9 @@ public class AuthServiceImpl implements AuthService {
 
         User savedUser = userRepository.save(user);
         patientService.createPatient(savedUser);
-        eventPublisher.publish(
-                new UserCreatedEvent(savedUser.getId(), savedUser.getUsername(), patientRole.getRoleName())
-        );
+        eventPublisher.publish(new UserCreatedEvent(savedUser.getId(), savedUser.getUsername(), patientRole.getRoleName()));
 
         UserPrincipal principal = new UserPrincipal(savedUser);
-
         String accessToken = jwtProvider.generateToken(principal);
 
         return LoginResponse.builder()
@@ -91,12 +78,7 @@ public class AuthServiceImpl implements AuthService {
     @Transactional(readOnly = true)
     public LoginResponse login(LoginRequest request) {
 
-        Authentication authentication =
-                authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                request.getUsername(),
-                                request.getPassword()));
-
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 
         String accessToken = jwtProvider.generateToken(principal);
@@ -106,13 +88,7 @@ public class AuthServiceImpl implements AuthService {
                 .username(principal.getUsername())
                 .fullName(principal.getFullName())
                 .role(principal.getRole())
-                .token(
-                        TokenResponse.builder()
-                                .accessToken(accessToken)
-                                .tokenType("Bearer")
-                                .expiresIn(jwtProvider.getExpiration() / 1000)
-                                .build()
-                )
+                .token(TokenResponse.builder().accessToken(accessToken).tokenType("Bearer").expiresIn(jwtProvider.getExpiration() / 1000).build())
                 .build();
     }
 

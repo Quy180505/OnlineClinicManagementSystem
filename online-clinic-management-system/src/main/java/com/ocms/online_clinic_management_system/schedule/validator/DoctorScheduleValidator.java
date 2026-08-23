@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.schedule.validator;
-
 import com.ocms.online_clinic_management_system.schedule.dto.request.CreateDoctorScheduleRequest;
 import com.ocms.online_clinic_management_system.schedule.dto.request.UpdateDoctorScheduleRequest;
 import com.ocms.online_clinic_management_system.schedule.entity.DoctorSchedule;
@@ -8,7 +7,6 @@ import com.ocms.online_clinic_management_system.schedule.exception.InvalidSchedu
 import com.ocms.online_clinic_management_system.schedule.repository.DoctorScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalTime;
 
 @Component

@@ -40,7 +40,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         for (PrescriptionDetail detail : prescription.getDetails()) {
 
             BigDecimal unitPrice = detail.getUnitPrice();
-
             BigDecimal amount = unitPrice.multiply(BigDecimal.valueOf(detail.getQuantity()));
 
             InvoiceDetail invoiceDetail = InvoiceDetail.builder()
@@ -54,7 +53,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .build();
 
             invoice.getInvoiceDetails().add(invoiceDetail);
-
             additionalAmount = additionalAmount.add(amount);
         }
         invoice.setTotalAmount(invoice.getTotalAmount().add(additionalAmount));
@@ -124,7 +122,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         eventPublisher.publish(new InvoiceUpdatedEvent(invoice.getId(),  invoice.getPatient().getId(),
                 invoice.getAppointment().getId(),invoice.getTotalAmount()));
     }
-
 
     @Override
     @Transactional(readOnly = true)

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.validator;
-
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineCategory;
 import com.ocms.online_clinic_management_system.inventory.exception.MedicineCategoryAlreadyExistsException;
 import com.ocms.online_clinic_management_system.inventory.exception.MedicineCategoryNotFoundException;
@@ -14,8 +13,7 @@ public class MedicineCategoryValidator {
     private final MedicineCategoryRepository medicineCategoryRepository;
 
     public MedicineCategory validateMedicineCategoryExists(Long categoryId) {
-        return medicineCategoryRepository.findById(categoryId)
-                .orElseThrow(MedicineCategoryNotFoundException::new);
+        return medicineCategoryRepository.findById(categoryId).orElseThrow(MedicineCategoryNotFoundException::new);
     }
 
     public void validateCategoryNameNotExists(String categoryName) {

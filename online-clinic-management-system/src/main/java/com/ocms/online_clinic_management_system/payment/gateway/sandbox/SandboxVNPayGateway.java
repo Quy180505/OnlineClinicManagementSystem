@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.gateway.sandbox;
-
 import com.ocms.online_clinic_management_system.payment.gateway.PaymentGateway;
 import com.ocms.online_clinic_management_system.payment.gateway.PaymentGatewayRequest;
 import com.ocms.online_clinic_management_system.payment.gateway.PaymentGatewayResponse;
@@ -14,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,7 +22,6 @@ import java.util.TreeMap;
 public class SandboxVNPayGateway implements PaymentGateway {
 
     private static final String PAYMENT_METHOD = "VNPAY";
-
     private static final String VERSION = "2.1.0";
     private static final String COMMAND = "pay";
     private static final String CURR_CODE = "VND";
@@ -59,16 +56,11 @@ public class SandboxVNPayGateway implements PaymentGateway {
 
         String createDate = LocalDateTime.now().atZone(ZoneId.of("Asia/Ho_Chi_Minh")).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
-        String expireDate = LocalDateTime.now()
-                .plusMinutes(15)
-                .atZone(ZoneId.of("Asia/Ho_Chi_Minh"))
-                .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        String expireDate = LocalDateTime.now().plusMinutes(15).atZone(ZoneId.of("Asia/Ho_Chi_Minh")).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
         String txnRef = request.getTransactionCode();
 
-        long amount = request.getAmount()
-                .multiply(BigDecimal.valueOf(100))
-                .longValueExact();
+        long amount = request.getAmount().multiply(BigDecimal.valueOf(100)).longValueExact();
 
         Map<String, String> params = new TreeMap<>();
 

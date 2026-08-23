@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.listener;
-
 import com.ocms.online_clinic_management_system.invoice.event.InvoiceCreatedEvent;
 import com.ocms.online_clinic_management_system.invoice.event.InvoiceUpdatedEvent;
 import com.ocms.online_clinic_management_system.payment.service.PaymentService;

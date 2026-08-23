@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.appointment.mapper;
-
 import com.ocms.online_clinic_management_system.appointment.dto.request.CreateAppointmentRequest;
 import com.ocms.online_clinic_management_system.appointment.dto.response.AppointmentDetailResponse;
 import com.ocms.online_clinic_management_system.appointment.dto.response.AppointmentResponse;

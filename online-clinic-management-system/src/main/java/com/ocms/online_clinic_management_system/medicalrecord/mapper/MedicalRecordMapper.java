@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.medicalrecord.mapper;
-
 import com.ocms.online_clinic_management_system.medicalrecord.dto.request.UpdateMedicalRecordRequest;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.response.MedicalRecordResponse;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.response.PatientMedicalHistoryDetailResponse;
@@ -54,13 +53,11 @@ public interface MedicalRecordMapper {
     PatientMedicalHistoryDetailResponse toPatientMedicalHistoryDetailResponse(MedicalRecord medicalRecord);
 
     default List<String> mapDiseases(List<MedicalRecordDisease> diseases) {
+
         if (diseases == null) {
             return List.of();
         }
 
-        return diseases.stream()
-                .map(MedicalRecordDisease::getDisease)
-                .map(Disease::getDiseaseName)
-                .toList();
+        return diseases.stream().map(MedicalRecordDisease::getDisease).map(Disease::getDiseaseName).toList();
     }
 }

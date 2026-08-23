@@ -1,13 +1,13 @@
 package com.ocms.online_clinic_management_system.appointment.specification;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import org.springframework.data.jpa.domain.Specification;
-
 import java.time.LocalDate;
 
 public final class AppointmentSpecification {
 
-    private AppointmentSpecification() {
+    private AppointmentSpecification()
+    {
+
     }
 
     public static Specification<Appointment> hasPatientId(Long patientId) {

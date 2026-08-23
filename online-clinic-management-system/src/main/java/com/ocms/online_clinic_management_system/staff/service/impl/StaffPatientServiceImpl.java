@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.service.impl;
-
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.patient.dto.request.PatientSearchRequest;
@@ -28,15 +27,13 @@ public class StaffPatientServiceImpl implements StaffPatientService {
     private final StaffMapper staffMapper;
     private final StaffValidator staffValidator;
     private final DomainEventPublisher eventPublisher;
+
     @Override
     @Transactional(readOnly = true)
     public PageResponse<PatientManagementResponse> searchPatients(PatientSearchRequest request, Pageable pageable) {
-
         Page<Patient> page = patientRepository.findAll(PatientSpecification.search(request), pageable);
-
         return PageResponse.of(page.map(staffMapper::toResponse));
     }
-
 
     @Override
     @Transactional(readOnly = true)
