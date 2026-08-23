@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.patient.service.impl;
-
 import com.ocms.online_clinic_management_system.auth.security.UserPrincipal;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
 import com.ocms.online_clinic_management_system.common.exception.ErrorCode;
@@ -69,7 +68,6 @@ public class PatientServiceImpl implements PatientService {
         if (StringUtils.hasText(request.getUsername())) {
 
             if (!request.getUsername().equals(user.getUsername()) && userRepository.existsByUsername(request.getUsername())) {
-
                 throw new UserAlreadyExistsException(ErrorCode.USERNAME_ALREADY_EXISTS);
             }
 
@@ -81,9 +79,7 @@ public class PatientServiceImpl implements PatientService {
         }
 
         if (StringUtils.hasText(request.getNewPassword())) {
-            user.setPassword(
-                    passwordEncoder.encode(request.getNewPassword())
-            );
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         }
     }
 
@@ -93,7 +89,6 @@ public class PatientServiceImpl implements PatientService {
     public Patient getCurrentPatient() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
 
         return patientRepository.findByUserId(principal.getId()).orElseThrow(PatientNotFoundException::new);

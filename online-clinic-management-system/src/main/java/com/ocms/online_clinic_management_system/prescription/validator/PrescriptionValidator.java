@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.prescription.validator;
-
 import com.ocms.online_clinic_management_system.doctor.entity.Doctor;
 import com.ocms.online_clinic_management_system.prescription.entity.Prescription;
 import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;

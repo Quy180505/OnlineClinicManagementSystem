@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.service.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.service.dto.request.CreateMedicalServiceRequest;
@@ -8,9 +7,6 @@ import com.ocms.online_clinic_management_system.service.dto.request.UpdateMedica
 import com.ocms.online_clinic_management_system.service.dto.response.MedicalServiceDetailResponse;
 import com.ocms.online_clinic_management_system.service.dto.response.MedicalServiceResponse;
 import com.ocms.online_clinic_management_system.service.service.MedicalServiceService;
-import com.ocms.online_clinic_management_system.specialty.dto.request.UpdateSpecialtyRequest;
-import com.ocms.online_clinic_management_system.specialty.dto.response.SpecialtyResponse;
-import com.ocms.online_clinic_management_system.specialty.service.SpecialtyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -45,21 +41,17 @@ public class MedicalServiceController {
     }
     @PatchMapping("/{medicalServiceId}")
     public ApiResponse<MedicalServiceResponse> partialUpdate(@PathVariable Long medicalServiceId, @RequestBody PatchMedicalServiceRequest request) {
-        return ApiResponse.success(medicalServiceService.partialUpdate(medicalServiceId, request)
-        );
+        return ApiResponse.success(medicalServiceService.partialUpdate(medicalServiceId, request));
     }
 
     @DeleteMapping("/{medicalServiceId}")
     public ApiResponse<Void> delete(@PathVariable Long medicalServiceId) {
-
         medicalServiceService.delete(medicalServiceId);
-
         return ApiResponse.success();
     }
 
     @GetMapping("/{medicalServiceId}")
     public ApiResponse<MedicalServiceDetailResponse> getById(@PathVariable Long medicalServiceId) {
-
         return ApiResponse.success(medicalServiceService.getById(medicalServiceId));
     }
 

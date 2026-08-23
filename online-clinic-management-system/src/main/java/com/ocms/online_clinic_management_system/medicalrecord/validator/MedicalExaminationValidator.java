@@ -1,6 +1,4 @@
-
 package com.ocms.online_clinic_management_system.medicalrecord.validator;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.appointment.exception.AppointmentNotFoundException;
 import com.ocms.online_clinic_management_system.appointment.repository.AppointmentRepository;
@@ -28,9 +26,7 @@ public class MedicalExaminationValidator {
     }
 
     public Long validateAndGetDoctorId(Long userId) {
-        return doctorRepository.findByUserId(userId)
-                .map(Doctor::getId)
-                .orElseThrow(MedicalExaminationAccessDeniedException::new);
+        return doctorRepository.findByUserId(userId).map(Doctor::getId).orElseThrow(MedicalExaminationAccessDeniedException::new);
     }
 
     public Appointment validateAppointmentExists(Long appointmentId) {

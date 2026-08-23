@@ -1,10 +1,8 @@
 package com.ocms.online_clinic_management_system.payment.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

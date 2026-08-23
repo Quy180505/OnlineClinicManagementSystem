@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.specialty.validator;
-
 import com.ocms.online_clinic_management_system.specialty.entity.Specialty;
 import com.ocms.online_clinic_management_system.specialty.exception.SpecialtyAlreadyExistsException;
 import com.ocms.online_clinic_management_system.specialty.exception.SpecialtyNotFoundException;

@@ -1,10 +1,8 @@
 package com.ocms.online_clinic_management_system.payment.controller;
-
 import com.ocms.online_clinic_management_system.payment.service.VNPayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 @RestController

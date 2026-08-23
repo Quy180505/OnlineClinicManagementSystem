@@ -1,8 +1,6 @@
 package com.ocms.online_clinic_management_system.inventory.specification;
-
 import com.ocms.online_clinic_management_system.inventory.entity.Medicine;
 import org.springframework.data.jpa.domain.Specification;
-
 import java.math.BigDecimal;
 
 public class MedicineSpecification {

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.service.impl;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.InventoryTransactionType;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.inventory.config.InventoryProperties;
@@ -42,9 +41,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     private final MedicineInventoryRepository medicineInventoryRepository;
     private final InventoryTransactionRepository inventoryTransactionRepository;
-
     private final InventoryMapper inventoryMapper;
-
     private final MedicineValidator medicineValidator;
     private final InventoryValidator inventoryValidator;
     private final InventoryStatusValidator inventoryStatusValidator;
@@ -56,12 +53,8 @@ public class InventoryServiceImpl implements InventoryService {
 
         for (ExportMedicineDetailRequest detail : request.getDetails()) {
 
-
             medicineValidator.validateMedicineExists(detail.getMedicineId());
-
-
-            PrescriptionDetail prescriptionDetail =
-                    inventoryValidator.validatePrescriptionDetailExists(detail.getPrescriptionDetailId(), request.getPrescriptionId());
+            PrescriptionDetail prescriptionDetail = inventoryValidator.validatePrescriptionDetailExists(detail.getPrescriptionDetailId(), request.getPrescriptionId());
 
             if (!prescriptionDetail.getMedicine().getId().equals(detail.getMedicineId())) {
                 throw new InvalidInventoryTransactionException();
@@ -71,8 +64,7 @@ public class InventoryServiceImpl implements InventoryService {
                 throw new InsufficientStockException();
             }
 
-            List<MedicineInventory> inventories = medicineInventoryRepository
-                            .findAvailableInventoriesForUpdate(detail.getMedicineId(), LocalDate.now());
+            List<MedicineInventory> inventories = medicineInventoryRepository.findAvailableInventoriesForUpdate(detail.getMedicineId(), LocalDate.now());
 
             int totalAvailable = inventories.stream().mapToInt(MedicineInventory::getQuantityInStock).sum();
 
@@ -148,9 +140,7 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     @Transactional(readOnly = true)
     public MedicineInventoryResponse getById(Long medicineInventoryId) {
-
         MedicineInventory medicineInventory = inventoryValidator.validateMedicineInventoryExists(medicineInventoryId);
-
         return inventoryMapper.toInventoryResponse(medicineInventory);
     }
 
@@ -168,8 +158,7 @@ public class InventoryServiceImpl implements InventoryService {
                         MedicineInventorySpecification.availableOnly(request.getAvailableOnly())
                 );
 
-        Page<MedicineInventoryResponse> responsePage = medicineInventoryRepository.findAll(specification, pageable)
-                        .map(inventoryMapper::toInventoryResponse);
+        Page<MedicineInventoryResponse> responsePage = medicineInventoryRepository.findAll(specification, pageable).map(inventoryMapper::toInventoryResponse);
 
         return PageResponse.of(responsePage);
     }
@@ -179,10 +168,7 @@ public class InventoryServiceImpl implements InventoryService {
     public PageResponse<InventoryTransactionResponse> getTransactions(Long medicineInventoryId, Pageable pageable) {
 
         inventoryValidator.validateMedicineInventoryExists(medicineInventoryId);
-
-        Page<InventoryTransactionResponse> responsePage = inventoryTransactionRepository
-                        .findByMedicineInventory_IdOrderByCreatedAtDesc(medicineInventoryId, pageable)
-                        .map(inventoryMapper::toTransactionResponse);
+        Page<InventoryTransactionResponse> responsePage = inventoryTransactionRepository.findByMedicineInventory_IdOrderByCreatedAtDesc(medicineInventoryId, pageable).map(inventoryMapper::toTransactionResponse);
 
         return PageResponse.of(responsePage);
     }

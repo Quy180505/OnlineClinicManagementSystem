@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.prescription.mapper;
-
 import com.ocms.online_clinic_management_system.prescription.dto.request.PrescriptionDetailRequest;
 import com.ocms.online_clinic_management_system.prescription.dto.response.PrescriptionDetailResponse;
 import com.ocms.online_clinic_management_system.prescription.dto.response.PrescriptionPatientResponse;
@@ -8,7 +7,6 @@ import com.ocms.online_clinic_management_system.prescription.entity.Prescription
 import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.math.BigDecimal;
 
 @Mapper(componentModel = "spring")

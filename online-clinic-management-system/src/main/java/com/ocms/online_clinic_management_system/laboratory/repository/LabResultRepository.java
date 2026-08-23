@@ -1,9 +1,7 @@
 package com.ocms.online_clinic_management_system.laboratory.repository;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.TestOrderStatus;
 import com.ocms.online_clinic_management_system.laboratory.entity.LabResult;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.dto.response;
-
 import lombok.Builder;
 import lombok.Getter;
 

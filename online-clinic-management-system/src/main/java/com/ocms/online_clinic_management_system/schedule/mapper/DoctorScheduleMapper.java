@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.schedule.mapper;
-
 import com.ocms.online_clinic_management_system.schedule.dto.request.CreateDoctorScheduleRequest;
 import com.ocms.online_clinic_management_system.schedule.dto.request.UpdateDoctorScheduleRequest;
 import com.ocms.online_clinic_management_system.schedule.dto.response.DoctorScheduleDetailResponse;

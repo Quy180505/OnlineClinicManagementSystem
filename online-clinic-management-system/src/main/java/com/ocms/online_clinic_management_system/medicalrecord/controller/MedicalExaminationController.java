@@ -1,4 +1,3 @@
-
 package com.ocms.online_clinic_management_system.medicalrecord.controller;
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.medicalrecord.dto.response.MedicalExaminationResponse;
@@ -8,9 +7,8 @@ import com.ocms.online_clinic_management_system.medicalrecord.service.MedicalExa
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/medical-examinations")

@@ -1,6 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.controller;
-
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.patient.dto.request.PatientSearchRequest;
@@ -13,12 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api/staff/patients")
 @RequiredArgsConstructor
 public class StaffController {
-
 
     private final StaffPatientService staffPatientService;
 

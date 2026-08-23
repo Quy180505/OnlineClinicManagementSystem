@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.validator;
-
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineInventory;
 import com.ocms.online_clinic_management_system.inventory.entity.InventoryTransaction;
 import com.ocms.online_clinic_management_system.inventory.exception.ExpiredMedicineException;
@@ -7,13 +6,11 @@ import com.ocms.online_clinic_management_system.inventory.exception.Insufficient
 import com.ocms.online_clinic_management_system.inventory.exception.InvalidInventoryTransactionException;
 import com.ocms.online_clinic_management_system.inventory.exception.MedicineInventoryNotFoundException;
 import com.ocms.online_clinic_management_system.inventory.repository.MedicineInventoryRepository;
-import com.ocms.online_clinic_management_system.inventory.repository.InventoryTransactionRepository;
 import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
 import com.ocms.online_clinic_management_system.prescription.exception.PrescriptionDetailNotFoundException;
 import com.ocms.online_clinic_management_system.prescription.repository.PrescriptionDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 
 @Component

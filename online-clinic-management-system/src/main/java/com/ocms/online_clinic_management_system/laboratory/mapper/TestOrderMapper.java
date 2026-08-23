@@ -1,12 +1,10 @@
 package com.ocms.online_clinic_management_system.laboratory.mapper;
-
 import com.ocms.online_clinic_management_system.laboratory.dto.response.TestOrderDetailResponse;
 import com.ocms.online_clinic_management_system.laboratory.dto.response.TestOrderResponse;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrder;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrderDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.util.List;
 
 @Mapper(componentModel = "spring")

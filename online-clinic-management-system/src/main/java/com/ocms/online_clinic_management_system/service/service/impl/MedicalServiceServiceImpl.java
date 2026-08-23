@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.service.service.impl;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.service.dto.request.CreateMedicalServiceRequest;
@@ -20,7 +19,6 @@ import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -32,7 +30,6 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     private final MedicalServiceMapper medicalServiceMapper;
     private final MedicalServiceValidator medicalServiceValidator;
     private final SpecialtyValidator specialtyValidator;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -65,16 +62,11 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     public MedicalServiceResponse create(CreateMedicalServiceRequest request) {
 
         Specialty specialty = specialtyValidator.validateSpecialtyExists(request.getSpecialtyId());
-
-        medicalServiceValidator.validateMedicalServiceNameNotExists(
-                request.getServiceName(),
-                request.getSpecialtyId()
-        );
+        medicalServiceValidator.validateMedicalServiceNameNotExists(request.getServiceName(), request.getSpecialtyId());
 
         MedicalService medicalService = medicalServiceMapper.toEntity(request);
 
         medicalService.setSpecialty(specialty);
-
         medicalService = medicalServiceRepository.save(medicalService);
 
         return medicalServiceMapper.toResponse(medicalService);
@@ -91,16 +83,12 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
                         || !medicalService.getSpecialty().getId().equals(request.getSpecialtyId());
 
         if (changed) {
-            medicalServiceValidator.validateMedicalServiceNameNotExists(
-                    request.getServiceName(),
-                    request.getSpecialtyId()
-            );
+            medicalServiceValidator.validateMedicalServiceNameNotExists(request.getServiceName(), request.getSpecialtyId());
         }
 
         medicalServiceMapper.updateEntity(request, medicalService);
 
         medicalService.setSpecialty(specialty);
-
         medicalService = medicalServiceRepository.save(medicalService);
 
         return medicalServiceMapper.toResponse(medicalService);
@@ -125,21 +113,15 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
     public MedicalServiceResponse partialUpdate(Long medicalServiceId, PatchMedicalServiceRequest request) {
 
         MedicalService medicalService = medicalServiceValidator.validateMedicalServiceExists(medicalServiceId);
-
         Long newSpecialtyId = request.getSpecialtyId() != null ? request.getSpecialtyId() : medicalService.getSpecialty().getId();
-
         String newServiceName = request.getServiceName() != null ? request.getServiceName() : medicalService.getServiceName();
 
-        if (!newServiceName.equalsIgnoreCase(medicalService.getServiceName())
-                || !newSpecialtyId.equals(medicalService.getSpecialty().getId())) {
-
+        if (!newServiceName.equalsIgnoreCase(medicalService.getServiceName()) || !newSpecialtyId.equals(medicalService.getSpecialty().getId())) {
             medicalServiceValidator.validateMedicalServiceNameNotExists(newServiceName, newSpecialtyId);
         }
 
         if (request.getSpecialtyId() != null) {
-
             Specialty specialty = specialtyValidator.validateSpecialtyExists(newSpecialtyId);
-
             medicalService.setSpecialty(specialty);
         }
         medicalServiceMapper.patchEntity(request, medicalService);
@@ -151,20 +133,16 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
 
     @Override
     @Transactional(readOnly = true)
-    public PageResponse<MedicalServiceResponse> getAll(String keyword, Long specialtyId,int page,
-                                                       int size, String sortBy, String direction) {
+    public PageResponse<MedicalServiceResponse> getAll(String keyword, Long specialtyId,int page, int size, String sortBy, String direction) {
 
         Sort.Direction sortDirection = Sort.Direction.fromString(direction);
-
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
-
         Specification<MedicalService> specification = Specification.allOf(
                 MedicalServiceSpecification.hasServiceName(keyword),
                 MedicalServiceSpecification.hasSpecialty(specialtyId)
         );
 
         Page<MedicalService> medicalServicePage = medicalServiceRepository.findAll(specification, pageable);
-
         Page<MedicalServiceResponse> responsePage = medicalServicePage.map(medicalServiceMapper::toResponse);
 
         return PageResponse.of(responsePage);

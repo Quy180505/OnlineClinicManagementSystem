@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.specialty.mapper;
-
 import com.ocms.online_clinic_management_system.specialty.dto.request.CreateSpecialtyRequest;
 import com.ocms.online_clinic_management_system.specialty.dto.request.UpdateSpecialtyRequest;
 import com.ocms.online_clinic_management_system.specialty.dto.response.SpecialtyDetailResponse;

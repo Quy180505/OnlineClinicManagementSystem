@@ -1,8 +1,6 @@
 package com.ocms.online_clinic_management_system.inventory.specification;
-
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineInventory;
 import org.springframework.data.jpa.domain.Specification;
-
 import java.time.LocalDate;
 
 public class MedicineInventorySpecification {

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.validator;
-
 import com.ocms.online_clinic_management_system.inventory.entity.InventoryStatus;
 import com.ocms.online_clinic_management_system.inventory.exception.InventoryStatusNotFoundException;
 import com.ocms.online_clinic_management_system.inventory.repository.InventoryStatusRepository;

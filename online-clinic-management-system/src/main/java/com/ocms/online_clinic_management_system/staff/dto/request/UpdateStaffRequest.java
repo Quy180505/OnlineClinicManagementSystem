@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.dto.request;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

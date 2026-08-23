@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.service.impl;
-
 import com.ocms.online_clinic_management_system.payment.entity.Payment;
 import com.ocms.online_clinic_management_system.payment.entity.PaymentTransaction;
 import com.ocms.online_clinic_management_system.payment.entity.TransactionStatus;
@@ -62,8 +61,6 @@ public class VNPayServiceImpl implements VNPayService {
         }
 
         Payment payment = transaction.getPayment();
-
-
         String vnpAmount = params.get("vnp_Amount");
 
         if (vnpAmount == null) {
@@ -84,12 +81,10 @@ public class VNPayServiceImpl implements VNPayService {
             }
 
         } catch (NumberFormatException e) {
-
             response.put("RspCode", "04");
             response.put("Message", "Invalid amount");
             return response;
         }
-
 
         if ("SUCCESS".equalsIgnoreCase(transaction.getTransactionStatus().getName())) {
             response.put("RspCode", "02");
@@ -101,7 +96,6 @@ public class VNPayServiceImpl implements VNPayService {
         String transactionStatus = params.get("vnp_TransactionStatus");
 
         boolean success = "00".equals(responseCode) && "00".equals(transactionStatus);
-
 
         if (success) {
             TransactionStatus successStatus = paymentValidator.validateTransactionStatus("SUCCESS");
@@ -117,11 +111,8 @@ public class VNPayServiceImpl implements VNPayService {
             return response;
         }
 
-
         TransactionStatus failedStatus = paymentValidator.validateTransactionStatus("FAILED");
-
         transaction.setTransactionStatus(failedStatus);
-
         paymentTransactionRepository.save(transaction);
         publishPaymentFailedEvent(payment, transaction);
         response.put("RspCode", "00");
@@ -224,11 +215,7 @@ public class VNPayServiceImpl implements VNPayService {
             return result.toString();
 
         } catch (Exception e) {
-
-            throw new IllegalStateException(
-                    "Failed to verify VNPay signature",
-                    e
-            );
+            throw new IllegalStateException("Failed to verify VNPay signature", e);
         }
     }
 

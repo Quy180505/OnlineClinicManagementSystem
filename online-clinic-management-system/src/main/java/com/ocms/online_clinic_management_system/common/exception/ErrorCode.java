@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.common.exception;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,6 @@ public enum ErrorCode {
     EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT, "USER_003", "Email already exists"),
     PHONE_ALREADY_EXISTS(HttpStatus.CONFLICT, "USER_004", "Phone already exists"),
     INVALID_ROLE(HttpStatus.BAD_REQUEST, "USER_005", "Invalid role"),
-
 
     DOCTOR_NOT_FOUND(HttpStatus.NOT_FOUND, "DOCTOR_001", "Doctor not found"),
 

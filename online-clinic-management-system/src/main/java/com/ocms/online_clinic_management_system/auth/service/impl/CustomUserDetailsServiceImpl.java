@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.service.impl;
-
 import com.ocms.online_clinic_management_system.auth.security.UserPrincipal;
 import com.ocms.online_clinic_management_system.auth.service.CustomUserDetailsService;
 import com.ocms.online_clinic_management_system.user.entity.User;

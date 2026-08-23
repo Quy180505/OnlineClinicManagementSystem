@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.service.mapper;
-
 import com.ocms.online_clinic_management_system.service.dto.request.CreateMedicalServiceRequest;
 import com.ocms.online_clinic_management_system.service.dto.request.PatchMedicalServiceRequest;
 import com.ocms.online_clinic_management_system.service.dto.request.UpdateMedicalServiceRequest;
@@ -21,11 +20,8 @@ public interface MedicalServiceMapper {
     @Mapping(source = "specialty.name", target = "specialtyName")
     MedicalServiceDetailResponse toDetailResponse(MedicalService medicalService);
 
-
     @Mapping(target = "specialty", ignore = true)
     void updateEntity(UpdateMedicalServiceRequest request, @MappingTarget MedicalService medicalService);
-
-
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "specialty", ignore = true)

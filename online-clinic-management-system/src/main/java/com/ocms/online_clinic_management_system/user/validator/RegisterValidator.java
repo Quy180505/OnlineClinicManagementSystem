@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.validator;
-
 import com.ocms.online_clinic_management_system.auth.dto.request.RegisterRequest;
 import com.ocms.online_clinic_management_system.common.exception.ErrorCode;
 import com.ocms.online_clinic_management_system.user.exception.UserAlreadyExistsException;

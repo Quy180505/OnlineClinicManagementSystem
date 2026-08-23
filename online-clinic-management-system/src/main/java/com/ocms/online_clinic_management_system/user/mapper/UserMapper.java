@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.mapper;
-
 import com.ocms.online_clinic_management_system.user.dto.request.UpdateUserRequest;
 import com.ocms.online_clinic_management_system.user.dto.response.UserDetailResponse;
 import com.ocms.online_clinic_management_system.user.dto.response.UserResponse;

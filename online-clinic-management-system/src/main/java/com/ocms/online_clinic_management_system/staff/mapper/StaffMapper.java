@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.staff.mapper;
-
 import com.ocms.online_clinic_management_system.patient.entity.Patient;
 import com.ocms.online_clinic_management_system.staff.dto.request.UpdatePatientInformationRequest;
 import com.ocms.online_clinic_management_system.staff.dto.request.UpdateStaffRequest;
@@ -39,7 +38,6 @@ public interface StaffMapper {
     @Mapping(target = "medicalHistory", source = "medicalHistory")
     @Mapping(target = "emergencyContact", source = "emergencyContact")
     PatientManagementResponse toResponse(Patient patient);
-
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.user.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.user.dto.request.*;
 import com.ocms.online_clinic_management_system.user.dto.response.UserDetailResponse;

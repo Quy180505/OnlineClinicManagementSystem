@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.doctor.mapper;
-
 import com.ocms.online_clinic_management_system.doctor.dto.request.UpdateDoctorRequest;
 import com.ocms.online_clinic_management_system.doctor.dto.response.DoctorResponse;
 import com.ocms.online_clinic_management_system.doctor.dto.response.DoctorSummaryResponse;
@@ -23,7 +22,6 @@ public interface DoctorMapper {
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "specialty", ignore = true)
     void updateDoctorFromRequest(UpdateDoctorRequest request, @MappingTarget Doctor doctor);
-
 
     @Mapping(target = "fullName", source = "user.fullName")
     @Mapping(target = "specialtyName", source = "specialty.name")

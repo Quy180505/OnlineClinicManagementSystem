@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.gateway.config;
-
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

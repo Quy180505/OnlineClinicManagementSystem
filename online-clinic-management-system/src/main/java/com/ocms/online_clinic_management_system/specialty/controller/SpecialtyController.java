@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.specialty.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.specialty.dto.request.CreateSpecialtyRequest;
@@ -10,7 +9,6 @@ import com.ocms.online_clinic_management_system.specialty.service.SpecialtyServi
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -20,20 +18,18 @@ public class SpecialtyController {
 
     private final SpecialtyService specialtyService;
 
-
     @GetMapping("/all")
     public ApiResponse<List<SpecialtyResponse>> getAllSpecialties() {
         return ApiResponse.success(specialtyService.getAll());
     }
+
     @PostMapping
     public ApiResponse<SpecialtyResponse> create(@Valid @RequestBody CreateSpecialtyRequest request) {
-
         return ApiResponse.success(specialtyService.create(request));
     }
 
     @PutMapping("/{specialtyId}")
     public ApiResponse<SpecialtyResponse> update(@PathVariable Long specialtyId, @Valid @RequestBody UpdateSpecialtyRequest request) {
-
         return ApiResponse.success(specialtyService.update(specialtyId, request));
     }
 

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.payment.service.impl;
-
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import com.ocms.online_clinic_management_system.invoice.event.InvoiceCreatedEvent;
@@ -24,10 +23,8 @@ import com.ocms.online_clinic_management_system.payment.repository.PaymentTransa
 import com.ocms.online_clinic_management_system.payment.service.PaymentService;
 import com.ocms.online_clinic_management_system.payment.validator.PaymentValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.UUID;
 
 @Service

@@ -1,6 +1,4 @@
 package com.ocms.online_clinic_management_system.patient.dto.response;
-
-
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,11 +7,7 @@ import lombok.Getter;
 public class PatientResponse {
 
     private Long id;
-
     private Long userId;
-
     private String fullName;
-
     private String citizenId;
-
 }

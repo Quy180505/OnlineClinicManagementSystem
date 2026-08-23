@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.notification.listener;
-
 import com.ocms.online_clinic_management_system.laboratory.event.LabResultUpdatedEvent;
 import com.ocms.online_clinic_management_system.laboratory.event.TestOrderCreatedEvent;
 import com.ocms.online_clinic_management_system.notification.entity.Notification;

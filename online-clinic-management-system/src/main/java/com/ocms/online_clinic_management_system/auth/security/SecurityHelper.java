@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.security;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -14,9 +13,7 @@ public class SecurityHelper {
     public UserPrincipal getCurrentPrincipal() {
         Authentication authentication = getAuthentication();
 
-        if (authentication == null
-                || !authentication.isAuthenticated()
-                || !(authentication.getPrincipal() instanceof UserPrincipal principal)) {
+        if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof UserPrincipal principal)) {
             return null;
         }
 

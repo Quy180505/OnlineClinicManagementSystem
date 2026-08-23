@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.doctor.controller;
-
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.doctor.dto.response.DoctorSummaryResponse;

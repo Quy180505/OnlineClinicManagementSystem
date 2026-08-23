@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.laboratory.dto.response;
-
 import lombok.*;
 import java.time.LocalDateTime;
 

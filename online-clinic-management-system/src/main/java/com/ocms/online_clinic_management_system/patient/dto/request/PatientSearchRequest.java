@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.patient.dto.request;
-
 import lombok.Getter;
 import lombok.Setter;
 

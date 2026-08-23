@@ -1,11 +1,9 @@
 package com.ocms.online_clinic_management_system.inventory.service.impl;
-
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.inventory.dto.request.CreateMedicineCategoryRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.UpdateMedicineCategoryRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.response.MedicineCategoryResponse;
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineCategory;
-import com.ocms.online_clinic_management_system.inventory.exception.MedicineCategoryAlreadyExistsException;
 import com.ocms.online_clinic_management_system.inventory.mapper.MedicineCategoryMapper;
 import com.ocms.online_clinic_management_system.inventory.repository.MedicineCategoryRepository;
 import com.ocms.online_clinic_management_system.inventory.service.MedicineCategoryService;

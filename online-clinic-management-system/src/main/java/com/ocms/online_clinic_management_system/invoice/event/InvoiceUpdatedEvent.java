@@ -1,9 +1,7 @@
 package com.ocms.online_clinic_management_system.invoice.event;
-
 import com.ocms.online_clinic_management_system.common.event.BaseEvent;
 import com.ocms.online_clinic_management_system.common.event.DomainEvent;
 import lombok.Getter;
-
 import java.math.BigDecimal;
 
 @Getter

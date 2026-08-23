@@ -1,7 +1,5 @@
 package com.ocms.online_clinic_management_system.appointment.dto.response;
-
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,21 +13,13 @@ import java.time.LocalTime;
 public class AppointmentDetailResponse {
 
     private Long id;
-
     private String appointmentStatus;
-
     private PatientInfo patient;
-
     private DoctorInfo doctor;
-
     private ServiceInfo service;
-
     private ScheduleInfo schedule;
-
     private String note;
-
     private InvoiceInfo invoice;
-
     private LocalDateTime createdAt;
 
     @Getter

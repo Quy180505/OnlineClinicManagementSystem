@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.invoice.entity;
-
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.patient.entity.Patient;
@@ -7,7 +6,6 @@ import com.ocms.online_clinic_management_system.payment.entity.Payment;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -40,11 +38,6 @@ public class Invoice extends BaseEntity {
     @Builder.Default
     private List<InvoiceDetail> invoiceDetails = new ArrayList<>();
 
-    @OneToOne(mappedBy = "invoice",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-    )
+    @OneToOne(mappedBy = "invoice", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Payment payment;
 }

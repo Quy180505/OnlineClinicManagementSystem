@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.auth.jwt;
-
 import com.ocms.online_clinic_management_system.auth.security.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

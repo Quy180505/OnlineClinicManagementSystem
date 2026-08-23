@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.inventory.config;
-
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.notification.listener;
-
 import com.ocms.online_clinic_management_system.appointment.event.AppointmentCancelledEvent;
 import com.ocms.online_clinic_management_system.appointment.event.AppointmentConfirmedEvent;
 import com.ocms.online_clinic_management_system.appointment.event.AppointmentCreatedEvent;

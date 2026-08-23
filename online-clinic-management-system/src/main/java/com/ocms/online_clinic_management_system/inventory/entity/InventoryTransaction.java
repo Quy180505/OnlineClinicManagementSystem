@@ -1,12 +1,10 @@
 package com.ocms.online_clinic_management_system.inventory.entity;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.InventoryTransactionType;
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDateTime;
 
 @Entity

@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.medicalrecord.entity;
-
 import com.ocms.online_clinic_management_system.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,15 +10,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@Table(
-        name = "medical_record_disease",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {
-                        "medical_record_id",
-                        "disease_id"
-                })
-        }
-)
+@Table(name = "medical_record_disease", uniqueConstraints = {@UniqueConstraint(columnNames = {"medical_record_id", "disease_id"})})
 @EqualsAndHashCode(callSuper = true)
 public class MedicalRecordDisease extends BaseEntity {
 

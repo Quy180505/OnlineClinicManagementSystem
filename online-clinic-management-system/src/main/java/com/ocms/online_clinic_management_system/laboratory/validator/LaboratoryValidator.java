@@ -1,5 +1,4 @@
 package com.ocms.online_clinic_management_system.laboratory.validator;
-
 import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.common.constant.enums.TestOrderStatus;
 import com.ocms.online_clinic_management_system.laboratory.entity.LabResult;
