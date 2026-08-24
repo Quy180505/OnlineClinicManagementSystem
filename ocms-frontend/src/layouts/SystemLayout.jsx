@@ -8,30 +8,11 @@ const SystemLayout = () => {
                 <nav className="navbar navbar-expand-lg navbar-dark">
                     <div className="container">
 
-                        <Link
-                            to="/"
-                            className="navbar-brand fw-bold"
-                        >
+                        <Link to="/" className="navbar-brand fw-bold">
                             OCMS
                         </Link>
 
-                        <div className="d-flex gap-2">
-
-                            <Link
-                                to="/login"
-                                className="btn btn-outline-light"
-                            >
-                                Đăng nhập
-                            </Link>
-
-                            <Link
-                                to="/register"
-                                className="btn btn-light"
-                            >
-                                Đăng ký
-                            </Link>
-
-                        </div>
+                       
                     </div>
                 </nav>
             </header>
