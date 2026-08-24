@@ -1,4 +1,5 @@
 package com.ocms.online_clinic_management_system.user.service.impl;
+import com.ocms.online_clinic_management_system.common.config.UserPaginationProperties;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
 import com.ocms.online_clinic_management_system.common.util.PasswordUtil;
 import com.ocms.online_clinic_management_system.doctor.service.DoctorService;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private final StaffService staffService;
     private final DomainEventPublisher eventPublisher;
     private final PasswordUtil passwordUtil;
-
+    private final UserPaginationProperties userPaginationProperties;
     @Override
     public UserResponse createDoctor(CreateDoctorRequest request) {
         validator.validateCreateDoctor(request);
@@ -134,7 +135,7 @@ public class UserServiceImpl implements UserService {
                 UserSpecification.status(request.getStatus())
         );
 
-        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        Pageable pageable = PageRequest.of(request.getPage(), userPaginationProperties.getPageSize());
 
         return userRepository.findAll(spec,pageable).map(userMapper::toUserSummaryResponse);
     }
