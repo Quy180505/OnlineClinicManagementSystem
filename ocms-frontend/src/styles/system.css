@@ -1,0 +1,53 @@
+
+.system-layout {
+    background-color: #f8f9fa;
+}
+
+.system-header {
+    background: linear-gradient(
+        135deg,
+        #0d6efd,
+        #0b5ed7
+    );
+}
+
+.system-header .navbar {
+    min-height: 70px;
+}
+
+.system-header .navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+
+.system-footer {
+    background-color: #212529;
+    color: #adb5bd;
+    padding: 20px 0;
+}
+
+
+.welcome-page {
+    min-height: calc(100vh - 130px);
+
+    background:
+        linear-gradient(
+            rgba(248, 249, 250, 0.95),
+            rgba(248, 249, 250, 0.95)
+        );
+
+    display: flex;
+}
+
+.welcome-content {
+    padding: 40px 20px;
+}
+
+.welcome-page h1 {
+    line-height: 1.3;
+}
+
+.welcome-page .lead {
+    font-size: 1.2rem;
+}
