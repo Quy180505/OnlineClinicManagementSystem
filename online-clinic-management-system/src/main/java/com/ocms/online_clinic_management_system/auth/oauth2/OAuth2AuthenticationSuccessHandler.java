@@ -33,9 +33,17 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
                 .build();
 
         LoginResponse loginResponse =  oauth2Service.loginWithGoogle(user);
-        response.setContentType("application/json");
 
-        objectMapper.writeValue(response.getOutputStream(), loginResponse);
+        String accessToken = loginResponse.getToken().getAccessToken();
+
+        String redirectUrl = "http://localhost:5173/oauth2/callback"
+                        + "?token=" + accessToken
+                        + "&userId=" + loginResponse.getUserId()
+                        + "&username=" + loginResponse.getUsername()
+                        + "&fullName=" + loginResponse.getFullName()
+                        + "&role=" + loginResponse.getRole();
+
+        response.sendRedirect(redirectUrl);
     }
 
 }
