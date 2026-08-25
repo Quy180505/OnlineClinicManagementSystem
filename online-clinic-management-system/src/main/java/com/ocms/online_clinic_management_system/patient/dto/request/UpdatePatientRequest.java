@@ -17,5 +17,6 @@ public class UpdatePatientRequest {
     private String medicalHistory;
     @Size(max = 100)
     private String emergencyContact;
-
+    @Size(max = 20)
+    private String phone;
 }
