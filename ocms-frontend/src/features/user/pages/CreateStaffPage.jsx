@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userApi } from "../api/userApi";
-
+import { ROUTES } from "../../../constants/routeConstants";
 const INITIAL_FORM = {
   username: "",
   password: "",
@@ -55,7 +55,7 @@ export default function CreateStaffPage() {
 
       window.alert("Tạo tài khoản Staff thành công.");
 
-      navigate("/admin/users");
+      navigate(ROUTES.ADMIN.USERS.LIST);
     } catch (error) {
       setError(
         error?.response?.data?.message ||
@@ -81,7 +81,7 @@ export default function CreateStaffPage() {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          onClick={() => navigate("/admin/users")}
+          onClick={() => navigate(ROUTES.ADMIN.USERS.LIST)}
         >
           Quay lại
         </button>
@@ -229,7 +229,7 @@ export default function CreateStaffPage() {
           <button
             type="button"
             className="btn btn-outline-secondary"
-            onClick={() => navigate("/admin/users")}
+            onClick={() => navigate(ROUTES.ADMIN.USERS.LIST)}
             disabled={loading}
           >
             Hủy

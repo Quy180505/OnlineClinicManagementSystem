@@ -1,19 +1,21 @@
 import { Routes, Route } from "react-router-dom";
 import SystemLayout from "../../layouts/SystemLayout";
+import PatientLayout from "../../layouts/PatientLayout";
+import StaffLayout from "../../layouts/StaffLayout";
+import DoctorLayout from "../../layouts/DoctorLayout";
+import AdminLayout from "../../layouts/AdminLayout";
+import ProtectedRoute from "./ProtectedRoute";
 import WelcomePage from "../../features/auth/pages/WelcomePage";
 import LoginPage from "../../features/auth/pages/LoginPage";
 import PatientLoginPage from "../../features/auth/pages/PatientLoginPage";
 import StaffLoginPage from "../../features/auth/pages/StaffLoginPage";
 import RegisterPage from "../../features/auth/pages/RegisterPage";
 import OAuth2CallbackPage from "../../features/auth/pages/OAuth2CallbackPage";
-import PatientLayout from "../../layouts/PatientLayout";
-import StaffLayout from "../../layouts/StaffLayout";
-import DoctorLayout from "../../layouts/DoctorLayout";
-import AdminLayout from "../../layouts/AdminLayout";
-import ProtectedRoute from "./ProtectedRoute";
 import UserManagementPage from "../../features/user/pages/UserManagementPage";
 import CreateDoctorPage from "../../features/user/pages/CreateDoctorPage";
 import CreateStaffPage from "../../features/user/pages/CreateStaffPage";
+
+import { ROUTES } from "../../constants/routeConstants";
 
 const AppRoutes = () => {
     return (
@@ -23,59 +25,54 @@ const AppRoutes = () => {
 
 
                 <Route
-                    path="/"
+                    path={ROUTES.ROOT}
                     element={<WelcomePage />}
                 />
 
                 <Route
-                    path="/login"
+                    path={ROUTES.AUTH.LOGIN}
                     element={<LoginPage />}
                 />
 
                 <Route
-                    path="/oauth2/callback"
+                    path={ROUTES.AUTH.OAUTH2_CALLBACK}
                     element={<OAuth2CallbackPage />}
                 />
 
                 <Route
-                    path="/login/patient"
+                    path={ROUTES.AUTH.LOGIN_PATIENT}
                     element={<PatientLoginPage />}
                 />
 
                 <Route
-                    path="/login/staff"
+                    path={ROUTES.AUTH.LOGIN_STAFF}
                     element={<StaffLoginPage />}
                 />
 
                 <Route
-                    path="/register"
+                    path={ROUTES.AUTH.REGISTER}
                     element={<RegisterPage />}
                 />
-
-
-               
 
                 <Route element={<ProtectedRoute />}>
 
                     <Route
-                        path="/patient"
+                        path={ROUTES.PATIENT.ROOT}
                         element={<PatientLayout />}
                     />
 
-    
                     <Route
-                        path="/staff"
+                        path={ROUTES.STAFF.ROOT}
                         element={<StaffLayout />}
                     />
 
-                  
                     <Route
-                        path="/doctor"
+                        path={ROUTES.DOCTOR.ROOT}
                         element={<DoctorLayout />}
                     />
 
                     <Route
-                        path="/admin"
+                        path={ROUTES.ADMIN.ROOT}
                         element={<AdminLayout />}
                     >
 
@@ -93,8 +90,6 @@ const AppRoutes = () => {
                             path="users/create-staff"
                             element={<CreateStaffPage />}
                         />
-
-
 
                     </Route>
 

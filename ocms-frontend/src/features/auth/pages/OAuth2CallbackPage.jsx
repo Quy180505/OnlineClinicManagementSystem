@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { ROUTES } from "../../../constants/routeConstants";
 const OAuth2CallbackPage = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -29,14 +29,11 @@ const OAuth2CallbackPage = () => {
                 errorMessages[errorCode] || "Đăng nhập Google thất bại."
             );
 
-            navigate("/login/patient", { replace: true });
+            navigate(ROUTES.AUTH.LOGIN_PATIENT, { replace: true });
 
             return;
         }
-
-
-
-
+        
         const token = searchParams.get("token");
         const userId = searchParams.get("userId");
         const username = searchParams.get("username");
@@ -44,7 +41,7 @@ const OAuth2CallbackPage = () => {
         const role = searchParams.get("role");
 
         if (!token || !userId || !username || !role) {
-            navigate("/login/patient", { replace: true });
+            navigate(ROUTES.AUTH.LOGIN_PATIENT, { replace: true });
             return;
         }
 
@@ -59,23 +56,23 @@ const OAuth2CallbackPage = () => {
         loginWithOAuth2(authData);
         switch (role) {
             case "ROLE_PATIENT":
-                navigate("/patient", { replace: true });
+                navigate(ROUTES.PATIENT.ROOT, { replace: true });
                 break;
 
             case "ROLE_DOCTOR":
-                navigate("/doctor", { replace: true });
+                navigate(ROUTES.DOCTOR.ROOT, { replace: true });
                 break;
 
             case "ROLE_STAFF":
-                navigate("/staff", { replace: true });
+                navigate(ROUTES.STAFF.ROOT, { replace: true });
                 break;
 
             case "ROLE_ADMIN":
-                navigate("/admin", { replace: true });
+                navigate(ROUTES.ADMIN.ROOT, { replace: true });
                 break;
 
             default:
-                navigate("/", { replace: true });
+                navigate(ROUTES.ROOT, { replace: true });
         }
     }, [searchParams, navigate, loginWithOAuth2]);
 
