@@ -15,8 +15,8 @@ import UserManagementPage from "../../features/user/pages/UserManagementPage";
 import CreateDoctorPage from "../../features/user/pages/CreateDoctorPage";
 import CreateStaffPage from "../../features/user/pages/CreateStaffPage";
 import PatientProfilePage from "../../features/patient/pages/PatientProfilePage";
-// import PatientManagementPage from "../../features/staff/pages/PatientManagementPage";
-//import PatientDetailPage from "../../features/staff/pages/PatientDetailPage";
+import PatientManagementPage from "../../features/staff/pages/PatientManagementPage";
+import PatientDetailPage from "../../features/staff/pages/PatientDetailPage";
 import { ROUTES } from "../../constants/routeConstants";
 
 const AppRoutes = () => {
@@ -64,10 +64,10 @@ const AppRoutes = () => {
                  </Route>
 
                <Route  path={ROUTES.STAFF.ROOT}  element={<StaffLayout />}>
-{/* 
+
                     <Route path="patients"  element={<PatientManagementPage />} />
 
-                    <Route  path="patients/:patientId" element={<PatientDetailPage />} /> */}
+                    <Route  path="patients/:patientId" element={<PatientDetailPage />} />
 
                 </Route>
 
