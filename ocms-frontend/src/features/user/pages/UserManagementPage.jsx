@@ -4,11 +4,13 @@ import { userApi } from "../api/userApi";
 import UserSearchForm from "../components/UserSearchForm";
 import UserTable from "../components/UserTable";
 import { ROUTES } from "../../../constants/routeConstants";
+import { PAGINATION } from "../../../constants/paginationConstants";
 const DEFAULT_SEARCH_PARAMS = {
   keyword: null,
   roleName: null,
   status: null,
-  page: 0,
+  page: PAGINATION.DEFAULT_PAGE,
+  size: PAGINATION.DEFAULT_PAGE_SIZE,
 };
 
 export default function UserManagementPage() {

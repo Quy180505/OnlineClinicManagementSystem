@@ -12,5 +12,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long>, JpaSpec
     Optional<Patient> findByCitizenId(String citizenId);
     Optional<Patient> findByUserId(Long userId);
     boolean existsByCitizenId(String citizenId);
+    boolean existsByCitizenIdAndIdNot(String citizenId, Long patientId);
 
 }

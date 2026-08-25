@@ -1,9 +1,12 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../features/auth/hooks/useAuthContext';
-
+import { ROUTES } from "../constants/routeConstants";
 
 const navItems = [
-    { label: 'Trang chủ', to: '/staff' },
+    {
+      label: "Trang chủ",
+      to: ROUTES.STAFF.ROOT,
+    },
     { label: 'Bệnh nhân', to: '/staff/patients' },
     { label: 'Lịch làm việc', to: '/staff/schedules' },
     { label: 'Lịch hẹn', to: '/staff/appointments' },
