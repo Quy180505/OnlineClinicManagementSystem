@@ -21,17 +21,9 @@ public class OAuth2AuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException{
 
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType("application/json");
+        String redirectUrl = "http://localhost:5173/oauth2/callback" + "?error=AUTH_001";
 
-        ErrorResponse error = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.UNAUTHORIZED.value())
-                .code("AUTH_001")
-                .message("Google authentication failed.")
-                .build();
-
-        objectMapper.writeValue(response.getOutputStream(), error);
+        response.sendRedirect(redirectUrl);
     }
 
 }

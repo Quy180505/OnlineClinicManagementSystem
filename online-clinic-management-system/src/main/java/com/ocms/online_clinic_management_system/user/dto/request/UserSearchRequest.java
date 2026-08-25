@@ -11,5 +11,4 @@ public class UserSearchRequest {
     private String roleName;
     private UserStatus status;
     private Integer page = 0;
-    private Integer size = 10;
 }
