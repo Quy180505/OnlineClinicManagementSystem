@@ -1,35 +1,39 @@
 export const ROUTES = {
-    ROOT: "/",
+  ROOT: "/",
 
-    AUTH: {
-        LOGIN: "/login",
-        LOGIN_PATIENT: "/login/patient",
-        LOGIN_STAFF: "/login/staff",
-        REGISTER: "/register",
-        OAUTH2_CALLBACK: "/oauth2/callback",
-    },
-
-    ADMIN: {
-      ROOT: "/admin",
-
-      USERS: {
-          LIST: "/admin/users",
-          CREATE_DOCTOR: "/admin/users/create-doctor",
-          CREATE_STAFF: "/admin/users/create-staff",
-      },
+  AUTH: {
+    LOGIN: "/login",
+    LOGIN_PATIENT: "/login/patient",
+    LOGIN_STAFF: "/login/staff",
+    REGISTER: "/register",
+    OAUTH2_CALLBACK: "/oauth2/callback",
   },
 
-    PATIENT: {
-        ROOT: "/patient",
-        PROFILE: "/patient/profile",
-    },
+  ADMIN: {
+    ROOT: "/admin",
 
-    STAFF: {
-        ROOT: "/staff",
-        PATIENTS: "/staff/patients",
+    USERS: {
+      LIST: "/admin/users",
+      CREATE_DOCTOR: "/admin/users/create-doctor",
+      CREATE_STAFF: "/admin/users/create-staff",
     },
+  },
 
-    DOCTOR: {
-        ROOT: "/doctor",
+  PATIENT: {
+    ROOT: "/patient",
+    PROFILE: "/patient/profile",
+  },
+
+  STAFF: {
+    ROOT: "/staff",
+
+    PATIENTS: {
+      LIST: "/staff/patients",
+      DETAIL: (patientId) => `/staff/patients/${patientId}`,
     },
+  },
+
+  DOCTOR: {
+    ROOT: "/doctor",
+  },
 };
