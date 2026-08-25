@@ -17,6 +17,10 @@ import CreateStaffPage from "../../features/user/pages/CreateStaffPage";
 import PatientProfilePage from "../../features/patient/pages/PatientProfilePage";
 import PatientManagementPage from "../../features/staff/pages/PatientManagementPage";
 import PatientDetailPage from "../../features/staff/pages/PatientDetailPage";
+import SpecialtyDetailPage from "../../features/specialty/pages/SpecialtyDetailPage";
+import SpecialtyManagementPage from "../../features/specialty/pages/SpecialtyManagementPage";
+import MedicalServiceDetailPage from "../../features/medical-service/pages/MedicalServiceDetailPage";
+import MedicalServiceManagementPage from "../../features/medical-service/pages/MedicalServiceManagementPage";
 import { ROUTES } from "../../constants/routeConstants";
 
 const AppRoutes = () => {
@@ -83,6 +87,13 @@ const AppRoutes = () => {
 
                         <Route path="users/create-staff"element={<CreateStaffPage />}/>
 
+                        <Route path="specialties" element={<SpecialtyManagementPage />} />
+
+                        <Route path="specialties/:specialtyId"element={<SpecialtyDetailPage />}/>
+
+                        <Route path="medical-services"element={<MedicalServiceManagementPage />}/>
+
+                        <Route  path="medical-services/:medicalServiceId"element={<MedicalServiceDetailPage />}/>
                     </Route>
 
                 </Route>

@@ -1,4 +1,5 @@
 package com.ocms.online_clinic_management_system.service.controller;
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.service.dto.request.CreateMedicalServiceRequest;
@@ -58,11 +59,12 @@ public class MedicalServiceController {
     @GetMapping
     public ApiResponse<PageResponse<MedicalServiceResponse>> getAll(@RequestParam(required = false) String keyword,
                                                                     @RequestParam(required = false) Long specialtyId,
+                                                                    @RequestParam(required = false) MedicalServiceType serviceType,
                                                                     @RequestParam(defaultValue = "0") int page,
                                                                     @RequestParam(defaultValue = "10") int size,
                                                                     @RequestParam(defaultValue = "serviceName") String sortBy,
                                                                     @RequestParam(defaultValue = "asc") String direction) {
-        return ApiResponse.success(medicalServiceService.getAll(keyword, specialtyId, page, size, sortBy, direction));
+        return ApiResponse.success(medicalServiceService.getAll(keyword, specialtyId,serviceType, page, size, sortBy, direction));
     }
 
 }

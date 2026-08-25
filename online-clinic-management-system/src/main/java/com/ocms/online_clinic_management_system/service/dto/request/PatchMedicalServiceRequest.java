@@ -1,4 +1,5 @@
 package com.ocms.online_clinic_management_system.service.dto.request;
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -16,4 +17,5 @@ public class PatchMedicalServiceRequest {
     private BigDecimal price;
     @Size(max = 2000)
     private String description;
+    private MedicalServiceType serviceType;
 }
