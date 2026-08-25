@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { ROUTES } from "../../../constants/routeConstants";
 import { userApi } from "../api/userApi";
 import { specialtyApi } from "../../specialty/api/specialtyApi";
 
@@ -93,7 +93,7 @@ export default function CreateDoctorPage() {
 
       alert("Tạo tài khoản bác sĩ thành công.");
 
-      navigate("/admin/users");
+      navigate(ROUTES.ADMIN.USERS.LIST);
     } catch (error) {
       setError(
         error?.response?.data?.message ||
@@ -119,7 +119,7 @@ export default function CreateDoctorPage() {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          onClick={() => navigate("/admin/users")}
+         onClick={() => navigate(ROUTES.ADMIN.USERS.LIST)}
         >
           Quay lại
         </button>
@@ -297,7 +297,6 @@ export default function CreateDoctorPage() {
               />
             </div>
 
-            {/* Kinh nghiệm */}
 
             <div className="col-md-6">
               <label className="form-label">Số năm kinh nghiệm</label>
@@ -314,13 +313,12 @@ export default function CreateDoctorPage() {
           </div>
         </div>
 
-        {/* Footer */}
 
         <div className="card-footer bg-white d-flex justify-content-end gap-2">
           <button
             type="button"
             className="btn btn-outline-secondary"
-            onClick={() => navigate("/admin/users")}
+            onClick={() => navigate(ROUTES.ADMIN.USERS.LIST)}
             disabled={loading}
           >
             Hủy

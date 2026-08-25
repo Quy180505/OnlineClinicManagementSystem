@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userApi } from "../api/userApi";
 import UserSearchForm from "../components/UserSearchForm";
 import UserTable from "../components/UserTable";
-
+import { ROUTES } from "../../../constants/routeConstants";
 const DEFAULT_SEARCH_PARAMS = {
   keyword: null,
   roleName: null,
@@ -83,11 +83,11 @@ export default function UserManagementPage() {
   };
 
   const handleCreateDoctor = () => {
-    navigate("/admin/users/create-doctor");
+     navigate(ROUTES.ADMIN.USERS.CREATE_DOCTOR);
   };
 
   const handleCreateStaff = () => {
-    navigate("/admin/users/create-staff");
+    navigate(ROUTES.ADMIN.USERS.CREATE_STAFF);
   };
 
   return (

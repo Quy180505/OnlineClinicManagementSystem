@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import { ROUTES } from "../../../constants/routeConstants";
 const LoginPage = () => {
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const LoginPage = () => {
                         <div 
                             className="card h-100 border-0 shadow-sm text-center p-4 rounded-4 hover-shadow transition-all cursor-pointer"
                             style={{ cursor: "pointer" }}
-                            onClick={() => navigate("/login/patient")}
+                            onClick={() => navigate(ROUTES.AUTH.LOGIN_PATIENT)}
                         >
                             <div className="card-body d-flex flex-column justify-content-between">
                                 <div>
@@ -41,7 +41,7 @@ const LoginPage = () => {
                         <div 
                             className="card h-100 border-0 shadow-sm text-center p-4 rounded-4 hover-shadow transition-all cursor-pointer"
                             style={{ cursor: "pointer" }}
-                            onClick={() => navigate("/login/staff")}
+                            onClick={() => navigate(ROUTES.AUTH.LOGIN_STAFF)}
                         >
                             <div className="card-body d-flex flex-column justify-content-between">
                                 <div>
@@ -61,7 +61,7 @@ const LoginPage = () => {
 
                 <div className="text-center mt-5">
                     <button 
-                        onClick={() => navigate("/")} 
+                        onClick={() => navigate(ROUTES.ROOT)} 
                         className="btn btn-link text-decoration-none text-secondary"
                     >
                         ← Quay lại trang chủ
