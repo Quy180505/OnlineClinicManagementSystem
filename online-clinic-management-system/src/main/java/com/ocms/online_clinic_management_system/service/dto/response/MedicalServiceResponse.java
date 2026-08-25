@@ -1,4 +1,5 @@
 package com.ocms.online_clinic_management_system.service.dto.response;
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
@@ -11,5 +12,5 @@ public class MedicalServiceResponse {
     private String serviceName;
     private BigDecimal price;
     private String specialtyName;
-
+    private MedicalServiceType serviceType;
 }

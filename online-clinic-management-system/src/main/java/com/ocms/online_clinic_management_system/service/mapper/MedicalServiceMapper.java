@@ -14,10 +14,12 @@ public interface MedicalServiceMapper {
     MedicalService toEntity(CreateMedicalServiceRequest request);
 
     @Mapping(source = "specialty.name", target = "specialtyName")
+    @Mapping(source = "serviceType", target = "serviceType")
     MedicalServiceResponse toResponse(MedicalService medicalService);
 
     @Mapping(source = "specialty.id", target = "specialtyId")
     @Mapping(source = "specialty.name", target = "specialtyName")
+    @Mapping(source = "serviceType", target = "serviceType")
     MedicalServiceDetailResponse toDetailResponse(MedicalService medicalService);
 
     @Mapping(target = "specialty", ignore = true)
