@@ -53,6 +53,16 @@ public class PatientServiceImpl implements PatientService {
         patientValidator.validateUpdate(request);
         Patient patient = getCurrentPatient();
         patientMapper.updatePatientFromRequest(request, patient);
+
+        User user = patient.getUser();
+
+        if (StringUtils.hasText(request.getPhone())) {
+            if (!request.getPhone().equals(user.getPhone()) && userRepository.existsByPhone(request.getPhone())) {
+                throw new UserAlreadyExistsException(ErrorCode.PHONE_ALREADY_EXISTS);
+            }
+
+            user.setPhone(request.getPhone());
+        }
         eventPublisher.publish(new PatientUpdateEvent(patient.getId(), patient.getUser().getId()));
 
         return patientMapper.toDetailResponse(patient);

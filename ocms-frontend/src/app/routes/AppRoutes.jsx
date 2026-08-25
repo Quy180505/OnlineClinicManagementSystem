@@ -14,7 +14,9 @@ import OAuth2CallbackPage from "../../features/auth/pages/OAuth2CallbackPage";
 import UserManagementPage from "../../features/user/pages/UserManagementPage";
 import CreateDoctorPage from "../../features/user/pages/CreateDoctorPage";
 import CreateStaffPage from "../../features/user/pages/CreateStaffPage";
-
+import PatientProfilePage from "../../features/patient/pages/PatientProfilePage";
+// import PatientManagementPage from "../../features/staff/pages/PatientManagementPage";
+//import PatientDetailPage from "../../features/staff/pages/PatientDetailPage";
 import { ROUTES } from "../../constants/routeConstants";
 
 const AppRoutes = () => {
@@ -56,40 +58,30 @@ const AppRoutes = () => {
 
                 <Route element={<ProtectedRoute />}>
 
-                    <Route
-                        path={ROUTES.PATIENT.ROOT}
-                        element={<PatientLayout />}
-                    />
+                <Route path={ROUTES.PATIENT.ROOT} element={<PatientLayout />} >
+                    <Route  path="profile" element={<PatientProfilePage />} />
+                
+                 </Route>
 
-                    <Route
-                        path={ROUTES.STAFF.ROOT}
-                        element={<StaffLayout />}
-                    />
+               <Route  path={ROUTES.STAFF.ROOT}  element={<StaffLayout />}>
+{/* 
+                    <Route path="patients"  element={<PatientManagementPage />} />
 
-                    <Route
-                        path={ROUTES.DOCTOR.ROOT}
-                        element={<DoctorLayout />}
-                    />
+                    <Route  path="patients/:patientId" element={<PatientDetailPage />} /> */}
 
-                    <Route
-                        path={ROUTES.ADMIN.ROOT}
-                        element={<AdminLayout />}
-                    >
+                </Route>
 
-                        <Route
-                            path="users"
-                            element={<UserManagementPage />}
-                        />
 
-                        <Route
-                            path="users/create-doctor"
-                            element={<CreateDoctorPage />}
-                        />
 
-                        <Route
-                            path="users/create-staff"
-                            element={<CreateStaffPage />}
-                        />
+                <Route path={ROUTES.DOCTOR.ROOT} element={<DoctorLayout />}/>
+
+                    <Route path={ROUTES.ADMIN.ROOT}element={<AdminLayout />}>
+
+                        <Route path="users" element={<UserManagementPage />} />
+
+                        <Route path="users/create-doctor" element={<CreateDoctorPage />} />
+
+                        <Route path="users/create-staff"element={<CreateStaffPage />}/>
 
                     </Route>
 
