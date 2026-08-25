@@ -17,6 +17,17 @@ export const ROUTES = {
       CREATE_DOCTOR: "/admin/users/create-doctor",
       CREATE_STAFF: "/admin/users/create-staff",
     },
+
+      SPECIALTIES: {
+      LIST: "/admin/specialties",
+      DETAIL: (specialtyId) => `/admin/specialties/${specialtyId}`,
+    },
+
+    MEDICAL_SERVICES: {
+      LIST: "/admin/medical-services",
+      DETAIL: (medicalServiceId) =>
+        `/admin/medical-services/${medicalServiceId}`,
+    },
   },
 
   PATIENT: {
