@@ -14,5 +14,5 @@ public interface DoctorService {
     DoctorResponse update(Long doctorId, UpdateDoctorRequest request);
     DoctorResponse findById(Long doctorId);
     Doctor findEntity(Long id);
-    PageResponse<DoctorSummaryResponse> getAllDoctors(Pageable pageable);
+    PageResponse<DoctorSummaryResponse> getAllDoctors(String keyword,Pageable pageable);
 }
