@@ -115,7 +115,7 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
         MedicalService medicalService = medicalServiceValidator.validateMedicalServiceExists(medicalServiceId);
         Long newSpecialtyId = request.getSpecialtyId() != null ? request.getSpecialtyId() : medicalService.getSpecialty().getId();
         String newServiceName = request.getServiceName() != null ? request.getServiceName() : medicalService.getServiceName();
-
+        MedicalServiceType newServiceType = request.getServiceType() != null ? request.getServiceType() : medicalService.getServiceType();
         if (!newServiceName.equalsIgnoreCase(medicalService.getServiceName()) || !newSpecialtyId.equals(medicalService.getSpecialty().getId())) {
             medicalServiceValidator.validateMedicalServiceNameNotExists(newServiceName, newSpecialtyId);
         }
@@ -133,13 +133,14 @@ public class MedicalServiceServiceImpl implements MedicalServiceService {
 
     @Override
     @Transactional(readOnly = true)
-    public PageResponse<MedicalServiceResponse> getAll(String keyword, Long specialtyId,int page, int size, String sortBy, String direction) {
+    public PageResponse<MedicalServiceResponse> getAll(String keyword, Long specialtyId,MedicalServiceType serviceType,int page, int size, String sortBy, String direction) {
 
         Sort.Direction sortDirection = Sort.Direction.fromString(direction);
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
         Specification<MedicalService> specification = Specification.allOf(
                 MedicalServiceSpecification.hasServiceName(keyword),
-                MedicalServiceSpecification.hasSpecialty(specialtyId)
+                MedicalServiceSpecification.hasSpecialty(specialtyId),
+                MedicalServiceSpecification.hasServiceType(serviceType)
         );
 
         Page<MedicalService> medicalServicePage = medicalServiceRepository.findAll(specification, pageable);

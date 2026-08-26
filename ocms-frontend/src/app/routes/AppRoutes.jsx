@@ -15,9 +15,16 @@ import UserManagementPage from "../../features/user/pages/UserManagementPage";
 import CreateDoctorPage from "../../features/user/pages/CreateDoctorPage";
 import CreateStaffPage from "../../features/user/pages/CreateStaffPage";
 import PatientProfilePage from "../../features/patient/pages/PatientProfilePage";
-// import PatientManagementPage from "../../features/staff/pages/PatientManagementPage";
-//import PatientDetailPage from "../../features/staff/pages/PatientDetailPage";
+import PatientManagementPage from "../../features/staff/pages/PatientManagementPage";
+import PatientDetailPage from "../../features/staff/pages/PatientDetailPage";
+import SpecialtyDetailPage from "../../features/specialty/pages/SpecialtyDetailPage";
+import SpecialtyManagementPage from "../../features/specialty/pages/SpecialtyManagementPage";
+import MedicalServiceDetailPage from "../../features/medical-service/pages/MedicalServiceDetailPage";
+import MedicalServiceManagementPage from "../../features/medical-service/pages/MedicalServiceManagementPage";
 import { ROUTES } from "../../constants/routeConstants";
+import DoctorScheduleManagementPage from "../../features/doctor-schedule/pages/DoctorScheduleManagementPage"
+import DoctorScheduleDetailPage from "../../features/doctor-schedule/pages/DoctorScheduleDetailPage";
+import DoctorScheduleCreatePage from "../../features/doctor-schedule/pages/DoctorScheduleCreatePage";
 
 const AppRoutes = () => {
     return (
@@ -64,10 +71,16 @@ const AppRoutes = () => {
                  </Route>
 
                <Route  path={ROUTES.STAFF.ROOT}  element={<StaffLayout />}>
-{/* 
+
                     <Route path="patients"  element={<PatientManagementPage />} />
 
-                    <Route  path="patients/:patientId" element={<PatientDetailPage />} /> */}
+                    <Route  path="patients/:patientId" element={<PatientDetailPage />} />
+                    
+                   <Route path="doctor-schedules" element={<DoctorScheduleManagementPage />} />
+
+                    <Route path="doctor-schedules/:doctorScheduleId" element={<DoctorScheduleDetailPage />}/>
+
+                     <Route path="doctor-schedules/create" element={<DoctorScheduleCreatePage />}/>
 
                 </Route>
 
@@ -83,6 +96,13 @@ const AppRoutes = () => {
 
                         <Route path="users/create-staff"element={<CreateStaffPage />}/>
 
+                        <Route path="specialties" element={<SpecialtyManagementPage />} />
+
+                        <Route path="specialties/:specialtyId"element={<SpecialtyDetailPage />}/>
+
+                        <Route path="medical-services"element={<MedicalServiceManagementPage />}/>
+
+                        <Route  path="medical-services/:medicalServiceId"element={<MedicalServiceDetailPage />}/>
                     </Route>
 
                 </Route>

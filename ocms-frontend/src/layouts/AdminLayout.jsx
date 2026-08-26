@@ -5,7 +5,7 @@ const navItems = [
     { label: 'Trang chủ', to: '/admin' },
     { label: 'Tài khoản', to: '/admin/users' },
     { label: 'Chuyên khoa', to: '/admin/specialties' },
-    { label: 'Dịch vụ y tế', to: '/admin/services' },
+    { label: 'Dịch vụ y tế', to: '/admin/medical-services' },
     { label: 'Thuốc', to: '/admin/medicines' },
     { label: 'Kho thuốc', to: '/admin/inventory' },
     { label: 'Báo cáo', to: '/admin/reports' },

@@ -8,6 +8,7 @@ import com.ocms.online_clinic_management_system.doctor.exception.DoctorNotFoundE
 import com.ocms.online_clinic_management_system.doctor.mapper.DoctorMapper;
 import com.ocms.online_clinic_management_system.doctor.repository.DoctorRepository;
 import com.ocms.online_clinic_management_system.doctor.service.DoctorService;
+import com.ocms.online_clinic_management_system.doctor.specification.DoctorSpecification;
 import com.ocms.online_clinic_management_system.specialty.entity.Specialty;
 import com.ocms.online_clinic_management_system.specialty.exception.SpecialtyNotFoundException;
 import com.ocms.online_clinic_management_system.specialty.repository.SpecialtyRepository;
@@ -15,6 +16,7 @@ import com.ocms.online_clinic_management_system.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,9 +44,10 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     @Transactional(readOnly = true)
-    public PageResponse<DoctorSummaryResponse> getAllDoctors(Pageable pageable) {
+    public PageResponse<DoctorSummaryResponse> getAllDoctors( String keyword,Pageable pageable) {
 
-        Page<Doctor> page = doctorRepository.findAll(pageable);
+        Specification<Doctor> specification = DoctorSpecification.keywordContains(keyword);
+        Page<Doctor> page = doctorRepository.findAll(specification,pageable);
 
         return PageResponse.of(page.map(doctorMapper::toSummaryResponse));
     }

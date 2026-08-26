@@ -1,4 +1,5 @@
 package com.ocms.online_clinic_management_system.service.specification;
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
 import com.ocms.online_clinic_management_system.service.entity.MedicalService;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -26,6 +27,17 @@ public final class MedicalServiceSpecification {
                 return criteriaBuilder.conjunction();
             }
             return criteriaBuilder.equal(root.get("specialty").get("id"), specialtyId);
+        };
+    }
+
+    public static Specification<MedicalService> hasServiceType(MedicalServiceType serviceType) {
+
+        return (root, query, criteriaBuilder) -> {
+            if (serviceType == null) {
+                return null;
+            }
+
+            return criteriaBuilder.equal(root.get("serviceType"), serviceType);
         };
     }
 

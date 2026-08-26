@@ -44,7 +44,7 @@ public class StaffPatientServiceImpl implements StaffPatientService {
     @Override
     public PatientManagementResponse updatePatient(Long patientId, UpdatePatientInformationRequest request) {
 
-        staffValidator.validateUpdatePatientInformation(request);
+        staffValidator.validateUpdatePatientInformation(patientId,request);
         Patient patient = findPatient(patientId);
         staffMapper.updatePatientInformation(request, patient);
         patientRepository.save(patient);

@@ -18,8 +18,8 @@ public class DoctorController {
     private final DoctorService doctorService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<PageResponse<DoctorSummaryResponse>>> getAllDoctors(@ParameterObject Pageable pageable) {
-        return ResponseEntity.ok(ApiResponse.success(doctorService.getAllDoctors(pageable)));
+    public ResponseEntity<ApiResponse<PageResponse<DoctorSummaryResponse>>> getAllDoctors(@RequestParam(required = false) String keyword,@ParameterObject Pageable pageable) {
+        return ResponseEntity.ok(ApiResponse.success(doctorService.getAllDoctors(keyword,pageable)));
     }
 
 }
