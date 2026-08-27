@@ -20,6 +20,7 @@ import com.ocms.online_clinic_management_system.appointment.validator.Appointmen
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
+import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import com.ocms.online_clinic_management_system.invoice.service.InvoiceService;
 import com.ocms.online_clinic_management_system.patient.entity.Patient;
 import com.ocms.online_clinic_management_system.patient.repository.PatientRepository;
@@ -95,18 +96,23 @@ public class AppointmentServiceImpl implements AppointmentService {
 
             appointmentValidator.validatePatientOwnership(appointment, patient.getId());
         }
-        return appointmentMapper.toDetailResponse(appointment);
+
+        AppointmentDetailResponse response = appointmentMapper.toDetailResponse(appointment);
+        Invoice invoice = invoiceService.getByAppointmentId(appointmentId);
+        response.setInvoice(AppointmentDetailResponse.InvoiceInfo.builder().id(invoice.getId()).totalAmount(invoice.getTotalAmount()).build());
+
+        return response;
     }
 
     @Override
     @Transactional(readOnly = true)
     public PageResponse<AppointmentResponse> search(AppointmentSearchRequest request, Pageable pageable) {
-
+        AppointmentStatus pendingStatus = getStatusByName("PENDING");
         Specification<Appointment> specification = Specification.allOf(
                         AppointmentSpecification.hasPatientId(request.getPatientId()),
                         AppointmentSpecification.hasDoctorId(request.getDoctorId()),
                         AppointmentSpecification.hasServiceId(request.getServiceId()),
-                        AppointmentSpecification.hasAppointmentStatusId(request.getAppointmentStatusId()),
+                        AppointmentSpecification.hasAppointmentStatusId(pendingStatus.getId()),
                         AppointmentSpecification.scheduleDateFrom(request.getFromDate()),
                         AppointmentSpecification.scheduleDateTo(request.getToDate())
                 );
