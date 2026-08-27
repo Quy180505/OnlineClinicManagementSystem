@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
-    Optional<Invoice> findByAppointment_Id(Long appointmentId);
-    boolean existsByAppointment_Id(Long appointmentId);
+    Optional<Invoice> findByAppointmentId(Long appointmentId);
+    boolean existsByAppointmentId(Long appointmentId);
 
 }

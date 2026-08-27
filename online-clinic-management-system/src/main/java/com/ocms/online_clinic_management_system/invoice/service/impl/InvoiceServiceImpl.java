@@ -34,7 +34,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public void addPrescriptionToInvoice(Prescription prescription) {
 
         Long appointmentId = prescription.getMedicalRecord().getAppointment().getId();
-        Invoice invoice = invoiceRepository.findByAppointment_Id(appointmentId).orElseThrow(InvoiceNotFoundException::new);
+        Invoice invoice = invoiceRepository.findByAppointmentId(appointmentId).orElseThrow(InvoiceNotFoundException::new);
         BigDecimal additionalAmount = BigDecimal.ZERO;
 
         for (PrescriptionDetail detail : prescription.getDetails()) {
@@ -65,7 +65,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public void createInitialInvoice(Appointment appointment) {
 
-        if (invoiceRepository.existsByAppointment_Id(appointment.getId())) {
+        if (invoiceRepository.existsByAppointmentId(appointment.getId())) {
             throw new InvoiceAlreadyExistsException();
         }
 
@@ -97,7 +97,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public void addTestOrderToInvoice(TestOrderCreatedEvent event) {
 
         TestOrder testOrder = testOrderRepository.findById(event.getTestOrderId()).orElseThrow(TestOrderNotFoundException::new);
-        Invoice invoice = invoiceRepository.findByAppointment_Id(testOrder.getMedicalRecord().getAppointment().getId()).orElseThrow(InvoiceNotFoundException::new);
+        Invoice invoice = invoiceRepository.findByAppointmentId(testOrder.getMedicalRecord().getAppointment().getId()).orElseThrow(InvoiceNotFoundException::new);
         BigDecimal additionalAmount = BigDecimal.ZERO;
 
         for (TestOrderDetail detail : testOrder.getDetails()) {
@@ -126,7 +126,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     @Transactional(readOnly = true)
     public Invoice getByAppointmentId(Long appointmentId) {
-        return invoiceRepository.findByAppointment_Id(appointmentId).orElseThrow(InvoiceNotFoundException::new);
+        return invoiceRepository.findByAppointmentId(appointmentId).orElseThrow(InvoiceNotFoundException::new);
     }
 }
 
