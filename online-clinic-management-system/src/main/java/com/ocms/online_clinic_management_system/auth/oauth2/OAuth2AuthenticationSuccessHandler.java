@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 
 @Component
@@ -37,11 +38,11 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         String accessToken = loginResponse.getToken().getAccessToken();
 
         String redirectUrl = "http://localhost:5173/oauth2/callback"
-                        + "?token=" + accessToken
-                        + "&userId=" + loginResponse.getUserId()
-                        + "&username=" + loginResponse.getUsername()
-                        + "&fullName=" + loginResponse.getFullName()
-                        + "&role=" + loginResponse.getRole();
+                + "?token=" + URLEncoder.encode(accessToken, StandardCharsets.UTF_8)
+                + "&userId=" + loginResponse.getUserId()
+                + "&username=" + URLEncoder.encode(loginResponse.getUsername(), StandardCharsets.UTF_8)
+                + "&fullName=" + URLEncoder.encode(loginResponse.getFullName(), StandardCharsets.UTF_8)
+                + "&role=" + URLEncoder.encode(loginResponse.getRole(), StandardCharsets.UTF_8);
 
         response.sendRedirect(redirectUrl);
     }
