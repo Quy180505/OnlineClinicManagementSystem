@@ -65,5 +65,14 @@ export const ROUTES = {
 
   DOCTOR: {
     ROOT: "/doctor",
+
+    MEDICAL_EXAMINATIONS: {
+      TODAY: "/doctor/today",
+      TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`,
+    },
+
+
+
+
   },
 };
