@@ -61,7 +61,21 @@ public class DoctorScheduleServiceImpl implements DoctorScheduleService {
 
         return doctorScheduleMapper.toDetailResponse(schedule);
     }
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponse<DoctorScheduleResponse> getFuture(DoctorScheduleSearchRequest request, Pageable pageable) {
 
+        Specification<DoctorSchedule> specification = Specification.allOf(
+                DoctorScheduleSpecification.hasDoctorId(request.getDoctorId()),
+                DoctorScheduleSpecification.hasSpecialtyId(request.getSpecialtyId()),
+                DoctorScheduleSpecification.hasWorkDate(request.getWorkDate()),
+                DoctorScheduleSpecification.isFuture()
+        );
+
+        Page<DoctorSchedule> page = doctorScheduleRepository.findAll(specification, pageable);
+
+        return PageResponse.of(page.map(doctorScheduleMapper::toResponse));
+    }
     @Override
     public DoctorScheduleDetailResponse update(Long id, UpdateDoctorScheduleRequest request) {
 

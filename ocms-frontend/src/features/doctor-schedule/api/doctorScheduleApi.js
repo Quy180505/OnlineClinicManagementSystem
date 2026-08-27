@@ -27,4 +27,10 @@ export const doctorScheduleApi = {
 
     return response.data;
   },
+
+   getFuture: async (params = {}) => {
+    const response = await apiClient.get("/doctor-schedules/future", { params,});
+
+    return response.data;
+  },
 };
