@@ -110,6 +110,7 @@ export default function AppointmentManagementPage() {
             pageInfo={pageInfo}
             loading={loading}
             processing={processing}
+            staffView={true}
             onView={handleViewDetail}
             onConfirm={handleConfirm}
             onReject={handleReject}
