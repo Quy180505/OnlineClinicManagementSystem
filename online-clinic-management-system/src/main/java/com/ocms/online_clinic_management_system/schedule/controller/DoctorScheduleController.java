@@ -47,4 +47,9 @@ public class DoctorScheduleController {
         return ResponseEntity.ok(ApiResponse.success(doctorScheduleService.getAll(request, pageable)));
     }
 
+    @GetMapping("/future")
+    public ResponseEntity<ApiResponse<PageResponse<DoctorScheduleResponse>>> getFuture(@ParameterObject DoctorScheduleSearchRequest request, @ParameterObject Pageable pageable) {
+        return ResponseEntity.ok(ApiResponse.success(doctorScheduleService.getFuture(request, pageable)));
+    }
+
 }

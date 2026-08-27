@@ -9,5 +9,5 @@ public class DoctorScheduleSearchRequest {
 
     private Long doctorId;
     private LocalDate workDate;
-
+    private Long specialtyId;
 }

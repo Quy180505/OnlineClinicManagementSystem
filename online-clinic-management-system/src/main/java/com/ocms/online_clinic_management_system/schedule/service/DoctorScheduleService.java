@@ -14,5 +14,5 @@ public interface DoctorScheduleService {
     void delete(Long id);
     DoctorScheduleDetailResponse getById(Long id);
     PageResponse<DoctorScheduleResponse> getAll(DoctorScheduleSearchRequest request, Pageable pageable);
-
+    PageResponse<DoctorScheduleResponse> getFuture(DoctorScheduleSearchRequest request, Pageable pageable);
 }
