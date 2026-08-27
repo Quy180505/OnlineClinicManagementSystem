@@ -29,6 +29,8 @@ import AppointmentManagementPage from "../../features/appointment/pages/Appointm
 import AppointmentDetailPage from "../../features/appointment/pages/AppointmentDetailPage";
 import AppointmentBookingPage from "../../features/appointment/pages/AppointmentBookingPage";
 import MyAppointmentPage from "../../features/appointment/pages/MyAppointmentPage";
+import TodayAppointmentsPage from "../../features/medical-record/pages/TodayAppointmentsPage";
+import PatientTreatmentHistoryPage from "../../features/medical-record/pages/PatientTreatmentHistoryPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -98,8 +100,13 @@ const AppRoutes = () => {
                 </Route>
 
 
+                <Route path={ROUTES.DOCTOR.ROOT} element={<DoctorLayout />}>
 
-                <Route path={ROUTES.DOCTOR.ROOT} element={<DoctorLayout />}/>
+                    <Route path="today"element={<TodayAppointmentsPage />}/>
+
+                    <Route path="today/:appointmentId/treatment-history" element={<PatientTreatmentHistoryPage />}/>
+
+                </Route>
 
                     <Route path={ROUTES.ADMIN.ROOT}element={<AdminLayout />}>
 
