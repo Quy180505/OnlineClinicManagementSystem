@@ -33,6 +33,13 @@ export const ROUTES = {
   PATIENT: {
     ROOT: "/patient",
     PROFILE: "/patient/profile",
+
+
+    APPOINTMENTS: {
+      LIST: "/patient/appointments",
+      BOOK: "/patient/appointments/book",
+      DETAIL: (appointmentId) => `/patient/appointments/${appointmentId}`,
+    },
   },
 
   STAFF: {
@@ -48,6 +55,11 @@ export const ROUTES = {
       CREATE: "/staff/doctor-schedules/create",
       DETAIL: (doctorScheduleId) =>
         `/staff/doctor-schedules/${doctorScheduleId}`,
+    },
+
+    APPOINTMENTS: {
+      LIST: "/staff/appointments",
+      DETAIL: (appointmentId) => `/staff/appointments/${appointmentId}`,
     },
   },
 

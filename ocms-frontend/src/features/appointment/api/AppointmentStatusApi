@@ -1,0 +1,9 @@
+import apiClient from "../../../services/apiClient";
+
+export const appointmentStatusApi = {
+  getAll: async () => {
+    const response = await apiClient.get("/appointment-statuses");
+
+    return response.data;
+  },
+};

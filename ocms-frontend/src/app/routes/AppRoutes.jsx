@@ -25,7 +25,10 @@ import { ROUTES } from "../../constants/routeConstants";
 import DoctorScheduleManagementPage from "../../features/doctor-schedule/pages/DoctorScheduleManagementPage"
 import DoctorScheduleDetailPage from "../../features/doctor-schedule/pages/DoctorScheduleDetailPage";
 import DoctorScheduleCreatePage from "../../features/doctor-schedule/pages/DoctorScheduleCreatePage";
-
+import AppointmentManagementPage from "../../features/appointment/pages/AppointmentManagementPage";
+import AppointmentDetailPage from "../../features/appointment/pages/AppointmentDetailPage";
+import AppointmentBookingPage from "../../features/appointment/pages/AppointmentBookingPage";
+import MyAppointmentPage from "../../features/appointment/pages/MyAppointmentPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -67,6 +70,12 @@ const AppRoutes = () => {
 
                 <Route path={ROUTES.PATIENT.ROOT} element={<PatientLayout />} >
                     <Route  path="profile" element={<PatientProfilePage />} />
+
+                    <Route path="appointments" element={<MyAppointmentPage />}/>
+
+                    <Route path="appointments/book" element={<AppointmentBookingPage />}/>
+
+                    <Route path="appointments/:appointmentId" element={<AppointmentDetailPage />}/>
                 
                  </Route>
 
@@ -81,6 +90,10 @@ const AppRoutes = () => {
                     <Route path="doctor-schedules/:doctorScheduleId" element={<DoctorScheduleDetailPage />}/>
 
                      <Route path="doctor-schedules/create" element={<DoctorScheduleCreatePage />}/>
+
+                     <Route path="appointments" element={<AppointmentManagementPage />}/>
+
+                    <Route path="appointments/:appointmentId" element={<AppointmentDetailPage />}/>
 
                 </Route>
 
