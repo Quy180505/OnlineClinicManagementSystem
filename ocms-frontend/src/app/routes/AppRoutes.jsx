@@ -31,6 +31,7 @@ import AppointmentBookingPage from "../../features/appointment/pages/Appointment
 import MyAppointmentPage from "../../features/appointment/pages/MyAppointmentPage";
 import TodayAppointmentsPage from "../../features/medical-record/pages/TodayAppointmentsPage";
 import PatientTreatmentHistoryPage from "../../features/medical-record/pages/PatientTreatmentHistoryPage";
+import MedicalRecordPage from "../../features/medical-record/pages/MedicalRecordPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -105,6 +106,8 @@ const AppRoutes = () => {
                     <Route path="today"element={<TodayAppointmentsPage />}/>
 
                     <Route path="today/:appointmentId/treatment-history" element={<PatientTreatmentHistoryPage />}/>
+
+                     <Route path="medical-records/:appointmentId" element={<MedicalRecordPage />}/>
 
                 </Route>
 

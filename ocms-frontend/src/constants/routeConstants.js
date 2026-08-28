@@ -71,6 +71,9 @@ export const ROUTES = {
       TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`,
     },
 
+     MEDICAL_RECORDS: {
+        DETAIL: (appointmentId) => `/doctor/medical-records/${appointmentId}`,
+    },
 
 
 
