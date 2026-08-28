@@ -23,7 +23,7 @@ public class MedicalRecordController {
         return ResponseEntity.ok(medicalRecordService.getMedicalRecord(appointmentId));
     }
 
-    @PutMapping("/appointment/{appointmentId}")
+    @PatchMapping("/appointment/{appointmentId}")
     public ResponseEntity<MedicalRecordResponse> updateMedicalRecord(@PathVariable Long appointmentId, @Valid @RequestBody UpdateMedicalRecordRequest request) {
         return ResponseEntity.ok(medicalRecordService.updateMedicalRecord(appointmentId, request));
     }

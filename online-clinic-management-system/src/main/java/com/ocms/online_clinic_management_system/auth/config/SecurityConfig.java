@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/medical-examinations/*/treatment-history").hasRole("DOCTOR")
                         .requestMatchers(HttpMethod.PATCH, "/api/medical-examinations/*/start").hasRole("DOCTOR")
                         .requestMatchers(HttpMethod.GET, "/api/medical-records/appointment/*").hasRole("DOCTOR")
-                        .requestMatchers(HttpMethod.PUT, "/api/medical-records/appointment/*").hasRole("DOCTOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/medical-records/appointment/*").hasRole("DOCTOR")
                         .requestMatchers(HttpMethod.GET, "/api/medical-records/my-history").hasRole("PATIENT")
                         .requestMatchers(HttpMethod.GET, "/api/medical-records/my-history/*").hasRole("PATIENT")
                         .requestMatchers(HttpMethod.POST, "/api/laboratory/medical-records/*/test-orders").hasRole("DOCTOR")
