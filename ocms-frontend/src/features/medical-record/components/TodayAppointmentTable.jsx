@@ -32,6 +32,7 @@ export default function TodayAppointmentTable({
   starting,
   onStart,
   onViewHistory,
+  onViewMedicalRecord,
 }) {
   if (loading) {
     return (
@@ -101,15 +102,25 @@ export default function TodayAppointmentTable({
                         </button>
                       )}
 
-                      {appointment.appointmentStatus === "IN_PROGRESS" && (
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                          onClick={() => onViewHistory(appointment.appointmentId)}
-                        >
-                          Lịch sử điều trị
-                        </button>
-                      )}
+                  {appointment.appointmentStatus === "IN_PROGRESS" && (
+                    <>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-primary"
+                        onClick={() => onViewMedicalRecord(appointment.appointmentId)}
+                      >
+                        Mở bệnh án
+                      </button>
+
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={() =>onViewHistory(appointment.appointmentId)}
+                      >
+                        Lịch sử điều trị
+                      </button>
+                    </>
+                  )}
                     </div>
                   </td>
               </tr>

@@ -20,6 +20,9 @@ export default function TodayAppointmentsPage() {
      navigate(ROUTES.DOCTOR.MEDICAL_EXAMINATIONS.TREATMENT_HISTORY(appointmentId));
   };
 
+  const handleViewMedicalRecord = (appointmentId) => {
+    navigate( ROUTES.DOCTOR.MEDICAL_RECORDS.DETAIL(appointmentId));
+  };
   return (
     <div className="container-fluid">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -75,6 +78,7 @@ export default function TodayAppointmentsPage() {
             starting={starting}
             onStart={handleStart}
             onViewHistory={handleViewHistory}
+            onViewMedicalRecord={handleViewMedicalRecord}
           />
         </div>
       </div>
