@@ -12,4 +12,18 @@ export const medicalRecordApi = {
 
     return response.data;
   },
+
+   getMyHistory: async () => {
+
+    const response = await apiClient.get("/medical-records/my-history");
+
+    return response.data;
+  },  
+
+  getMyHistoryDetail: async (medicalRecordId) => {
+
+    const response = await apiClient.get(`/medical-records/my-history/${medicalRecordId}`);
+
+    return response.data;
+  },
 };

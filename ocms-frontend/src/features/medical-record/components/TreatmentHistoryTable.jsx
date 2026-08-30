@@ -6,7 +6,8 @@ const formatDateTime = (dateTime) => {
   return new Date(dateTime).toLocaleString("vi-VN");
 };
 
-export default function TreatmentHistoryTable({ treatmentHistory, loading }) {
+export default function TreatmentHistoryTable({treatmentHistory,loading,onViewDetail,
+}) {
   if (loading) {
     return (
       <div className="text-center py-5">
@@ -20,22 +21,21 @@ export default function TreatmentHistoryTable({ treatmentHistory, loading }) {
   if (!treatmentHistory.length) {
     return (
       <div className="text-center py-5 text-muted">
-        Chưa có lịch sử điều trị.
+        Chưa có lịch sử khám bệnh.
       </div>
     );
   }
 
   return (
     <div className="table-responsive">
-      <table className="table table-hover align-middle">
+      <table className="table table-hover align-middle mb-0">
         <thead className="table-light">
           <tr>
             <th>Ngày khám</th>
+            <th>Chuyên khoa</th>
             <th>Bác sĩ</th>
-            <th>Triệu chứng</th>
-            <th>Kết quả thăm khám</th>
-            <th>Chẩn đoán</th>
-            <th>Bệnh</th>
+            <th>Trạng thái</th>
+            <th className="text-end">Thao tác</th>
           </tr>
         </thead>
 
@@ -44,16 +44,21 @@ export default function TreatmentHistoryTable({ treatmentHistory, loading }) {
             <tr key={record.medicalRecordId}>
               <td>{formatDateTime(record.examinationDate)}</td>
 
+              <td>{record.specialtyName || "-"}</td>
+
               <td>{record.doctorName || "-"}</td>
 
-              <td>{record.symptoms || "-"}</td>
+              <td>{record.appointmentStatus || "-"}</td>
 
-              <td>{record.examinationResult || "-"}</td>
-
-              <td>{record.diagnosis || "-"}</td>
-
-              <td>
-                {record.diseases?.length ? record.diseases.join(", ") : "-"}
+              <td className="text-end">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() => onViewDetail(record.medicalRecordId)}
+                >
+                  <i className="bi bi-eye me-1" />
+                  Xem chi tiết
+                </button>
               </td>
             </tr>
           ))}
