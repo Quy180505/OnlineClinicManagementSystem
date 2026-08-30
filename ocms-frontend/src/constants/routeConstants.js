@@ -40,6 +40,13 @@ export const ROUTES = {
       BOOK: "/patient/appointments/book",
       DETAIL: (appointmentId) => `/patient/appointments/${appointmentId}`,
     },
+
+
+      MEDICAL_RECORDS: {
+        LIST: "/patient/medical-records",
+        DETAIL: (medicalRecordId) => `/patient/medical-records/${medicalRecordId}`,
+      },
+
   },
 
   STAFF: {
@@ -61,9 +68,29 @@ export const ROUTES = {
       LIST: "/staff/appointments",
       DETAIL: (appointmentId) => `/staff/appointments/${appointmentId}`,
     },
+
+    LABORATORY: {
+      ROOT: "/staff/laboratory",
+
+    },
   },
 
   DOCTOR: {
     ROOT: "/doctor",
+
+    MEDICAL_EXAMINATIONS: {
+      TODAY: "/doctor/today",
+      TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`,
+    },
+
+    MEDICAL_RECORDS: {
+        DETAIL: (appointmentId) => `/doctor/medical-records/${appointmentId}`,
+    },
+
+    LABORATORY: {
+      TEST_ORDER: (testOrderId) =>`/doctor/laboratory/test-orders/${testOrderId}`
+    },
+
+
   },
 };

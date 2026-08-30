@@ -29,6 +29,12 @@ import AppointmentManagementPage from "../../features/appointment/pages/Appointm
 import AppointmentDetailPage from "../../features/appointment/pages/AppointmentDetailPage";
 import AppointmentBookingPage from "../../features/appointment/pages/AppointmentBookingPage";
 import MyAppointmentPage from "../../features/appointment/pages/MyAppointmentPage";
+import TodayAppointmentsPage from "../../features/medical-record/pages/TodayAppointmentsPage";
+import PatientTreatmentHistoryPage from "../../features/medical-record/pages/PatientTreatmentHistoryPage";
+import MedicalRecordPage from "../../features/medical-record/pages/MedicalRecordPage";
+import LaboratoryPage from "../../features/laboratory/pages/staff/LaboratoryPage";
+import PatientMedicalRecordDetailPage from "../../features/medical-record/pages/PatientMedicalRecordDetailPage";
+import DoctorTreatmentHistoryPage from "../../features/medical-record/pages/DoctorTreatmentHistoryPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -76,7 +82,11 @@ const AppRoutes = () => {
                     <Route path="appointments/book" element={<AppointmentBookingPage />}/>
 
                     <Route path="appointments/:appointmentId" element={<AppointmentDetailPage />}/>
-                
+
+                     <Route path="medical-records" element={<PatientTreatmentHistoryPage />}/>
+
+                      <Route path="medical-records/:medicalRecordId" element={<PatientMedicalRecordDetailPage />}/>
+
                  </Route>
 
                <Route  path={ROUTES.STAFF.ROOT}  element={<StaffLayout />}>
@@ -95,27 +105,36 @@ const AppRoutes = () => {
 
                     <Route path="appointments/:appointmentId" element={<AppointmentDetailPage />}/>
 
+                    <Route path="laboratory" element={<LaboratoryPage />}/>
+
                 </Route>
 
 
+                <Route path={ROUTES.DOCTOR.ROOT} element={<DoctorLayout />}>
 
-                <Route path={ROUTES.DOCTOR.ROOT} element={<DoctorLayout />}/>
+                    <Route path="today"element={<TodayAppointmentsPage />}/>
 
-                    <Route path={ROUTES.ADMIN.ROOT}element={<AdminLayout />}>
+                    <Route path="today/:appointmentId/treatment-history" element={<DoctorTreatmentHistoryPage />}/>
+
+                     <Route path="medical-records/:appointmentId" element={<MedicalRecordPage />}/>
+
+                </Route>
+
+                    <Route path={ROUTES.ADMIN.ROOT} element={<AdminLayout />}>
 
                         <Route path="users" element={<UserManagementPage />} />
 
                         <Route path="users/create-doctor" element={<CreateDoctorPage />} />
 
-                        <Route path="users/create-staff"element={<CreateStaffPage />}/>
+                        <Route path="users/create-staff" element={<CreateStaffPage />}/>
 
                         <Route path="specialties" element={<SpecialtyManagementPage />} />
 
-                        <Route path="specialties/:specialtyId"element={<SpecialtyDetailPage />}/>
+                        <Route path="specialties/:specialtyId" element={<SpecialtyDetailPage />}/>
 
-                        <Route path="medical-services"element={<MedicalServiceManagementPage />}/>
+                        <Route path="medical-services" element={<MedicalServiceManagementPage />}/>
 
-                        <Route  path="medical-services/:medicalServiceId"element={<MedicalServiceDetailPage />}/>
+                        <Route  path="medical-services/:medicalServiceId" element={<MedicalServiceDetailPage />}/>
                     </Route>
 
                 </Route>

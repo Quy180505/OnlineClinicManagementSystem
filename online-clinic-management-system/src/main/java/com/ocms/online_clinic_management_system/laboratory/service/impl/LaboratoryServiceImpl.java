@@ -2,6 +2,7 @@ package com.ocms.online_clinic_management_system.laboratory.service.impl;
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.common.constant.enums.TestOrderStatus;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
+import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.doctor.entity.Doctor;
 import com.ocms.online_clinic_management_system.doctor.exception.DoctorNotFoundException;
 import com.ocms.online_clinic_management_system.doctor.repository.DoctorRepository;
@@ -29,8 +30,14 @@ import com.ocms.online_clinic_management_system.medicalrecord.validator.MedicalR
 import com.ocms.online_clinic_management_system.patient.entity.Patient;
 import com.ocms.online_clinic_management_system.patient.exception.PatientNotFoundException;
 import com.ocms.online_clinic_management_system.patient.repository.PatientRepository;
+import com.ocms.online_clinic_management_system.service.dto.response.MedicalServiceResponse;
 import com.ocms.online_clinic_management_system.service.entity.MedicalService;
 import com.ocms.online_clinic_management_system.service.exception.MedicalServiceNotFoundException;
+import com.ocms.online_clinic_management_system.service.mapper.MedicalServiceMapper;
+import com.ocms.online_clinic_management_system.service.specification.MedicalServiceSpecification;
+import com.ocms.online_clinic_management_system.common.constant.enums.MedicalServiceType;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import com.ocms.online_clinic_management_system.service.repository.MedicalServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,6 +60,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     private final MedicalRecordValidator medicalRecordValidator;
     private final TestOrderMapper testOrderMapper;
     private final LabResultMapper labResultMapper;
+    private final MedicalServiceMapper medicalServiceMapper;
     private final SecurityHelper securityHelper;
     private final DomainEventPublisher domainEventPublisher;
 
@@ -67,6 +75,15 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     }
 
     @Override
+    public PageResponse<TestOrderResponse> getTestOrders(TestOrderStatus status, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "orderDate"));
+        Page<TestOrder> testOrderPage = testOrderRepository.findByStatusOrderByOrderDateAsc(status, pageable);
+        Page<TestOrderResponse> responsePage = testOrderPage.map(testOrderMapper::toResponse);
+        return PageResponse.of(responsePage);
+    }
+
+    @Override
     public PatientLabResultDetailResponse getMyLabResult(Long labResultId) {
 
         Long currentUserId = securityHelper.getCurrentUserId();
@@ -75,6 +92,32 @@ public class LaboratoryServiceImpl implements LaboratoryService {
         laboratoryValidator.validateLabResultPatientOwnership(labResult, patient.getId());
         laboratoryValidator.validateTestOrderCompleted(labResult);
         return labResultMapper.toPatientLabResultDetailResponse(labResult);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponse<MedicalServiceResponse> getAvailableTestServices(Long medicalRecordId, String keyword, int page, int size) {
+
+        Long currentUserId = securityHelper.getCurrentUserId();
+        Doctor doctor = doctorRepository.findByUserId(currentUserId).orElseThrow(DoctorNotFoundException::new);
+
+        MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordById(medicalRecordId);
+        medicalRecordValidator.validateDoctorOwnership(medicalRecord, currentUserId);
+
+        Long specialtyId = doctor.getSpecialty().getId();
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "serviceName"));
+
+        Specification<MedicalService> specification =
+                Specification.allOf(
+                        MedicalServiceSpecification.hasServiceName(keyword),
+                        MedicalServiceSpecification.hasSpecialty(specialtyId),
+                        MedicalServiceSpecification.hasServiceType(MedicalServiceType.TEST)
+                );
+
+        Page<MedicalServiceResponse> responsePage = medicalServiceRepository.findAll(specification, pageable).map(medicalServiceMapper::toResponse);
+
+        return PageResponse.of(responsePage);
     }
 
     @Override
@@ -198,5 +241,16 @@ public class LaboratoryServiceImpl implements LaboratoryService {
         LabResult labResult = laboratoryValidator.validateLabResultExists(testOrderDetailId);
 
         return labResultMapper.toResponse(labResult);
+    }
+
+    @Override
+    public List<TestOrderResponse> getTestOrdersByMedicalRecord(Long medicalRecordId) {
+
+        Long currentUserId = securityHelper.getCurrentUserId();
+        MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordById(medicalRecordId);
+        medicalRecordValidator.validateDoctorOwnership(medicalRecord, currentUserId);
+        List<TestOrder> testOrders = testOrderRepository.findByMedicalRecordIdOrderByOrderDateDesc(medicalRecordId);
+
+        return testOrders.stream().map(testOrderMapper::toResponse).toList();
     }
 }
