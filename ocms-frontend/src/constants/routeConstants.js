@@ -61,6 +61,11 @@ export const ROUTES = {
       LIST: "/staff/appointments",
       DETAIL: (appointmentId) => `/staff/appointments/${appointmentId}`,
     },
+
+    LABORATORY: {
+      ROOT: "/staff/laboratory",
+
+    },
   },
 
   DOCTOR: {
@@ -71,10 +76,13 @@ export const ROUTES = {
       TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`,
     },
 
-     MEDICAL_RECORDS: {
+    MEDICAL_RECORDS: {
         DETAIL: (appointmentId) => `/doctor/medical-records/${appointmentId}`,
     },
 
+    LABORATORY: {
+      TEST_ORDER: (testOrderId) =>`/doctor/laboratory/test-orders/${testOrderId}`
+    },
 
 
   },

@@ -2,14 +2,14 @@ import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MedicalRecordForm from "../components/MedicalRecordForm";
 import useMedicalRecord from "../hooks/useMedicalRecord";
-import PatientLaboratoryPanel from "../components/PatientLaboratoryPanel";
+import DoctorLaboratoryPanel from "../../laboratory/components/doctor/DoctorLaboratoryPanel";
 export default function MedicalRecordPage() {
   const { appointmentId } = useParams();
   const navigate = useNavigate();
 
   const {
-    medicalRecord,formData,loading,saving,error,saveError,
-    loadMedicalRecord,updateField,updateMedicalRecord,clearError,clearSaveError,
+    medicalRecord,formData,loading,saving,error,saveError,saveSuccess,
+    loadMedicalRecord,updateField,updateMedicalRecord,clearError, clearSaveSuccess,clearSaveError,
   } = useMedicalRecord();
 
   const loadData = useCallback(() => {
@@ -19,6 +19,7 @@ export default function MedicalRecordPage() {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -83,6 +84,22 @@ export default function MedicalRecordPage() {
         </div>
       )}
 
+      {saveSuccess && (
+        <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <i className="bi bi-check-circle me-2" />
+            {saveSuccess}
+
+            <button
+              type="button"
+              className="btn-close"
+              onClick={clearSaveSuccess}
+            />
+          </div>
+        )}
+
  
   {medicalRecord && (
     <div className="row g-4">
@@ -124,8 +141,11 @@ export default function MedicalRecordPage() {
           </div>
         </div>
       </div>
+      
       <div className="col-lg-6">
-        <PatientLaboratoryPanel />
+        
+        <DoctorLaboratoryPanel medicalRecordId={medicalRecord.id}/>
+       
       </div>
     </div>
   )}

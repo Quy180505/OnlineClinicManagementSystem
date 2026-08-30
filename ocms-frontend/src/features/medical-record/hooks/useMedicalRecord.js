@@ -16,6 +16,13 @@ export default function useMedicalRecord() {
   const [error, setError] = useState("");
   const [saveError, setSaveError] = useState("");
   const [saveSuccess, setSaveSuccess] = useState("");
+
+  const clearSaveSuccess = useCallback(() => {
+      setSaveSuccess("");
+    }, []);
+
+
+
   const loadMedicalRecord = useCallback(async (appointmentId) => {
     if (!appointmentId) {
       return;
@@ -57,7 +64,7 @@ export default function useMedicalRecord() {
 
       setSaving(true);
       setSaveError("");
-
+      setSaveSuccess("")
       try {
         const data = await medicalRecordApi.update(appointmentId,formData);
 
@@ -92,6 +99,6 @@ export default function useMedicalRecord() {
 
   return {
     medicalRecord,formData,loading,saving,error,saveError,saveSuccess,
-    loadMedicalRecord,updateField,updateMedicalRecord,clearError,clearSaveError,
+    loadMedicalRecord,updateField,updateMedicalRecord,clearError, clearSaveSuccess,clearSaveError,
   };
 }

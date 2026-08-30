@@ -3,9 +3,7 @@ import { useAuthContext } from '../features/auth/hooks/useAuthContext';
 
 const navItems = [
     { label: 'Trang chủ', to: '/doctor' },
-    { label: 'Lịch khám', to: '/doctor/schedules' },
     { label: 'Bệnh nhân hôm nay', to: '/doctor/today' },
-    { label: 'Xét nghiệm', to: '/doctor/laboratory' },
     { label: 'Đơn thuốc', to: '/doctor/prescriptions' },
     { label: 'Tin nhắn', to: '/doctor/chat' },
 ];
