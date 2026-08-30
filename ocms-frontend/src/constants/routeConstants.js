@@ -40,6 +40,13 @@ export const ROUTES = {
       BOOK: "/patient/appointments/book",
       DETAIL: (appointmentId) => `/patient/appointments/${appointmentId}`,
     },
+
+
+      MEDICAL_RECORDS: {
+        LIST: "/patient/medical-records",
+        DETAIL: (medicalRecordId) => `/patient/medical-records/${medicalRecordId}`,
+      },
+
   },
 
   STAFF: {

@@ -16,16 +16,12 @@ const navItems = [
     to: "/patient/appointments",
   },
   {
-    label: "Hồ sơ khám",
-    to: "/patient/medical-records",
+    label: "Lịch sử khám",
+    to: ROUTES.PATIENT.MEDICAL_RECORDS.LIST,
   },
   {
     label: "Đơn thuốc",
     to: "/patient/prescriptions",
-  },
-  {
-    label: "Xét nghiệm",
-    to: "/patient/lab-results",
   },
   {
     label: "Thanh toán",

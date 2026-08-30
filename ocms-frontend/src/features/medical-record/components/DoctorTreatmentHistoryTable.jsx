@@ -6,8 +6,7 @@ const formatDateTime = (dateTime) => {
   return new Date(dateTime).toLocaleString("vi-VN");
 };
 
-export default function TreatmentHistoryTable({treatmentHistory,loading,onViewDetail,
-}) {
+export default function DoctorTreatmentHistoryTable({treatmentHistory,loading, onViewDetail,}) {
   if (loading) {
     return (
       <div className="text-center py-5">
@@ -32,29 +31,23 @@ export default function TreatmentHistoryTable({treatmentHistory,loading,onViewDe
         <thead className="table-light">
           <tr>
             <th>Ngày khám</th>
-            <th>Chuyên khoa</th>
             <th>Bác sĩ</th>
-            <th>Trạng thái</th>
             <th className="text-end">Thao tác</th>
           </tr>
         </thead>
 
         <tbody>
           {treatmentHistory.map((record) => (
-            <tr key={record.medicalRecordId}>
+            <tr key={record.appointmentId}>
               <td>{formatDateTime(record.examinationDate)}</td>
 
-              <td>{record.specialtyName || "-"}</td>
-
               <td>{record.doctorName || "-"}</td>
-
-              <td>{record.appointmentStatus || "-"}</td>
 
               <td className="text-end">
                 <button
                   type="button"
                   className="btn btn-sm btn-outline-primary"
-                  onClick={() => onViewDetail(record.medicalRecordId)}
+                  onClick={() => onViewDetail(record.appointmentId)}
                 >
                   <i className="bi bi-eye me-1" />
                   Xem chi tiết
