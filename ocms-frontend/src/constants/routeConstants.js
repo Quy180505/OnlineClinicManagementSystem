@@ -28,6 +28,10 @@ export const ROUTES = {
       DETAIL: (medicalServiceId) =>
         `/admin/medical-services/${medicalServiceId}`,
     },
+
+    MEDICINES: {
+     LIST: "/admin/medicines",
+    },
   },
 
   PATIENT: {

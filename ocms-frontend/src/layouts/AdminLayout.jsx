@@ -1,14 +1,36 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../features/auth/hooks/useAuthContext';
+import { ROUTES } from "../constants/routeConstants";
 
 const navItems = [
-    { label: 'Trang chủ', to: '/admin' },
-    { label: 'Tài khoản', to: '/admin/users' },
-    { label: 'Chuyên khoa', to: '/admin/specialties' },
-    { label: 'Dịch vụ y tế', to: '/admin/medical-services' },
-    { label: 'Thuốc', to: '/admin/medicines' },
-    { label: 'Kho thuốc', to: '/admin/inventory' },
-    { label: 'Báo cáo', to: '/admin/reports' },
+  {
+    label: "Trang chủ",
+    to: ROUTES.ADMIN.ROOT,
+  },
+  {
+    label: "Tài khoản",
+    to: ROUTES.ADMIN.USERS.LIST,
+  },
+  {
+    label: "Chuyên khoa",
+    to: ROUTES.ADMIN.SPECIALTIES.LIST,
+  },
+  {
+    label: "Dịch vụ y tế",
+    to: ROUTES.ADMIN.MEDICAL_SERVICES.LIST,
+  },
+  {
+    label: "Thuốc",
+    to: ROUTES.ADMIN.MEDICINES.LIST,
+  },
+  {
+    label: "Kho thuốc",
+    to: "/admin/inventory",
+  },
+  {
+    label: "Báo cáo",
+    to: "/admin/reports",
+  },
 ];
 
 export default function AdminLayout() {
@@ -37,18 +59,18 @@ export default function AdminLayout() {
 
                             {navItems.map((item) => (
                                 <li className="nav-item" key={item.to}>
-                                    <NavLink
-                                        to={item.to}
-                                        end={item.to === '/admin'}
-                                        className={({ isActive }) =>
-                                            `nav-link ${
-                                                isActive
-                                                    ? 'active fw-semibold text-primary'
-                                                    : ''
-                                            }`
-                                        }
+                                 <NavLink
+                                    to={item.to}
+                                    end={item.to === ROUTES.ADMIN.ROOT}
+                                    className={({ isActive }) =>
+                                        `nav-link ${
+                                        isActive
+                                            ? "active fw-semibold text-primary"
+                                            : ""
+                                        }`
+                                    }
                                     >
-                                        {item.label}
+                                    {item.label}
                                     </NavLink>
                                 </li>
                             ))}
