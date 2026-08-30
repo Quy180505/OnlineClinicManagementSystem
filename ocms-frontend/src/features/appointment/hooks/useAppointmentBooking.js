@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { appointmentApi } from "../api/AppointmentApi";
-import { specialtyApi } from "../../specialty/api/SpecialtyApi";
+import { specialtyApi } from "../../specialty/api/specialtyApi"
 import { medicalServiceApi } from "../../medical-service/api/MedicalServiceApi";
 import { doctorScheduleApi } from "../../doctor-schedule/api/DoctorScheduleApi";
 import { getErrorMessage } from "../../../utils/errorHandler";
