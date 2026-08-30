@@ -1,5 +1,7 @@
 package com.ocms.online_clinic_management_system.laboratory.controller;
+import com.ocms.online_clinic_management_system.common.constant.enums.TestOrderStatus;
 import com.ocms.online_clinic_management_system.common.response.ApiResponse;
+import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.laboratory.dto.request.CreateTestOrderRequest;
 import com.ocms.online_clinic_management_system.laboratory.dto.request.UpdateLabResultRequest;
 import com.ocms.online_clinic_management_system.laboratory.dto.response.LabResultResponse;
@@ -7,6 +9,7 @@ import com.ocms.online_clinic_management_system.laboratory.dto.response.PatientL
 import com.ocms.online_clinic_management_system.laboratory.dto.response.PatientLabResultResponse;
 import com.ocms.online_clinic_management_system.laboratory.dto.response.TestOrderResponse;
 import com.ocms.online_clinic_management_system.laboratory.service.LaboratoryService;
+import com.ocms.online_clinic_management_system.service.dto.response.MedicalServiceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +57,22 @@ public class LaboratoryController {
     @GetMapping("/test-order-details/{testOrderDetailId}/result")
     public ResponseEntity<ApiResponse<LabResultResponse>> getLabResult(@PathVariable Long testOrderDetailId) {
         return ResponseEntity.ok(ApiResponse.success(laboratoryService.getLabResult(testOrderDetailId)));
+    }
+
+
+    @GetMapping("/medical-records/{medicalRecordId}/available-test-services")
+    public ResponseEntity<ApiResponse<PageResponse<MedicalServiceResponse>>> getAvailableTestServices(@PathVariable Long medicalRecordId, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        return ResponseEntity.ok(ApiResponse.success(laboratoryService.getAvailableTestServices(medicalRecordId, keyword, page, size)));
+    }
+
+
+    @GetMapping("/test-orders")
+    public ResponseEntity<ApiResponse<PageResponse<TestOrderResponse>>> getTestOrders(@RequestParam(defaultValue = "PENDING") TestOrderStatus status, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(ApiResponse.success(laboratoryService.getTestOrders(status, page, size)));
+    }
+    @GetMapping("/medical-records/{medicalRecordId}/test-orders")
+    public ResponseEntity<ApiResponse<List<TestOrderResponse>>> getTestOrdersByMedicalRecord(@PathVariable Long medicalRecordId) {
+        return ResponseEntity.ok(ApiResponse.success(laboratoryService.getTestOrdersByMedicalRecord(medicalRecordId)));
     }
 
 }
