@@ -34,6 +34,7 @@ import PatientTreatmentHistoryPage from "../../features/medical-record/pages/Pat
 import MedicalRecordPage from "../../features/medical-record/pages/MedicalRecordPage";
 import LaboratoryPage from "../../features/laboratory/pages/staff/LaboratoryPage";
 import PatientMedicalRecordDetailPage from "../../features/medical-record/pages/PatientMedicalRecordDetailPage";
+import DoctorTreatmentHistoryPage from "../../features/medical-record/pages/DoctorTreatmentHistoryPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -113,7 +114,7 @@ const AppRoutes = () => {
 
                     <Route path="today"element={<TodayAppointmentsPage />}/>
 
-                    <Route path="today/:appointmentId/treatment-history" element={<PatientTreatmentHistoryPage />}/>
+                    <Route path="today/:appointmentId/treatment-history" element={<DoctorTreatmentHistoryPage />}/>
 
                      <Route path="medical-records/:appointmentId" element={<MedicalRecordPage />}/>
 
