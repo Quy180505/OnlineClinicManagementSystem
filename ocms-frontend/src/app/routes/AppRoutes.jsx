@@ -36,6 +36,7 @@ import LaboratoryPage from "../../features/laboratory/pages/staff/LaboratoryPage
 import PatientMedicalRecordDetailPage from "../../features/medical-record/pages/PatientMedicalRecordDetailPage";
 import DoctorTreatmentHistoryPage from "../../features/medical-record/pages/DoctorTreatmentHistoryPage";
 import MedicineManagementPage from "../../features/medicine/pages/MedicineManagementPage";
+import InventoryManagementPage from "../../features/inventory/pages/InventoryManagementPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -138,6 +139,8 @@ const AppRoutes = () => {
                         <Route  path="medical-services/:medicalServiceId" element={<MedicalServiceDetailPage />}/>
 
                         <Route path="medicines" element={<MedicineManagementPage />}/>
+
+                        <Route path="inventory" element={<InventoryManagementPage />}/>
                     </Route>
 
                 </Route>

@@ -25,7 +25,7 @@ const navItems = [
   },
   {
     label: "Kho thuốc",
-    to: "/admin/inventory",
+    to: ROUTES.ADMIN.INVENTORY.LIST,
   },
   {
     label: "Báo cáo",
