@@ -32,6 +32,12 @@ export const ROUTES = {
     MEDICINES: {
      LIST: "/admin/medicines",
     },
+
+    INVENTORY: {
+      LIST: "/admin/inventory",
+      DETAIL: (inventoryId) => `/admin/inventory/${inventoryId}`,
+      TRANSACTIONS: (inventoryId) =>`/admin/inventory/${inventoryId}/transactions`,
+    },
   },
 
   PATIENT: {
