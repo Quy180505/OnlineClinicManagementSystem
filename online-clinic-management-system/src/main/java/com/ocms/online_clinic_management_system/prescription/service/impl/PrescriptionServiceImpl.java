@@ -34,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -66,6 +67,27 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         Page<PrescriptionPatientResponse> responsePage = prescriptionRepository.findAll(specification, pageable).map(prescriptionMapper::toPatientResponse);
 
         return PageResponse.of(responsePage);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PrescriptionResponse getByMedicalRecordId(Long medicalRecordId) {
+        return prescriptionRepository.findByMedicalRecordId(medicalRecordId).map(prescriptionMapper::toResponse).orElse(null);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public PrescriptionPatientResponse getMyPrescriptionByMedicalRecord(Long medicalRecordId) {
+        Prescription prescription = prescriptionRepository.findByMedicalRecordId(medicalRecordId).orElse(null);
+
+        if (prescription == null) {
+            return null;
+        }
+        Long currentUserId = securityHelper.getCurrentUserId();
+        prescriptionValidator.validatePatientOwnership(prescription, currentUserId);
+
+        return prescriptionMapper.toPatientResponse(prescription);
     }
 
     @Override

@@ -37,4 +37,17 @@ public class PrescriptionController {
     public ResponseEntity<ApiResponse<PrescriptionPatientResponse>> getMyPrescription(@PathVariable Long prescriptionId) {
         return ResponseEntity.ok(ApiResponse.success(prescriptionService.getMyPrescription(prescriptionId)));
     }
+
+    @GetMapping("/medical-records/{medicalRecordId}")
+    public ResponseEntity<ApiResponse<PrescriptionResponse>> getByMedicalRecord(@PathVariable Long medicalRecordId) {
+        return ResponseEntity.ok(ApiResponse.success(prescriptionService.getByMedicalRecordId(medicalRecordId)));
+    }
+
+
+    @GetMapping("/my/medical-records/{medicalRecordId}")
+    public ResponseEntity<ApiResponse<PrescriptionPatientResponse>> getMyPrescriptionByMedicalRecord(@PathVariable Long medicalRecordId) {
+        return ResponseEntity.ok(ApiResponse.success(prescriptionService.getMyPrescriptionByMedicalRecord(medicalRecordId)));
+    }
+
+
 }
