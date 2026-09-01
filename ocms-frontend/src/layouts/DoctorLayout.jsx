@@ -1,11 +1,20 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../features/auth/hooks/useAuthContext';
+import { ROUTES } from "../constants/routeConstants";
 
 const navItems = [
-    { label: 'Trang chủ', to: '/doctor' },
-    { label: 'Bệnh nhân hôm nay', to: '/doctor/today' },
-    { label: 'Đơn thuốc', to: '/doctor/prescriptions' },
-    { label: 'Tin nhắn', to: '/doctor/chat' },
+  {
+    label: "Trang chủ",
+    to: ROUTES.DOCTOR.ROOT,
+  },
+  {
+    label: "Bệnh nhân hôm nay",
+    to: ROUTES.DOCTOR.MEDICAL_EXAMINATIONS.TODAY,
+  },
+  {
+    label: "Tin nhắn",
+    to: "/doctor/chat",
+  },
 ];
 
 export default function DoctorLayout() {
@@ -35,7 +44,7 @@ export default function DoctorLayout() {
                                 <li className="nav-item" key={item.to}>
                                     <NavLink
                                         to={item.to}
-                                        end={item.to === '/doctor'}
+                                        end={item.to === ROUTES.DOCTOR.ROOT}
                                         className={({ isActive }) =>
                                             `nav-link ${
                                                 isActive

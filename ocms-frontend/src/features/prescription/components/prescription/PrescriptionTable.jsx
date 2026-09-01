@@ -1,0 +1,77 @@
+import { formatDateTime } from "../../../../utils/dateUtils";
+export default function PrescriptionTable({prescriptions = [],loading = false,onViewDetail}) {
+
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <span
+          className="spinner-border"
+          role="status"
+        />
+      </div>
+    );
+  }
+
+  if (prescriptions.length === 0) {
+    return (
+      <div className="text-center text-muted py-5">
+        Chưa có đơn thuốc.
+      </div>
+    );
+  }
+
+  return (
+    <div className="table-responsive">
+      <table className="table table-hover align-middle">
+        <thead className="table-light">
+          <tr>
+            <th>Mã đơn</th>
+            <th>Ngày kê</th>
+            <th>Bác sĩ</th>
+            <th className="text-center">
+              Số loại thuốc
+            </th>
+            <th className="text-end">
+              Thao tác
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {prescriptions.map(
+            (prescription) => (
+              <tr key={prescription.id}>
+                <td>
+                  #{prescription.id}
+                </td>
+
+                <td>
+                  {formatDateTime(prescription.prescriptionDate)}
+                </td>
+
+                <td>
+                  {prescription.doctorName}
+                </td>
+
+                <td className="text-center">
+                  {prescription.details ?.length ?? 0}
+                </td>
+
+                <td className="text-end">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-outline-primary"
+                    onClick={() => onViewDetail?.(prescription.id)}
+                  >
+                    <i className="bi bi-eye me-1" />
+                    Chi tiết
+                  </button>
+                </td>
+              </tr>
+            ),
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
