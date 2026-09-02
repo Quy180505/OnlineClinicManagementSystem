@@ -18,7 +18,7 @@ public class VNPayController {
     }
 
     @GetMapping("/return")
-    public ResponseEntity<Map<String, Object>> paymentReturn(@RequestParam Map<String, String> params) {
-        return ResponseEntity.ok(vnPayService.handleReturn(params));
+    public ResponseEntity<Void> paymentReturn(@RequestParam Map<String, String> params) {
+        return vnPayService.handleReturn(params);
     }
 }
