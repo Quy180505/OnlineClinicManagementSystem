@@ -1,13 +1,19 @@
 package com.ocms.online_clinic_management_system.invoice.service.impl;
 import com.ocms.online_clinic_management_system.appointment.entity.Appointment;
+import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.common.event.DomainEventPublisher;
+import com.ocms.online_clinic_management_system.common.response.PageResponse;
+import com.ocms.online_clinic_management_system.invoice.dto.response.InvoicePatientDetailResponse;
+import com.ocms.online_clinic_management_system.invoice.dto.response.InvoicePatientResponse;
 import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import com.ocms.online_clinic_management_system.invoice.entity.InvoiceDetail;
 import com.ocms.online_clinic_management_system.invoice.exception.InvoiceAlreadyExistsException;
 import com.ocms.online_clinic_management_system.invoice.exception.InvoiceNotFoundException;
+import com.ocms.online_clinic_management_system.invoice.mapper.InvoiceMapper;
 import com.ocms.online_clinic_management_system.invoice.repository.InvoiceRepository;
 import com.ocms.online_clinic_management_system.invoice.service.InvoiceService;
 import com.ocms.online_clinic_management_system.common.constant.enums.InvoiceItemType;
+import com.ocms.online_clinic_management_system.invoice.validator.InvoiceValidator;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrder;
 import com.ocms.online_clinic_management_system.laboratory.entity.TestOrderDetail;
 import com.ocms.online_clinic_management_system.laboratory.event.TestOrderCreatedEvent;
@@ -16,6 +22,8 @@ import com.ocms.online_clinic_management_system.laboratory.repository.TestOrderR
 import com.ocms.online_clinic_management_system.prescription.entity.Prescription;
 import com.ocms.online_clinic_management_system.prescription.entity.PrescriptionDetail;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
@@ -30,6 +38,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final TestOrderRepository testOrderRepository;
     private final DomainEventPublisher eventPublisher;
+    private final SecurityHelper securityHelper;
+    private final InvoiceValidator invoiceValidator;
+    private final InvoiceMapper invoiceMapper;
     @Override
     public void addPrescriptionToInvoice(Prescription prescription) {
 
@@ -128,5 +139,32 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Invoice getByAppointmentId(Long appointmentId) {
         return invoiceRepository.findByAppointmentId(appointmentId).orElseThrow(InvoiceNotFoundException::new);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponse<InvoicePatientResponse> searchMyInvoices(String paymentStatus,Pageable pageable) {
+
+        Long currentUserId = securityHelper.getCurrentUserId();
+        Page<Invoice> invoices;
+
+        if (paymentStatus == null || paymentStatus.isBlank()) {
+            invoices = invoiceRepository.findByPatientUserId(currentUserId, pageable);
+        } else {
+            invoices = invoiceRepository.findByPatientUserIdAndPaymentPaymentStatusNameIgnoreCase(currentUserId, paymentStatus, pageable);
+        }
+
+        return PageResponse.of(invoices.map(invoiceMapper::toPatientResponse));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public InvoicePatientDetailResponse getMyInvoice(Long invoiceId) {
+        Invoice invoice = invoiceValidator.validateInvoiceExists(invoiceId);
+        Long currentUserId = securityHelper.getCurrentUserId();
+        invoiceValidator.validatePatientOwnership(invoice, currentUserId);
+        return invoiceMapper.toPatientDetailResponse(invoice);
+    }
+
+
 }
 
