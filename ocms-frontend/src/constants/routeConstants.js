@@ -62,6 +62,10 @@ export const ROUTES = {
       DETAIL: (prescriptionId) =>`/patient/prescriptions/${prescriptionId}`
     },
 
+    INVOICES: {
+      LIST: "/patient/invoices",
+      DETAIL: (invoiceId) =>`/patient/invoices/${invoiceId}`,
+    },
   },
 
   STAFF: {

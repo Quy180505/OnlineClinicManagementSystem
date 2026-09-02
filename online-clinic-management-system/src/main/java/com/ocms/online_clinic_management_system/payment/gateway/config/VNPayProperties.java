@@ -15,4 +15,5 @@ public class VNPayProperties {
     private String paymentUrl;
     private String returnUrl;
     private String ipnUrl;
+    private String frontendBaseUrl;
 }

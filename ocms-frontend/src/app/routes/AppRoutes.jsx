@@ -39,6 +39,8 @@ import MedicineManagementPage from "../../features/medicine/pages/MedicineManage
 import InventoryManagementPage from "../../features/inventory/pages/InventoryManagementPage";
 import PatientPrescriptionPage from "../../features/prescription/pages/PatientPrescriptionPage";
 import DoctorPrescriptionPage from "../../features/prescription/pages/DoctorPrescriptionPage";
+import PatientInvoicePage from "../../features/invoice/pages/PatientInvoicePage";
+import PatientInvoiceDetailPage from "../../features/invoice/pages/PatientInvoiceDetailPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -79,6 +81,7 @@ const AppRoutes = () => {
                 <Route element={<ProtectedRoute />}>
 
                 <Route path={ROUTES.PATIENT.ROOT} element={<PatientLayout />} >
+
                     <Route  path="profile" element={<PatientProfilePage />} />
 
                     <Route path="appointments" element={<MyAppointmentPage />}/>
@@ -92,6 +95,12 @@ const AppRoutes = () => {
                       <Route path="medical-records/:medicalRecordId" element={<PatientMedicalRecordDetailPage />}/>
 
                       <Route path="prescriptions" element={<PatientPrescriptionPage />}/>
+
+                        <Route path="invoices" element={<PatientInvoicePage />}/>
+
+                        <Route path="invoices/:invoiceId" element={<PatientInvoiceDetailPage />}/>
+
+                 
 
                  </Route>
 
