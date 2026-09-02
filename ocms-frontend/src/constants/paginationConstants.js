@@ -14,6 +14,7 @@ export const PAGINATION = {
   MEDICINE_SEARCH_SIZE:Number(import.meta.env.VITE_MEDICINE_SEARCH_SIZE) || 5,
   MEDICINE_SEARCH_MIN_LENGTH:Number(import.meta.env.VITE_MEDICINE_SEARCH_MIN_LENGTH) || 2,
   PRESCRIPTION_PAGE_SIZE:Number(import.meta.env.VITE_PRESCRIPTION_PAGE_SIZE) || 10,
+  INVOICE_PAGE_SIZE:Number(import.meta.env.VITE_INVOICE_PAGE_SIZE) || 10,
 
 };
   

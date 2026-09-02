@@ -24,8 +24,8 @@ const navItems = [
     to: ROUTES.PATIENT.PRESCRIPTIONS.LIST,
   },
   {
-    label: "Thanh toán",
-    to: "/patient/payments",
+    label: "Hóa đơn",
+    to: ROUTES.PATIENT.INVOICES.LIST,
   },
   {
     label: "Tin nhắn",
