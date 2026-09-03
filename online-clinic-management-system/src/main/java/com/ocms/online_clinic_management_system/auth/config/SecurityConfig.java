@@ -97,6 +97,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/invoices/my").hasRole("PATIENT")
                         .requestMatchers(HttpMethod.GET,"/api/invoices/my/**").hasRole("PATIENT")
                         .requestMatchers("/api/inventory/**").hasRole("ADMIN")
+                        .requestMatchers("/api/reports/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
 
                 .oauth2Login(oauth -> oauth
