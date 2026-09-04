@@ -41,6 +41,7 @@ import PatientPrescriptionPage from "../../features/prescription/pages/PatientPr
 import DoctorPrescriptionPage from "../../features/prescription/pages/DoctorPrescriptionPage";
 import PatientInvoicePage from "../../features/invoice/pages/PatientInvoicePage";
 import PatientInvoiceDetailPage from "../../features/invoice/pages/PatientInvoiceDetailPage";
+import ReportManagementPage from "../../features/report/pages/ReportManagementPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -156,6 +157,8 @@ const AppRoutes = () => {
                         <Route path="medicines" element={<MedicineManagementPage />}/>
 
                         <Route path="inventory" element={<InventoryManagementPage />}/>
+
+                        <Route path="reports" element={<ReportManagementPage />}/>
                     </Route>
 
                 </Route>
