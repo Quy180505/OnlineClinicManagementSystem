@@ -29,7 +29,7 @@ const navItems = [
   },
   {
     label: "Báo cáo",
-    to: "/admin/reports",
+    to: ROUTES.ADMIN.REPORTS.LIST,
   },
 ];
 
