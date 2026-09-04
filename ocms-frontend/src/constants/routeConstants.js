@@ -6,7 +6,7 @@ export const ROUTES = {
     LOGIN_PATIENT: "/login/patient",
     LOGIN_STAFF: "/login/staff",
     REGISTER: "/register",
-    OAUTH2_CALLBACK: "/oauth2/callback",
+    OAUTH2_CALLBACK: "/oauth2/callback"
   },
 
   ADMIN: {
@@ -15,19 +15,33 @@ export const ROUTES = {
     USERS: {
       LIST: "/admin/users",
       CREATE_DOCTOR: "/admin/users/create-doctor",
-      CREATE_STAFF: "/admin/users/create-staff",
+      CREATE_STAFF: "/admin/users/create-staff"
     },
 
     SPECIALTIES: {
       LIST: "/admin/specialties",
-      DETAIL: (specialtyId) => `/admin/specialties/${specialtyId}`,
+      DETAIL: (specialtyId) => `/admin/specialties/${specialtyId}`
     },
 
     MEDICAL_SERVICES: {
       LIST: "/admin/medical-services",
       DETAIL: (medicalServiceId) =>
-        `/admin/medical-services/${medicalServiceId}`,
+        `/admin/medical-services/${medicalServiceId}`
     },
+
+    MEDICINES: {
+     LIST: "/admin/medicines"
+    },
+
+    INVENTORY: {
+      LIST: "/admin/inventory",
+      DETAIL: (inventoryId) => `/admin/inventory/${inventoryId}`,
+      TRANSACTIONS: (inventoryId) =>`/admin/inventory/${inventoryId}/transactions`
+    },
+
+    REPORTS: {
+      LIST: "/admin/reports"
+    }
   },
 
   PATIENT: {
@@ -38,15 +52,24 @@ export const ROUTES = {
     APPOINTMENTS: {
       LIST: "/patient/appointments",
       BOOK: "/patient/appointments/book",
-      DETAIL: (appointmentId) => `/patient/appointments/${appointmentId}`,
+      DETAIL: (appointmentId) => `/patient/appointments/${appointmentId}`
     },
 
 
-      MEDICAL_RECORDS: {
+    MEDICAL_RECORDS: {
         LIST: "/patient/medical-records",
-        DETAIL: (medicalRecordId) => `/patient/medical-records/${medicalRecordId}`,
-      },
+        DETAIL: (medicalRecordId) => `/patient/medical-records/${medicalRecordId}`
+    },
 
+    PRESCRIPTIONS: {
+      LIST: "/patient/prescriptions",
+      DETAIL: (prescriptionId) =>`/patient/prescriptions/${prescriptionId}`
+    },
+
+    INVOICES: {
+      LIST: "/patient/invoices",
+      DETAIL: (invoiceId) =>`/patient/invoices/${invoiceId}`,
+    },
   },
 
   STAFF: {
@@ -54,24 +77,22 @@ export const ROUTES = {
 
     PATIENTS: {
       LIST: "/staff/patients",
-      DETAIL: (patientId) => `/staff/patients/${patientId}`,
+      DETAIL: (patientId) => `/staff/patients/${patientId}`
     },
 
     DOCTOR_SCHEDULES: {
       LIST: "/staff/doctor-schedules",
       CREATE: "/staff/doctor-schedules/create",
-      DETAIL: (doctorScheduleId) =>
-        `/staff/doctor-schedules/${doctorScheduleId}`,
+      DETAIL: (doctorScheduleId) =>`/staff/doctor-schedules/${doctorScheduleId}`
     },
 
     APPOINTMENTS: {
       LIST: "/staff/appointments",
-      DETAIL: (appointmentId) => `/staff/appointments/${appointmentId}`,
+      DETAIL: (appointmentId) => `/staff/appointments/${appointmentId}`
     },
 
     LABORATORY: {
-      ROOT: "/staff/laboratory",
-
+      ROOT: "/staff/laboratory"
     },
   },
 
@@ -80,7 +101,7 @@ export const ROUTES = {
 
     MEDICAL_EXAMINATIONS: {
       TODAY: "/doctor/today",
-      TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`,
+      TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`
     },
 
     MEDICAL_RECORDS: {
@@ -89,6 +110,10 @@ export const ROUTES = {
 
     LABORATORY: {
       TEST_ORDER: (testOrderId) =>`/doctor/laboratory/test-orders/${testOrderId}`
+    },
+
+    PRESCRIPTIONS: {
+      LIST: "/doctor/prescriptions"
     },
 
 

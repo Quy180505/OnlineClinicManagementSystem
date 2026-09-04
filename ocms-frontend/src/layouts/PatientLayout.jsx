@@ -9,11 +9,11 @@ const navItems = [
   },
   {
     label: "Đặt lịch khám",
-    to: "/patient/appointments/book",
+    to: ROUTES.PATIENT.APPOINTMENTS.BOOK,
   },
   {
     label: "Lịch khám",
-    to: "/patient/appointments",
+    to: ROUTES.PATIENT.APPOINTMENTS.LIST,
   },
   {
     label: "Lịch sử khám",
@@ -21,11 +21,11 @@ const navItems = [
   },
   {
     label: "Đơn thuốc",
-    to: "/patient/prescriptions",
+    to: ROUTES.PATIENT.PRESCRIPTIONS.LIST,
   },
   {
-    label: "Thanh toán",
-    to: "/patient/payments",
+    label: "Hóa đơn",
+    to: ROUTES.PATIENT.INVOICES.LIST,
   },
   {
     label: "Tin nhắn",

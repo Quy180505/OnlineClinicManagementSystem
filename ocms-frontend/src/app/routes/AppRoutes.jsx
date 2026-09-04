@@ -35,6 +35,13 @@ import MedicalRecordPage from "../../features/medical-record/pages/MedicalRecord
 import LaboratoryPage from "../../features/laboratory/pages/staff/LaboratoryPage";
 import PatientMedicalRecordDetailPage from "../../features/medical-record/pages/PatientMedicalRecordDetailPage";
 import DoctorTreatmentHistoryPage from "../../features/medical-record/pages/DoctorTreatmentHistoryPage";
+import MedicineManagementPage from "../../features/medicine/pages/MedicineManagementPage";
+import InventoryManagementPage from "../../features/inventory/pages/InventoryManagementPage";
+import PatientPrescriptionPage from "../../features/prescription/pages/PatientPrescriptionPage";
+import DoctorPrescriptionPage from "../../features/prescription/pages/DoctorPrescriptionPage";
+import PatientInvoicePage from "../../features/invoice/pages/PatientInvoicePage";
+import PatientInvoiceDetailPage from "../../features/invoice/pages/PatientInvoiceDetailPage";
+import ReportManagementPage from "../../features/report/pages/ReportManagementPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -75,6 +82,7 @@ const AppRoutes = () => {
                 <Route element={<ProtectedRoute />}>
 
                 <Route path={ROUTES.PATIENT.ROOT} element={<PatientLayout />} >
+
                     <Route  path="profile" element={<PatientProfilePage />} />
 
                     <Route path="appointments" element={<MyAppointmentPage />}/>
@@ -86,6 +94,14 @@ const AppRoutes = () => {
                      <Route path="medical-records" element={<PatientTreatmentHistoryPage />}/>
 
                       <Route path="medical-records/:medicalRecordId" element={<PatientMedicalRecordDetailPage />}/>
+
+                      <Route path="prescriptions" element={<PatientPrescriptionPage />}/>
+
+                        <Route path="invoices" element={<PatientInvoicePage />}/>
+
+                        <Route path="invoices/:invoiceId" element={<PatientInvoiceDetailPage />}/>
+
+                 
 
                  </Route>
 
@@ -118,6 +134,8 @@ const AppRoutes = () => {
 
                      <Route path="medical-records/:appointmentId" element={<MedicalRecordPage />}/>
 
+                     <Route path="prescriptions" element={<DoctorPrescriptionPage />}/>
+
                 </Route>
 
                     <Route path={ROUTES.ADMIN.ROOT} element={<AdminLayout />}>
@@ -135,6 +153,12 @@ const AppRoutes = () => {
                         <Route path="medical-services" element={<MedicalServiceManagementPage />}/>
 
                         <Route  path="medical-services/:medicalServiceId" element={<MedicalServiceDetailPage />}/>
+
+                        <Route path="medicines" element={<MedicineManagementPage />}/>
+
+                        <Route path="inventory" element={<InventoryManagementPage />}/>
+
+                        <Route path="reports" element={<ReportManagementPage />}/>
                     </Route>
 
                 </Route>

@@ -1,16 +1,19 @@
 package com.ocms.online_clinic_management_system.inventory.service.impl;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.inventory.dto.request.CreateMedicineCategoryRequest;
+import com.ocms.online_clinic_management_system.inventory.dto.request.MedicineCategorySearchRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.request.UpdateMedicineCategoryRequest;
 import com.ocms.online_clinic_management_system.inventory.dto.response.MedicineCategoryResponse;
 import com.ocms.online_clinic_management_system.inventory.entity.MedicineCategory;
 import com.ocms.online_clinic_management_system.inventory.mapper.MedicineCategoryMapper;
 import com.ocms.online_clinic_management_system.inventory.repository.MedicineCategoryRepository;
 import com.ocms.online_clinic_management_system.inventory.service.MedicineCategoryService;
+import com.ocms.online_clinic_management_system.inventory.specification.MedicineCategorySpecification;
 import com.ocms.online_clinic_management_system.inventory.validator.MedicineCategoryValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,16 +58,19 @@ public class MedicineCategoryServiceImpl implements MedicineCategoryService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public PageResponse<MedicineCategoryResponse> search(Pageable pageable) {
-
-        Page<MedicineCategoryResponse> responsePage = medicineCategoryRepository.findAll(pageable).map(medicineCategoryMapper::toResponse);
-        return PageResponse.of(responsePage);
-    }
-
-    @Override
     public void delete(Long categoryId) {
         MedicineCategory category = medicineCategoryValidator.validateMedicineCategoryExists(categoryId);
         medicineCategoryRepository.delete(category);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageResponse<MedicineCategoryResponse> search(MedicineCategorySearchRequest request, Pageable pageable) {
+
+        Specification<MedicineCategory> specification = Specification.allOf(MedicineCategorySpecification.hasCategoryName(request.getCategoryName()));
+        Page<MedicineCategoryResponse> responsePage = medicineCategoryRepository.findAll(specification, pageable).map(medicineCategoryMapper::toResponse);
+
+        return PageResponse.of(responsePage);
     }
 }

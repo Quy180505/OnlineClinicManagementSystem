@@ -62,7 +62,7 @@ public enum ErrorCode {
 
     INVOICE_NOT_FOUND(HttpStatus.NOT_FOUND,"INVOICE_001", "Invoice not found"),
     INVOICE_ALREADY_EXISTS(HttpStatus.CONFLICT,"INVOICE_002", "Invoice already exists"),
-
+    INVOICE_ACCESS_DENIED(HttpStatus.FORBIDDEN,"INVOICE_003","You do not have permission to access this invoice"),
     TEST_ORDER_NOT_FOUND(HttpStatus.NOT_FOUND, "LAB_001", "Test order not found"),
     TEST_ORDER_DETAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "LAB_003", "Test order detail not found"),
     LAB_RESULT_NOT_FOUND(HttpStatus.NOT_FOUND, "LAB_004", "Lab result not found"),

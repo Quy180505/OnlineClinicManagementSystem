@@ -11,6 +11,7 @@ import com.ocms.online_clinic_management_system.payment.service.VNPayService;
 import com.ocms.online_clinic_management_system.payment.validator.PaymentValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.crypto.Mac;
@@ -20,7 +21,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-
+import org.springframework.http.ResponseEntity;
+import java.net.URI;
+import java.net.URLEncoder;
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -123,33 +126,37 @@ public class VNPayServiceImpl implements VNPayService {
 
     @Override
     @Transactional(readOnly = true)
-    public Map<String, Object> handleReturn(Map<String, String> params) {
-
-        Map<String, Object> response = new HashMap<>();
+    public ResponseEntity<Void> handleReturn(Map<String, String> params) {
 
         boolean validSignature = verifySignature(params);
-
-        if (!validSignature) {
-            response.put("success", false);
-            response.put("responseCode", "97");
-            response.put("message", "Invalid signature");
-
-            return response;
-        }
-
+        String transactionCode = params.get("vnp_TxnRef");
         String responseCode = params.get("vnp_ResponseCode");
-
         String transactionStatus = params.get("vnp_TransactionStatus");
 
-        boolean success = "00".equals(responseCode) && "00".equals(transactionStatus);
+        boolean success = validSignature && "00".equals(responseCode) && "00".equals(transactionStatus);
 
-        response.put("success", success);
-        response.put("responseCode", responseCode);
-        response.put("transactionStatus", transactionStatus);
-        response.put("transactionCode", params.get("vnp_TxnRef"));
-        response.put("message", success ? "Thanh toán thành công" : "Thanh toán không thành công");
+        String status = success ? "success" : "failed";
+        PaymentTransaction transaction = paymentTransactionRepository.findByTransactionCode(transactionCode).orElse(null);
 
-        return response;
+        if (transaction == null) {
+            String frontendUrl = vnpayProperties.getFrontendBaseUrl() + "/patient/invoices";
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(frontendUrl)).build();
+        }
+
+        Long invoiceId = transaction.getPayment().getInvoice().getId();
+
+        String frontendUrl = vnpayProperties.getFrontendBaseUrl()
+                        + "/patient/invoices/"
+                        + invoiceId
+                        + "?payment="
+                        + status
+                        + "&transactionCode="
+                        + URLEncoder.encode(
+                        transactionCode,
+                        StandardCharsets.UTF_8
+                );
+
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(frontendUrl)).build();
     }
 
     private boolean verifySignature(Map<String, String> params) {

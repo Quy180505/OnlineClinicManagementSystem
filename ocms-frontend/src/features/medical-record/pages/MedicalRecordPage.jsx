@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import MedicalRecordForm from "../components/MedicalRecordForm";
 import useMedicalRecord from "../hooks/useMedicalRecord";
 import DoctorLaboratoryPanel from "../../laboratory/components/doctor/DoctorLaboratoryPanel";
+import DoctorPrescriptionPanel from "../../prescription/components/doctor/DoctorPrescriptionPanel";
 export default function MedicalRecordPage() {
   const { appointmentId } = useParams();
   const navigate = useNavigate();
@@ -100,55 +101,67 @@ export default function MedicalRecordPage() {
           </div>
         )}
 
- 
-  {medicalRecord && (
-    <div className="row g-4">
-      <div className="col-lg-6">
-        <div className="card border-0 shadow-sm h-100">
-          <div className="card-header bg-white border-0 py-3">
-            <h5 className="mb-1">Bệnh án điện tử</h5>
+  
+    {medicalRecord && (
+      <div className="row g-4">
+    <div className="col-lg-4">
+      <div className="card border-0 shadow-sm h-100">
+        <div className="card-header bg-white border-0 py-3">
+          <h5 className="mb-1">
+            Bệnh án điện tử
+          </h5>
 
-            <small className="text-muted">
-              Thông tin khám bệnh của bệnh nhân
-            </small>
-          </div>
+          <small className="text-muted">
+            Thông tin khám bệnh của bệnh nhân
+          </small>
+        </div>
 
-          <div className="card-body">
-            <div className="row g-3 mb-4">
-              <div className="col-12">
-                <small className="text-muted d-block">
-                  Ngày khám
-                </small>
+        <div className="card-body">
+          <div className="row g-3 mb-4">
+            <div className="col-12">
+              <small className="text-muted d-block">
+                Ngày khám
+              </small>
 
-                <span className="fw-semibold">
-                  {medicalRecord.examinationDate? new Date( medicalRecord.examinationDate).toLocaleString("vi-VN"): "-"}
-                </span>
-              </div>
+              <span className="fw-semibold">
+                {medicalRecord.examinationDate
+                  ? new Date(
+                      medicalRecord.examinationDate,
+                    ).toLocaleString("vi-VN")
+                  : "-"}
+              </span>
             </div>
-
-            <hr className="mb-4" />
-
-            <h6 className="mb-3">
-              Thông tin khám bệnh
-            </h6>
-
-            <MedicalRecordForm
-              formData={formData}
-              saving={saving}
-              onChange={updateField}
-              onSubmit={handleSubmit}
-            />
           </div>
+
+          <hr className="mb-4" />
+
+          <h6 className="mb-3">
+            Thông tin khám bệnh
+          </h6>
+
+          <MedicalRecordForm
+            formData={formData}
+            saving={saving}
+            onChange={updateField}
+            onSubmit={handleSubmit}
+          />
         </div>
       </div>
-      
-      <div className="col-lg-6">
-        
-        <DoctorLaboratoryPanel medicalRecordId={medicalRecord.id}/>
-       
-      </div>
     </div>
-  )}
-      </div>
-    );
+
+    <div className="col-lg-4">
+      <DoctorLaboratoryPanel
+        medicalRecordId={medicalRecord.id}
+      />
+    </div>
+
+    <div className="col-lg-4">
+      <DoctorPrescriptionPanel
+        medicalRecordId={medicalRecord.id}
+      />
+    </div>
+  </div>
+    )}
+        </div>
+      );
 }
