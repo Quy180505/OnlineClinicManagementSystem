@@ -29,7 +29,7 @@ const navItems = [
   },
   {
     label: "Tin nhắn",
-    to: "/patient/chat",
+    to: ROUTES.PATIENT.CHAT,
   },
 ];
 

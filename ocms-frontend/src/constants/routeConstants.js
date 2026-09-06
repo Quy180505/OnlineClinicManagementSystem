@@ -48,6 +48,7 @@ export const ROUTES = {
     ROOT: "/patient",
     PROFILE: "/patient/profile",
 
+    CHAT: "/patient/chat",
 
     APPOINTMENTS: {
       LIST: "/patient/appointments",
@@ -99,6 +100,8 @@ export const ROUTES = {
   DOCTOR: {
     ROOT: "/doctor",
 
+    CHAT: "/doctor/chat",
+    
     MEDICAL_EXAMINATIONS: {
       TODAY: "/doctor/today",
       TREATMENT_HISTORY: (appointmentId) =>`/doctor/today/${appointmentId}/treatment-history`

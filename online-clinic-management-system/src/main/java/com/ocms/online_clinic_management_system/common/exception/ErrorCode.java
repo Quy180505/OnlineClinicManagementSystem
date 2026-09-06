@@ -15,6 +15,7 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "AUTH_002", "Invalid JWT token"),
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "AUTH_003", "JWT token has expired"),
     ACCESS_DENIED(HttpStatus.FORBIDDEN, "AUTH_004", "Access denied"),
+    JWT_TOKEN_REQUIRED(HttpStatus.UNAUTHORIZED, "AUTH005", "JWT token is required"),
 
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_001", "User not found"),
     USERNAME_ALREADY_EXISTS(HttpStatus.CONFLICT, "USER_002", "Username already exists"),
@@ -91,7 +92,14 @@ public enum ErrorCode {
     PAYMENT_ALREADY_PAID(HttpStatus.CONFLICT,"PAYMENT_002","Payment has already been paid"),
     INVALID_PAYMENT(HttpStatus.BAD_REQUEST,"PAYMENT_003","Invalid payment"),
     PAYMENT_TRANSACTION_NOT_FOUND(HttpStatus.NOT_FOUND,"PAYMENT_004","Payment transaction not found"),
-    PAYMENT_ACCESS_DENIED(HttpStatus.FORBIDDEN,"PAYMENT_005","You do not have permission to access this payment");
+    PAYMENT_ACCESS_DENIED(HttpStatus.FORBIDDEN,"PAYMENT_005","You do not have permission to access this payment"),
+
+    CHAT_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "CHAT_001", "Chat room not found"),
+    CHAT_MESSAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "CHAT_002", "Chat message not found"),
+    CHAT_ROOM_ALREADY_EXISTS(HttpStatus.CONFLICT, "CHAT_003", "Chat room already exists"),
+    CHAT_ACCESS_DENIED(HttpStatus.FORBIDDEN, "CHAT_004", "You do not have permission to access this chat"),
+    INVALID_CHAT_ROOM_STATUS(HttpStatus.BAD_REQUEST, "CHAT_005", "Chat room status is invalid");
+
 
 
     private final HttpStatus httpStatus;
