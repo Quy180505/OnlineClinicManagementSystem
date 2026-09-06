@@ -1,5 +1,5 @@
 import {formatDateTime} from "../../../utils/dateUtils";
-export default function PatientMedicalRecordDetail({medicalRecord}) {
+export default function PatientMedicalRecordDetail({medicalRecord,onChatWithDoctor, creatingChatRoom}) {
   
   if (!medicalRecord) {
     return null;
@@ -8,14 +8,46 @@ export default function PatientMedicalRecordDetail({medicalRecord}) {
   return (
     <div className="card border-0 shadow-sm h-100">
       <div className="card-header bg-white border-0 py-3">
-        <h5 className="mb-1">
-          Bệnh án
-        </h5>
+      <div className="d-flex justify-content-between align-items-start">
+        <div>
+          <h5 className="mb-1">
+            Bệnh án
+          </h5>
 
-        <small className="text-muted">
-          Thông tin của lần khám
-        </small>
+          <small className="text-muted">
+            Thông tin của lần khám
+          </small>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-sm btn-outline-primary"
+          onClick={() =>
+            onChatWithDoctor?.(medicalRecord.doctorId)
+          }
+          disabled={
+            creatingChatRoom ||
+            !medicalRecord.doctorId
+          }
+        >
+          {creatingChatRoom ? (
+            <>
+              <span
+                className="spinner-border spinner-border-sm me-1"
+                role="status"
+                aria-hidden="true"
+              />
+              Đang xử lý...
+            </>
+          ) : (
+            <>
+              <i className="bi bi-chat-dots me-1" />
+              Nhắn tin
+            </>
+          )}
+    </button>
       </div>
+    </div>
 
       <div className="card-body">
         <div className="row g-3">

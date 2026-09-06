@@ -42,6 +42,8 @@ import DoctorPrescriptionPage from "../../features/prescription/pages/DoctorPres
 import PatientInvoicePage from "../../features/invoice/pages/PatientInvoicePage";
 import PatientInvoiceDetailPage from "../../features/invoice/pages/PatientInvoiceDetailPage";
 import ReportManagementPage from "../../features/report/pages/ReportManagementPage";
+import DoctorChatPage from "../../features/chat/pages/DoctorChatPage";
+import PatientChatPage from "../../features/chat/pages/PatientChatPage";
 const AppRoutes = () => {
     return (
         <Routes>
@@ -101,7 +103,7 @@ const AppRoutes = () => {
 
                         <Route path="invoices/:invoiceId" element={<PatientInvoiceDetailPage />}/>
 
-                 
+                         <Route path="chat" element={<PatientChatPage />}/>
 
                  </Route>
 
@@ -135,6 +137,8 @@ const AppRoutes = () => {
                      <Route path="medical-records/:appointmentId" element={<MedicalRecordPage />}/>
 
                      <Route path="prescriptions" element={<DoctorPrescriptionPage />}/>
+
+                     <Route path="chat" element={<DoctorChatPage />}/>
 
                 </Route>
 
