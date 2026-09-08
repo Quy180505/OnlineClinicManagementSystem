@@ -13,7 +13,7 @@ const navItems = [
   },
   {
     label: "Tin nhắn",
-    to: "/doctor/chat",
+    to: ROUTES.DOCTOR.CHAT,
   },
 ];
 

@@ -10,7 +10,6 @@ const DEFAULT_SEARCH_PARAMS = {
   roleName: null,
   status: null,
   page: PAGINATION.DEFAULT_PAGE,
-  size: PAGINATION.DEFAULT_PAGE_SIZE,
 };
 
 export default function UserManagementPage() {
@@ -51,11 +50,7 @@ export default function UserManagementPage() {
         totalElements: data?.totalElements ?? 0,
       });
     } catch (error) {
-      setError(
-        error?.response?.data?.message ||
-          error?.message ||
-          "Không thể tải danh sách tài khoản.",
-      );
+      setError(error?.response?.data?.message ||error?.message ||"Không thể tải danh sách tài khoản.", );
     } finally {
       setLoading(false);
     }
@@ -70,8 +65,13 @@ export default function UserManagementPage() {
   }, []);
 
   const handleSearch = (params) => {
-    setSearchParams(params);
-    loadUsers(params);
+    const searchParams = {
+      ...params,
+      page: PAGINATION.DEFAULT_PAGE,
+    };
+
+    setSearchParams(searchParams);
+    loadUsers(searchParams);
   };
 
   const handlePageChange = (page) => {

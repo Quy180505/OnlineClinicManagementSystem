@@ -5,6 +5,9 @@ import com.ocms.online_clinic_management_system.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "chat_message")
@@ -26,4 +29,8 @@ public class ChatMessage extends BaseEntity {
     @Lob
     @Column(name = "message_content", nullable = false)
     private String messageContent;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 }

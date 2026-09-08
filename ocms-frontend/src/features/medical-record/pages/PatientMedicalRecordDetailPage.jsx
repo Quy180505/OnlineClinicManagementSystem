@@ -1,28 +1,47 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import PatientMedicalRecordDetail from "../components/PatientMedicalRecordDetail";
 import PatientLabResultModal from "../../laboratory/components/patient/PatientLabResultModal";
 import PrescriptionPatientDetail from "../../prescription/components/patient/PrescriptionPatientDetail";
 import usePatientMedicalRecord from "../hooks/usePatientMedicalRecord";
 import usePrescriptionDetail from "../../prescription/hooks/usePrescriptionDetail";
-
+import {chatApi} from "../../chat/api/chatApi";
+import {ROUTES} from "../../../constants/routeConstants";
 export default function PatientMedicalRecordDetailPage() {
+
   const { medicalRecordId } = useParams();
   const navigate = useNavigate();
-
-  const [showLabResultModal, setShowLabResultModal] =
-    useState(false);
-
-
+  const [showLabResultModal, setShowLabResultModal] =useState(false);
   const { medicalRecordDetail, detailLoading, detailError,loadMyHistoryDetail,clearDetailError} = usePatientMedicalRecord();
-
-
   const {
     prescription,loading: prescriptionLoading,error: prescriptionError,
     loadPrescriptionByMedicalRecord,clearPrescriptionDetail,clearError: clearPrescriptionError,
   } = usePrescriptionDetail();
 
+  const [creatingChatRoom, setCreatingChatRoom] =useState(false);
+
+  const handleChatWithDoctor = async (doctorId) => {
+      if (!doctorId) {
+        return;
+      }
+
+      try {
+        setCreatingChatRoom(true);
+
+        await chatApi.createChatRoom({
+          doctorId,
+        });
+
+        navigate(ROUTES.PATIENT.CHAT);
+      } catch (error) {
+        console.error(
+          "Không thể tạo phòng trò chuyện:",
+          error
+        );
+      } finally {
+        setCreatingChatRoom(false);
+      }
+};
 
   useEffect(() => {
     if (!medicalRecordId) {
@@ -115,6 +134,8 @@ export default function PatientMedicalRecordDetailPage() {
             <div className="col-lg-4">
               <PatientMedicalRecordDetail
                 medicalRecord={medicalRecordDetail}
+                onChatWithDoctor={handleChatWithDoctor}
+                creatingChatRoom={creatingChatRoom}
               />
             </div>
             <div className="col-lg-4">

@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/error",  "/oauth2/**", "/login/oauth2/**","/api/payments/vnpay/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/error",  "/oauth2/**", "/login/oauth2/**","/api/payments/vnpay/**","/ws/chat").permitAll()
                         .requestMatchers("/api/admin/users/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/payments/invoices/*").hasRole("PATIENT")
                         .requestMatchers(HttpMethod.GET, "/api/payments/invoices/*").hasRole("PATIENT")
@@ -93,6 +93,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/prescriptions/my/medical-records/{medicalRecordId}").hasRole("PATIENT")
                         .requestMatchers(HttpMethod.POST, "/api/prescriptions/medical-records/*").hasRole("DOCTOR")
                         .requestMatchers(HttpMethod.GET, "/api/prescriptions/my/**").hasRole("PATIENT")
+                        .requestMatchers(HttpMethod.POST, "/api/chat/**").hasAnyRole("PATIENT","DOCTOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/chat/**").hasAnyRole("PATIENT","DOCTOR")
+                        .requestMatchers(HttpMethod.GET, "/api/chat/**").hasAnyRole("PATIENT","DOCTOR")
                         .requestMatchers(HttpMethod.GET, "/api/prescriptions/*").hasAnyRole( "DOCTOR", "STAFF", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/invoices/my").hasRole("PATIENT")
                         .requestMatchers(HttpMethod.GET,"/api/invoices/my/**").hasRole("PATIENT")
