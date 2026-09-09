@@ -16,4 +16,5 @@ public interface AppointmentService {
     AppointmentResponse reject(Long appointmentId, RejectAppointmentRequest request);
     AppointmentResponse cancel(Long appointmentId);
     PageResponse<AppointmentResponse> getMyAppointments(AppointmentSearchRequest request, Pageable pageable);
+    AppointmentResponse completeByMedicalRecordId(Long medicalRecordId);
 }

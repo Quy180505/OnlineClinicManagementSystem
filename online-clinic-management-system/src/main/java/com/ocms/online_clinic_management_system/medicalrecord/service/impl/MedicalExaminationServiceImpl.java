@@ -27,6 +27,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     private static final String STATUS_CONFIRMED = "CONFIRMED";
     private static final String STATUS_IN_PROGRESS = "IN_PROGRESS";
+    private static final String STATUS_COMPLETED = "COMPLETED";
     private final AppointmentRepository appointmentRepository;
     private final AppointmentStatusRepository appointmentStatusRepository;
     private final MedicalRecordRepository medicalRecordRepository;
@@ -42,7 +43,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
         medicalExaminationValidator.validateDoctorAuthenticated(currentUserId);
         Long doctorId = medicalExaminationValidator.validateAndGetDoctorId(currentUserId);
-        List<Appointment> appointments = appointmentRepository.findByDoctorAndWorkDateAndStatuses(doctorId, workDate, List.of(STATUS_CONFIRMED, STATUS_IN_PROGRESS));
+        List<Appointment> appointments = appointmentRepository.findByDoctorAndWorkDateAndStatuses(doctorId, workDate, List.of(STATUS_CONFIRMED, STATUS_IN_PROGRESS,STATUS_COMPLETED));
 
         return medicalExaminationMapper.toTodayAppointmentResponseList(appointments);
     }

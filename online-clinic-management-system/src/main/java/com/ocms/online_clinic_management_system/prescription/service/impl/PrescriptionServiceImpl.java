@@ -1,4 +1,5 @@
 package com.ocms.online_clinic_management_system.prescription.service.impl;
+import com.ocms.online_clinic_management_system.appointment.service.AppointmentService;
 import com.ocms.online_clinic_management_system.auth.security.SecurityHelper;
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.doctor.entity.Doctor;
@@ -50,7 +51,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final InvoiceService invoiceService;
     private final SecurityHelper securityHelper;
     private final ApplicationEventPublisher eventPublisher;
-
+    private final AppointmentService appointmentService;
     @Override
     @Transactional(readOnly = true)
     public PageResponse<PrescriptionPatientResponse> search(PrescriptionSearchRequest request, Pageable pageable) {
@@ -141,7 +142,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         invoiceService.addPrescriptionToInvoice(prescription);
 
         publishPrescriptionCreatedEvent(prescription, medicalRecord);
-
+        appointmentService.completeByMedicalRecordId(medicalRecordId);
         return prescriptionMapper.toResponse(prescription);
     }
 

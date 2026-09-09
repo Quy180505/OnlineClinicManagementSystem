@@ -34,7 +34,6 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         Long currentUserId = securityHelper.getCurrentUserId();
 
         MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordExists(appointmentId);
-        medicalRecordValidator.validateDoctorOwnership(medicalRecord, currentUserId);
 
         return medicalRecordMapper.toMedicalRecordResponse(medicalRecord);
     }

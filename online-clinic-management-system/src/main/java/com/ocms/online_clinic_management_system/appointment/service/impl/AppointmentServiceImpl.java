@@ -22,6 +22,9 @@ import com.ocms.online_clinic_management_system.common.event.DomainEventPublishe
 import com.ocms.online_clinic_management_system.common.response.PageResponse;
 import com.ocms.online_clinic_management_system.invoice.entity.Invoice;
 import com.ocms.online_clinic_management_system.invoice.service.InvoiceService;
+import com.ocms.online_clinic_management_system.medicalrecord.entity.MedicalRecord;
+import com.ocms.online_clinic_management_system.medicalrecord.exception.MedicalRecordNotFoundException;
+import com.ocms.online_clinic_management_system.medicalrecord.repository.MedicalRecordRepository;
 import com.ocms.online_clinic_management_system.patient.entity.Patient;
 import com.ocms.online_clinic_management_system.patient.repository.PatientRepository;
 import com.ocms.online_clinic_management_system.patient.service.PatientService;
@@ -43,7 +46,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final AppointmentStatusRepository appointmentStatusRepository;
-    private final PatientRepository patientRepository;
+    private final MedicalRecordRepository medicalRecordRepository;
     private final AppointmentMapper appointmentMapper;
     private final AppointmentValidator appointmentValidator;
     private final PatientService patientService;
@@ -53,6 +56,17 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final DomainEventPublisher eventPublisher;
     private final SecurityHelper securityHelper;
 
+    @Override
+    public AppointmentResponse completeByMedicalRecordId(Long medicalRecordId) {
+
+        MedicalRecord medicalRecord = medicalRecordRepository.findById(medicalRecordId).orElseThrow(MedicalRecordNotFoundException::new);
+        Appointment appointment = medicalRecord.getAppointment();
+        appointmentValidator.validateStatusTransition(appointment, "COMPLETED");
+        AppointmentStatus completedStatus = getStatusByName("COMPLETED");
+        appointment.setAppointmentStatus(completedStatus);
+
+        return appointmentMapper.toResponse(appointment);
+    }
     @Override
     public AppointmentResponse create(CreateAppointmentRequest request) {
 
