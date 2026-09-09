@@ -248,7 +248,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
         Long currentUserId = securityHelper.getCurrentUserId();
         MedicalRecord medicalRecord = medicalRecordValidator.validateMedicalRecordById(medicalRecordId);
-        medicalRecordValidator.validateDoctorOwnership(medicalRecord, currentUserId);
+
         List<TestOrder> testOrders = testOrderRepository.findByMedicalRecordIdOrderByOrderDateDesc(medicalRecordId);
 
         return testOrders.stream().map(testOrderMapper::toResponse).toList();
