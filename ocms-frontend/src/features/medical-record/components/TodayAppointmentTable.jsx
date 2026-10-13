@@ -7,6 +7,10 @@ const STATUS_CONFIG = {
     label: "Đang khám",
     className: "bg-primary",
   },
+  COMPLETED: {
+    label: "Hoàn thành",
+    className: "bg-secondary",
+  },
 };
 
 const formatTime = (time) => {

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import medicineApi from "../../medicine/api/medicineApi";
 import { PAGINATION } from "../../../constants/paginationConstants";
 
-const DEBOUNCE_DELAY = 400;
+const DEBOUNCE_DELAY = PAGINATION.SEARCH_DEBOUNCE_DELAY;
 
 export default function useMedicineSearch() {
   

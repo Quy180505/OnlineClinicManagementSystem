@@ -19,4 +19,5 @@ public class TreatmentHistoryResponse {
     private String examinationResult;
     private String diagnosis;
     private List<String> diseases;
+    private String appointmentStatus;
 }

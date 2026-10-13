@@ -44,6 +44,7 @@ public interface MedicalExaminationMapper {
     @Mapping(target = "examinationResult", source = "examinationResult")
     @Mapping(target = "diagnosis", source = "diagnosis")
     @Mapping(target = "diseases", source = "diseases")
+    @Mapping(target = "appointmentStatus", source = "appointment.appointmentStatus.name")
     TreatmentHistoryResponse toTreatmentHistoryResponse(MedicalRecord medicalRecord);
 
     List<TreatmentHistoryResponse> toTreatmentHistoryResponseList(List<MedicalRecord> medicalRecords);
